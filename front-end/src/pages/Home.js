@@ -2,25 +2,25 @@ import React from "react";
 
 import logo from '../assets/images/Logo.png';
 
-import Header from '../components/Header';
-import Footer from "../components/Footer";
-
-import '../styles/Main.css';
-import '../styles/Home.css';
+import { useGlobalState } from "../utils/gloablStateContext";
+import { Header } from '../components/Header';
+import { Footer } from "../components/Footer";
 
 const Home = () => {
+    const { setSignup } = useGlobalState();
+
     return (
         <div>
             <Header />
 
-            <div id='main'>
-                <section id="intro-section">
+            <div>
+                <section className="intro-section">
                     <img width={500} height={500} src={logo} alt="Logo" />
 
-                    <div>
+                    <div className="content">
                         <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search</p>
 
-                        <button className="signup" onClick = {() => console.log("Sign Up")}>
+                        <button className="signup" onClick={() => setSignup(true)}>
                             Sign Up
                         </button>
                     </div>
@@ -98,7 +98,7 @@ const Home = () => {
                                 </li>
 
                                 <li>
-                                    <div className="user-review">
+                                    <div className="blog">
                                         <img src="" width={300} height={300} style={{ backgroundColor: "blue" }} alt="" className="image" />
 
                                         <h3>How to use AI in business?</h3>
@@ -116,7 +116,7 @@ const Home = () => {
                                 </li>
 
                                 <li>
-                                    <div className="user-review">
+                                    <div className="blog">
                                         <img src="" width={300} height={300} style={{ backgroundColor: "yellow" }} alt="" className="image" />
 
                                         <h3>How to use AI in business?</h3>

@@ -15,7 +15,6 @@ header {
 /* Logo */
 #header-logo {
     margin-left: 50px;
-    cursor: pointer;
 }
 
 /* Navigation */
@@ -35,7 +34,6 @@ header {
     font-size: 16px;
     color: white;
     text-align: center;
-    cursor: pointer;
 }
 
 #header-nav a:hover {
@@ -60,7 +58,6 @@ header {
     background-color: #7AB2B2;
     border-style: ridge;
     border-radius: 10px;
-    cursor: pointer;
 }
 
 #header-auth button:hover {

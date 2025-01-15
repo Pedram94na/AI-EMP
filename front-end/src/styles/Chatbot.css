@@ -1,36 +1,7 @@
-/* Overlay */
-#chatbot-overlay {
-    position: fixed;
-    /* top: 0;
-    left: 0; */
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    visibility: visible;
-    /* opacity: 1; */
-    /* transition: visibility 0s, opacity 0.5s ease; */
-}
-
-#chatbot-content {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    background-color: #4D869C;
-    padding: 30px;
-    border-radius: 10px;
-    text-align: center;
-}
-
-.overlay.show {
-    visibility: visible;
-    /* opacity: 1; */
-}
-
-.overlay.hide {
-    visibility: hiddent;
-    /* opacity: 0; */
+.chat-input-area {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
 }

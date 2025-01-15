@@ -1,82 +1,94 @@
 import React from "react";
 
-const Inbox = () => {
+export const Inbox = () => {
     return (
         <section className="section">
-            <table>
-                <thead>
-                    <th>Topic</th>
-                    <th>Content</th>
-                    <th>Date</th>
-                </thead>
+            <h3 id="title">Your Messages</h3>
 
-                <tbody>
-                    <tr>
-                        <td>Welcome</td>
-                        <td>Welcome to AI EMP. Happy you're here :D</td>
-                        <td>01.14.2025</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div className="content">
+                <table>
+                    <thead>
+                        <th>Topic</th>
+                        <th>Content</th>
+                        <th>Date</th>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>Welcome</td>
+                            <td>Welcome to AI EMP. Happy you're here :D</td>
+                            <td>01.14.2025</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
     );
 };
 
-const Models = () => {
+export const Models = () => {
     return (
         <section className="section">
-            <table>
-                <thead>
-                    <th>Name</th>
-                    <th>ID</th>
-                    <th>Creation Date</th>
-                    <th>Last Training Date</th>
-                    <th>API</th>
-                    <th>Download</th>
-                </thead>
+            <h3 id="title">Your Models</h3>
 
-                <tbody>
-                    <tr>
-                        <td>My First Agent</td>
-                        <td>23213dawd2e2d2w</td>
-                        <td>01.14.2025</td>
-                        <td>-</td>
-                        <td>jdsiajdpoawkd2j9wjd9jadj89jwadj98jdwd89awhd9wahd98wahdaw</td>
-                        <td>DOWNLOAD LINK</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div className="content">
+                <table>
+                    <thead>
+                        <th>Name</th>
+                        <th>ID</th>
+                        <th>Creation Date</th>
+                        <th>Last Training Date</th>
+                        <th>API</th>
+                        <th>Download</th>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>My First Agent</td>
+                            <td>23213dawd2e2d2w</td>
+                            <td>01.14.2025</td>
+                            <td>-</td>
+                            <td>jdsiajdpoawkd2j9wjd9jadj89jwadj98jdwd89awhd9wahd98wahdaw</td>
+                            <td>DOWNLOAD LINK</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
     );
 };
 
-const TrainModel = () => {
+export const TrainModel = () => {
     return (
         <section className="section">
-            <form id="training-form">
-                <select>
-                    <option>Model X</option>
-                    <option>Model Y</option>
-                    <option>Model Z</option>
-                </select>
+            <h3 id="title">Train Model</h3>
 
-                <input type="file" />
+            <div className="content">
+                <form>
+                    <select>
+                        <option>Model X</option>
+                        <option>Model Y</option>
+                        <option>Model Z</option>
+                    </select>
 
-                <input type="number" placeholder="batch"/>
-                <input type="number" placeholder="epoch"/>
+                    <input type="file" />
 
-                <button>Start Training</button>
-            </form>
+                    <input type="number" placeholder="batch"/>
+                    <input type="number" placeholder="epoch"/>
+
+                    <button>Start Training</button>
+                </form>
+            </div>
         </section>
     );
 };
 
-const TestModel = () => {
+export const TestModel = () => {
     return (
         <section className="section">
-            <div id="chatbot-content">
-                <h3 id="chatbot-title">Test Model</h3>
+            <h3 id="title">Test Model</h3>
 
+            <div className="content">
                 <select>
                     <option>Model X</option>
                     <option>Model Y</option>
@@ -94,5 +106,3 @@ const TestModel = () => {
         </section>
     );
 };
-
-export { Inbox, Models, TrainModel, TestModel };

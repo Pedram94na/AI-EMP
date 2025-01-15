@@ -1,0 +1,37 @@
+.content form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 300px;
+    margin: 0 auto;
+}
+
+.content form > input,
+.content form > textarea {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 300px;
+    max-width: 300px;
+}
+
+.content form > textarea {
+    height: 200px;
+    resize: none;
+}
+
+.content form > button {
+    width: 100px;
+    padding: 7px;
+    font-size: 16px;
+    color: white;
+    background-color: #7AB2B2;
+    border-style: ridge;
+    border-radius: 10px;
+}
+
+.content form > button:hover {
+    color: rgb(214, 220, 45);
+    background-color: #4D869C;
+}

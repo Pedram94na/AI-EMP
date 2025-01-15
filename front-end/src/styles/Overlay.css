@@ -21,19 +21,9 @@
     width: auto;
     height: auto;
     background: none;
-    padding: 10px;
+    padding: 20px;
     z-index: 999;
     visibility: visible;
-}
-
-.overlay.show {
-    visibility: visible;
-    /* opacity: 1; */
-}
-
-.overlay.hide {
-    visibility: hiddent;
-    /* opacity: 0; */
 }
 
 .overlay > .content {
@@ -82,7 +72,6 @@
     background-color: #7AB2B2;
     border-style: ridge;
     border-radius: 10px;
-    cursor: pointer;
 }
 
 .overlay > .content form > button:hover {
@@ -92,4 +81,39 @@
 
 .overlay .content > div {
     padding: 10px;
+}
+
+/* Free Overlay Content */
+.overlay.free .content {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.overlay.free.button > .content {
+    background: none;
+    box-shadow: none;
+    border: none;
+}
+
+.overlay.free.button > .content > button {
+    width: auto;
+    height: auto;
+    background-color: red;
+}
+
+.overlay.free .content .sub-header {
+    display: flex;
+    justify-content: right;
+}
+
+.overlay.free .content .sub-header button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background-color: rgba(122, 178, 178, 0);
+    transition: background-color 0.4s ease;
+}
+
+.overlay.free .content .sub-header button:hover {
+    background-color: rgba(122, 178, 178, 1);
 }

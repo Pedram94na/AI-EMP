@@ -1,6 +1,6 @@
 import React from "react";
 
-const CreateBlog = () => {
+export const CreateBlog = () => {
     return (
         <section className="section">
             <h2 className="title">New Blog Post</h2>
@@ -20,7 +20,7 @@ const CreateBlog = () => {
     );
 };
 
-const EditBlog = () => {
+export const EditBlog = () => {
     return (
         <section className="section">
             <h2 className="title">Edit Blog Post</h2>
@@ -70,7 +70,7 @@ const EditBlog = () => {
     );
 };
 
-const Tickets = () => {
+export const Tickets = () => {
     return (
         <section className="section">
             <h2 className="title">Customer Tickets</h2>
@@ -97,5 +97,3 @@ const Tickets = () => {
         </section>
     );
 };
-
-export { CreateBlog, EditBlog, Tickets };

@@ -1,17 +1,21 @@
 import React from "react";
 
 import logo from '../assets/images/Logo.png';
-import '../styles/Header.css';
+import Styles from './Styles';
 
-import Chatbot from "./Chatbot";
-import { SignUp, SignIn } from "./user/Auth";
+import { useGlobalState } from '../utils/gloablStateContext';
+import { Chatbot } from "./Chatbot";
+import { SignUp, SignIn } from "./auth/Auth";
 
-const Header = () => {
+export const Header = () => {
+    const { signupClicked, setSignup, signinClicked, setSignin } = useGlobalState();
+
     return (
         <header>
+            <Styles />
             <Chatbot />
-            {/* <SignUp />
-            <SignIn /> */}
+            {signupClicked && <SignUp onCancel={() => setSignup(false)} />}
+            {signinClicked && <SignIn onCancel={() => setSignin(false)} />}
 
             <a id="header-logo">
                 <img width={70} height={70} src={logo} alt="Logo" />
@@ -32,11 +36,11 @@ const Header = () => {
             </nav>
 
             <div id="header-auth">
-                <button className="signup" onClick = {() => console.log("Sign Up")}>
+                <button className="signup" onClick={() => setSignup(true)}>
                         Sign Up
                 </button>
 
-                <button onClick = {() => console.log("Sign In")}>
+                <button onClick = {() => setSignin(true)}>
                         Sign In
                 </button>
 
@@ -47,5 +51,3 @@ const Header = () => {
         </header>
     );
 };
-
-export default Header;

@@ -1,9 +1,11 @@
 import React from "react";
 
 import logo from "../assets/images/Logo.png";
-import '../styles/Footer.css';
+import { useGlobalState } from '../utils/gloablStateContext';
 
-const Footer = () => {
+export const Footer = () => {
+    const { signupClicked, setSignup, signinClicked, setSignin } = useGlobalState();
+    
     return (
         <footer>
             <div id="common-info">
@@ -26,16 +28,12 @@ const Footer = () => {
                 </nav>
 
                 <div id="footer-auth">
-                    <button className="signup" onClick = {() => console.log("Sign Up")}>
+                    <button className="signup" onClick = {() => setSignup(true)}>
                             Sign Up
                     </button>
 
-                    <button onClick = {() => console.log("Sign In")}>
+                    <button onClick = {() => setSignin(true)}>
                             Sign In
-                    </button>
-
-                    <button onClick = {() => console.log("Sign Out")}>
-                        Sign Out
                     </button>
                 </div>
             </div>
@@ -44,5 +42,3 @@ const Footer = () => {
         </footer>
     );
 };
-
-export default Footer;
