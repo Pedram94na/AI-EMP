@@ -1,0 +1,126 @@
+/* Intro Section*/
+#intro-section {
+    background-color: #3B5A74;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0 200px;
+    background-image: linear-gradient(to bottom, #3B5A74 10%, #4D869C 100%);
+}
+
+#intro-section .signup {
+    width: 100px;
+    padding: 7px;
+    font-size: 16px;
+    color: white;
+    background-color: rgb(161, 18, 25);
+    border-style: ridge;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#intro-section .signup:hover {
+    color: rgb(214, 220, 45);;
+    background-color: rgb(112, 14, 19);
+}
+
+/* Sections */
+.section {
+    text-align: center;
+    color: black;
+    padding: 0 50px;
+}
+
+.title {
+    font-size: 50px;
+}
+
+/* Contents */
+.content p {
+    text-align: left;
+    text-indent: 15px;
+}
+
+/* Unordered Lists */
+.content ul {
+    padding: 0;
+}
+
+.content li {
+    list-style: none;
+}
+
+.content ul p {
+    text-align: center;
+}
+
+/* Roll */
+.roll {
+    overflow: hidden; /* Hide overflow to create a seamless effect */
+    width: 100%;      /* Ensure it spans the container width */
+    position: relative;
+}
+
+.roll ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 10px;
+    padding: 0;
+    list-style: none;
+    animation: list-scroll 60s linear infinite;
+}
+
+.roll ul li {
+    flex: 0 0 auto;
+}
+
+@keyframes list-scroll {
+    from {
+        transform: translateX(50%); /* Start outside the container on the right */
+    }
+    to {
+        transform: translateX(-50%); /* Move completely outside the container on the left */
+    }
+}
+
+/* Forms */
+.content form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 300px;
+    margin: 0 auto;
+}
+
+.content form > input,
+.content form > textarea {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 300px;
+    max-width: 300px;
+}
+
+.content form > textarea {
+    height: 200px;
+    resize: none;
+}
+
+.content form > button {
+    width: 100px;
+    padding: 7px;
+    font-size: 16px;
+    color: white;
+    background-color: #7AB2B2;
+    border-style: ridge;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.content form > button:hover {
+    color: rgb(214, 220, 45);
+    background-color: #4D869C;
+}
