@@ -5,9 +5,9 @@ const Inbox = () => {
         <section className="section">
             <table>
                 <thead>
-                    <td>Topic</td>
-                    <td>Content</td>
-                    <td>Date</td>
+                    <th>Topic</th>
+                    <th>Content</th>
+                    <th>Date</th>
                 </thead>
 
                 <tbody>
@@ -27,12 +27,12 @@ const Models = () => {
         <section className="section">
             <table>
                 <thead>
-                    <td>Name</td>
-                    <td>ID</td>
-                    <td>Creation Date</td>
-                    <td>Last Training Date</td>
-                    <td>API</td>
-                    <td>Download</td>
+                    <th>Name</th>
+                    <th>ID</th>
+                    <th>Creation Date</th>
+                    <th>Last Training Date</th>
+                    <th>API</th>
+                    <th>Download</th>
                 </thead>
 
                 <tbody>

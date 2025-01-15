@@ -2,7 +2,6 @@ import React from "react";
 
 import logo from '../assets/images/Logo.png';
 
-import Chatbot from "../components/Chatbot";
 import Header from '../components/Header';
 import Footer from "../components/Footer";
 
@@ -12,7 +11,6 @@ import '../styles/Home.css';
 const Home = () => {
     return (
         <div>
-            {/* <Chatbot /> */}
             <Header />
 
             <div id='main'>

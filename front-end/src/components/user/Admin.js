@@ -23,18 +23,48 @@ const CreateBlog = () => {
 const EditBlog = () => {
     return (
         <section className="section">
-            <h2 className="title">New Blog Post</h2>
+            <h2 className="title">Edit Blog Post</h2>
                     
             <div className="content">
-                <form>
-                    <input type="text" placeholder="Author" value={"Pedram"}/>
-                    <input type="text" placeholder="Title"/>
-                    <textarea placeholder="Content"/>
-                    <input type="file" />
-                    <input type="url" />
+                <div className="blogs">
+                    <ul>
+                        <li>
+                            <div className="blog">
+                                <img src="" width={300} height={300} style={{ backgroundColor: "red" }} alt="" className="image" />
 
-                    <button>Publish</button>
-                </form>
+                                <h3>What is software engineering?</h3>
+                                <p className="short-description">Finding solutions with architectural patterns</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div className="user-review">
+                                <img src="" width={300} height={300} style={{ backgroundColor: "blue" }} alt="" className="image" />
+
+                                <h3>How to use AI in business?</h3>
+                                <p className="short-description">Make AI work for you!</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div className="blog">
+                                <img src="" width={300} height={300} style={{ backgroundColor: "black" }} alt="" className="image" />
+
+                                <h3>What is software engineering?</h3>
+                                <p className="short-description">Finding solutions with architectural patterns</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div className="user-review">
+                                <img src="" width={300} height={300} style={{ backgroundColor: "yellow" }} alt="" className="image" />
+
+                                <h3>How to use AI in business?</h3>
+                                <p className="short-description">Make AI work for you!</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </section>
     );
@@ -43,15 +73,15 @@ const EditBlog = () => {
 const Tickets = () => {
     return (
         <section className="section">
-            <h2 className="title">New Blog Post</h2>
+            <h2 className="title">Customer Tickets</h2>
                     
             <div className="content">
                 <table>
                     <thead>
-                        <td>Ticket ID</td>
-                        <td>Username</td>
-                        <td>Date</td>
-                        <td>Issue</td>
+                        <th>Ticket ID</th>
+                        <th>Username</th>
+                        <th>Date</th>
+                        <th>Issue</th>
                     </thead>
 
                     <tbody>

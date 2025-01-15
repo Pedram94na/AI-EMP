@@ -1,40 +1,48 @@
 import React from "react";
 
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 import { Inbox, Models, TrainModel, TestModel } from "../components/user/Customer";
 import { CreateBlog, EditBlog, Tickets } from "../components/user/Admin";
 
 const Dashboard = () => {
     return (
-        <div id="main">
-            <section id="main-section">
-                <img width={100} height={100} style={{ backgroundColor: "red" }} />
+        <div>
+            <Header />
 
-                <ul id="user-info">
-                    <li>Name: Pedram Negahban</li>
-                    <li><button>Edit Profile</button></li>
-                </ul>
-            </section>
+            <div id="main">
+                <section id="main-section">
+                    <img width={100} height={100} style={{ backgroundColor: "red" }} />
 
-            <section className="section">
-                <ul>
-                    <li>Inbox</li>
-                    <li>Models</li>
-                    <li>Train Model</li>
-                    <li>Test Model</li>
+                    <ul id="user-info">
+                        <li>Name: Pedram Negahban</li>
+                        <li><button>Edit Profile</button></li>
+                    </ul>
+                </section>
 
-                    <li>Blog</li>
-                    <li>Tickets</li>
-                </ul>
-            </section>
+                <section className="section">
+                    <ul>
+                        <li>Inbox</li>
+                        <li>Models</li>
+                        <li>Train Model</li>
+                        <li>Test Model</li>
 
-            <Inbox />
-            <Models />
-            <TrainModel />
-            <TestModel />
+                        <li>Blog</li>
+                        <li>Tickets</li>
+                    </ul>
+                </section>
 
-            <CreateBlog />
-            <EditBlog />
-            <Tickets />
+                <Inbox />
+                <Models />
+                <TrainModel />
+                <TestModel />
+
+                <CreateBlog />
+                <EditBlog />
+                <Tickets />
+            </div>
+
+            <Footer />
         </div>
     );
 };

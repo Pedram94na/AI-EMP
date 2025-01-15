@@ -3,13 +3,15 @@ import React from "react";
 import logo from '../assets/images/Logo.png';
 import '../styles/Header.css';
 
+import Chatbot from "./Chatbot";
 import { SignUp, SignIn } from "./user/Auth";
 
 const Header = () => {
     return (
         <header>
-            <SignUp />
-            <SignIn />
+            <Chatbot />
+            {/* <SignUp />
+            <SignIn /> */}
 
             <a id="header-logo">
                 <img width={70} height={70} src={logo} alt="Logo" />
