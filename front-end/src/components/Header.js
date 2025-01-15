@@ -1,7 +1,9 @@
 import React from "react";
 
 import logo from '../assets/images/Logo.png';
-import Styles from './Styles';
+import '../styles/general/Main.css';
+import '../styles/general/Header.css';
+import '../styles/general/SignupButton.css';
 
 import { useGlobalState } from '../utils/gloablStateContext';
 import { Chatbot } from "./Chatbot";
@@ -12,7 +14,6 @@ export const Header = () => {
 
     return (
         <header>
-            <Styles />
             <Chatbot />
             {signupClicked && <SignUp onCancel={() => setSignup(false)} />}
             {signinClicked && <SignIn onCancel={() => setSignin(false)} />}

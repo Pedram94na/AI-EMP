@@ -2,6 +2,7 @@ footer {
     background-color: #3B5A74;
     display: flex;
     flex-direction: column;
+    color: white;
 }
 
 /* Common Info */
@@ -41,23 +42,6 @@ footer {
     padding: 0;
 }
 
-#footer-nav li {
-    list-style: none;
-}
-
-#footer-nav a {
-    display: block;
-    width: 70px;
-    max-width: 100px;
-    font-size: 16px;
-    color: white;
-    text-align: left;
-}
-
-#footer-nav a:hover {
-    color: rgb(214, 220, 45);
-}
-
 /* Authentication */
 #footer-auth {
     display: flex;
@@ -67,32 +51,9 @@ footer {
     gap: 5px;
 }
 
-#footer-auth button {
-    width: 100px;
-    padding: 7px;
-    font-size: 16px;
-    color: white;
-    background-color: #7AB2B2;
-    border-style: ridge;
-    border-radius: 10px;
-}
-
-#footer-auth button:hover {
-    color: rgb(214, 220, 45);
-    background-color: #4D869C;
-}
-
-.signup {
-    background-color: rgb(161, 18, 25) !important;
-}
-
-.signup:hover {
-    background-color: rgb(112, 14, 19) !important;
-}
-
 /* Dev Info */
 #dev-info {
-    color: white;
     font-size: 15px;
     text-align: center;
+    padding-bottom: 5px;
 }

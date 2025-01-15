@@ -1,0 +1,26 @@
+header {
+    display: flex;
+    flex-direction: row;
+    background-color: #3B5A74;
+    padding: 5px 0;
+    color: white;
+}
+
+#header-logo, #header-nav, #header-auth {
+    flex: 1;
+}
+
+/* Logo */
+#header-logo {
+    margin-left: 50px;
+}
+
+/* Authentication */
+#header-auth {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5px;
+    margin-right: 20px;
+}

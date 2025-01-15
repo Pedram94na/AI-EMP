@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import '../styles/Chatbot.css';
+import '../styles/Overlay.css';
 
 export const Chatbot = () => {
     const [isChatbotShown, showChatbot] = useState(false);
@@ -8,7 +8,7 @@ export const Chatbot = () => {
     if (!isChatbotShown)
     {
         return (
-            <section className="overlay free button">
+            <section className="overlay chatbot button">
                 <div className="content">
                     <button onClick={() => showChatbot(true)}></button>
                 </div>
@@ -19,7 +19,7 @@ export const Chatbot = () => {
     else 
     {
         return (
-            <section className="overlay free">
+            <section className="overlay chatbot">
                 <div className="content">
                     <div className="sub-header">
                         <button onClick={() => showChatbot(false)}>X</button>

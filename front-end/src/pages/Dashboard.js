@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
+
+import '../styles/dashboard/CategoryButtons.css';
 
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { CreateBlog, EditBlog, Tickets } from "../components/user/Admin";
 import { Inbox, Models, TrainModel, TestModel } from "../components/user/Customer";
+import { inbox, models, trainModel, testModel, createBlog, editBlog, tickets } from '../components/user/SectionString';
 
 const Dashboard = () => {
+    const [ activeSection, setActiveSection ] = useState(inbox);
+
     return (
         <div>
             <Header />
@@ -24,26 +29,46 @@ const Dashboard = () => {
 
                 <section className="section">
                     <div className="content">
-                        <ul>
-                            <li>Inbox</li>
-                            <li>Models</li>
-                            <li>Train Model</li>
-                            <li>Test Model</li>
+                        <ul id="categories">
+                            <li>
+                                <button onClick={() => setActiveSection(inbox)}>Inbox</button>
+                            </li>
 
-                            <li>Blog</li>
-                            <li>Tickets</li>
+                            <li>
+                                <button onClick={() => setActiveSection(models)}>Models</button>
+                            </li>
+
+                            <li>
+                                <button onClick={() => setActiveSection(trainModel)}>Train Model</button>
+                            </li>
+
+                            <li>
+                                <button onClick={() => setActiveSection(testModel)}>Test Model</button>
+                            </li>
+
+                            <li>
+                                <button onClick={() => setActiveSection(createBlog)}>New Blog</button>
+                            </li>
+
+                            <li>
+                                <button onClick={() => setActiveSection(editBlog)}>Edit Blog</button>
+                            </li>
+
+                            <li>
+                                <button onClick={() => setActiveSection(tickets)}>Tickets</button>
+                            </li>
                         </ul>
                     </div>
                 </section>
 
-                <Inbox />
-                <Models />
-                <TrainModel />
-                <TestModel />
-
-                <CreateBlog />
-                <EditBlog />
-                <Tickets />
+                {activeSection === inbox && <Inbox />}
+                {activeSection === models && <Models />}
+                {activeSection === trainModel && <TrainModel />}
+                {activeSection === testModel && <TestModel />}
+                
+                {activeSection === createBlog && <CreateBlog />}
+                {activeSection === editBlog && <EditBlog />}
+                {activeSection === tickets && <Tickets />}
             </div>
 
             <Footer />

@@ -1,15 +1,17 @@
 import React from "react";
+
+import '../../styles/Overlay.css';
 import { useGlobalState } from '../../utils/gloablStateContext';
 
 export const SignUp = ({onCancel}) => {
     const { setSignup, setSignin } = useGlobalState();
     
     return (
-        <section className="overlay">
+        <section className="overlay auth">
             <div className="content">
-                <h3 className="auth-title">Create Account</h3>
+                <h3>Create Account</h3>
 
-                <form className="auth-form">
+                <form>
                     <input type="text" placeholder="First Name" />
                     <input type="text" placeholder="Last Name" />
                     <input type="email" placeholder="Email" />
@@ -31,15 +33,12 @@ export const SignUp = ({onCancel}) => {
                     </div>
                 </form>
 
-                <div>
-                    <p>
-                        Have an account?
-                        <button
-                            onClick={(e) => {
-                                setSignin(true);
-                                setSignup(false);
-                            }}>Sign In</button>
-                    </p>
+                <div className="extra">
+                    <button
+                        onClick={(e) => {
+                            setSignin(true);
+                            setSignup(false);
+                        }}>Have An Account?</button>
                 </div>
             </div>
         </section>
@@ -50,7 +49,7 @@ export const SignIn = ({onCancel}) => {
     const { setSignup, setSignin } = useGlobalState();
 
     return (
-        <section className="overlay">
+        <section className="overlay auth">
             <div className="content">
                 <h3>Enter Account</h3>
 
@@ -73,17 +72,14 @@ export const SignIn = ({onCancel}) => {
                     </div>
                 </form>
 
-                <div>
+                <div className="extra">
                     <a>Forgot Password?</a>
 
-                    <p>
-                        Don't have an account?
-                        <button className="signup"
-                            onClick={(e) => {
-                                setSignup(true);
-                                setSignin(false);
-                            }}>Sign Up</button>
-                    </p>
+                    <button className="signup"
+                        onClick={(e) => {
+                            setSignup(true);
+                            setSignin(false);
+                        }}>Don't Have An Account?</button>
                 </div>
             </div>
         </section>

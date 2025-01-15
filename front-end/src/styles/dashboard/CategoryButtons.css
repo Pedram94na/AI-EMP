@@ -1,0 +1,14 @@
+#categories {
+    display: flex;
+    flex-direction: row;
+}
+
+#categories li {
+    flex: 1;
+}
+
+#categories button {
+    border-radius: 0;
+    width: 100%;
+    padding: 40px 0;
+}
