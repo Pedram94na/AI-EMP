@@ -5,7 +5,6 @@ footer {
     color: white;
 }
 
-/* Common Info */
 #common-info {
     display: flex;
     flex-direction: row;
@@ -18,14 +17,12 @@ footer {
     /* display: flex; */
 }
 
-/* Title */
 #footer-logo {
     margin-left: 50px;
     align-items: center;
     justify-content: flex-start;
 }
 
-/* Navigation */
 #footer-nav {
     display: flex;
     flex-direction: row;
@@ -42,7 +39,16 @@ footer {
     padding: 0;
 }
 
-/* Authentication */
+#footer-nav li {
+    transition: transform 0.3s ease, padding 0.3s ease, height 0.3s ease;
+}
+
+#footer-nav li:hover {
+    transform: scale(1.5);
+    padding: 10px 0;
+    height: auto;
+}
+
 #footer-auth {
     display: flex;
     flex-direction: column;
@@ -51,7 +57,6 @@ footer {
     gap: 5px;
 }
 
-/* Dev Info */
 #dev-info {
     font-size: 15px;
     text-align: center;

@@ -2,9 +2,11 @@ import React from "react";
 
 import '../../styles/blog/BlogsList.css';
 
-import blogsData from '../../data/blogsData';
+import Blogs from '../../data/Blogs';
 
 const BlogsList = ({onSelectBlog}) => {
+    const blogsData = Blogs();
+    
     return (
         <section className="blogs-list">
             <h1>Blog Post</h1>
@@ -22,7 +24,7 @@ const BlogsList = ({onSelectBlog}) => {
                                 </div>
                             </li>
                         ))
-                    }
+                    };
                 </ul>
             </div>
         </section>

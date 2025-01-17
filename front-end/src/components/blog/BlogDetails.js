@@ -5,7 +5,6 @@ import '../../styles/blog/BlogDetails.css';
 const BlogDetail = ({blog, onClose}) => {
     if (!blog)
         return null;
-    console.log(blog);
     
     return (
         <section className="blog-details">

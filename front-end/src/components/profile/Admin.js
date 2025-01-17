@@ -1,6 +1,6 @@
 import React from "react";
 
-import '../../styles/dashboard/DashboardSection.css'
+import '../../styles/profile/Section.css'
 
 export const CreateBlog = () => {
     return (

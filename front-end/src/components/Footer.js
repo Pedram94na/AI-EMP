@@ -2,7 +2,6 @@ import React from "react";
 
 import logo from "../assets/images/Logo.png";
 import '../styles/general/Footer.css';
-import '../styles/general/SignupButton.css';
 
 import { useGlobalState } from '../utils/gloablStateContext';
 

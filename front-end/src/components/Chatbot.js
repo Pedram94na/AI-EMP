@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-import '../styles/Overlay.css';
+import '../styles/general/Overlay.css';
 
-export const ChatbotOverlay = () => {
+const ChatbotOverlay = () => {
     const [isChatbotShown, showChatbot] = useState(false);
     
     if (!isChatbotShown)
@@ -41,3 +41,5 @@ export const ChatbotOverlay = () => {
         );
     }
 };
+
+export default ChatbotOverlay;

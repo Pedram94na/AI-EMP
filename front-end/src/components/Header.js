@@ -4,11 +4,12 @@ import logo from '../assets/images/Logo.png';
 
 import '../styles/Main.css';
 import '../styles/general/Header.css';
-import '../styles/general/SignupButton.css';
 
 import { useGlobalState } from '../utils/gloablStateContext';
-import { ChatbotOverlay } from "./Chatbot";
-import { SignUpOverlay, SignInOverlay } from "./auth/Auth";
+
+import ChatbotOverlay from "./Chatbot";
+import SignUpOverlay from "./auth/SignupOverlay";
+import SignInOverlay from "./auth/SigninOverlay";
 
 export const Header = () => {
     const { signupClicked, setSignup, signinClicked, setSignin } = useGlobalState();
@@ -24,17 +25,31 @@ export const Header = () => {
             </a>
 
             <nav id="header-nav">
-                <a>Home</a>
+                <ul>
+                    <li>
+                        <a>Home</a>
+                    </li>
 
-                <a>About</a>
+                    <li>
+                        <a>About</a>
+                    </li>
 
-                <a>Reviews</a>
+                    <li>
+                        <a>Guide</a>
+                    </li>
 
-                <a>Guide</a>
+                    <li>
+                        <a>Reviews</a>
+                    </li>
 
-                <a>Blog</a>
+                    <li>
+                        <a>Blog</a>
+                    </li>
 
-                <a>Contact</a>
+                    <li>
+                        <a>Contact</a>
+                    </li>
+                </ul>
             </nav>
 
             <div id="header-auth">

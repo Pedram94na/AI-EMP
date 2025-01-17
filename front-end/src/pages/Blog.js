@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 
 import { Header } from '../components/Header';
+import { Footer } from "../components/Footer";
+
 import BlogsList from '../components/blog/BlogsList';
 import BlogDetail from "../components/blog/BlogDetails";
-import { Footer } from "../components/Footer";
 
 const Blogs = () => {
     const [ blog, setBlog ] = new useState(null);

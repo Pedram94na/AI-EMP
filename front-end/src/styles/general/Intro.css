@@ -1,4 +1,4 @@
-.intro-section {
+.intro {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -9,6 +9,6 @@
     color: white;
 }
 
-.intro-section .content li {
+.intro .content li {
     margin: 10px 0;
 }
