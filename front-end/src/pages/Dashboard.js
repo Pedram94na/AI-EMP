@@ -6,7 +6,7 @@ import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { CreateBlog, EditBlog, Tickets } from "../components/user/Admin";
 import { Inbox, Models, TrainModel, TestModel } from "../components/user/Customer";
-import { inbox, models, trainModel, testModel, createBlog, editBlog, tickets } from '../components/user/SectionString';
+import { inbox, models, trainModel, testModel, createBlog, editBlog, tickets } from '../components/user/SectionCategories';
 
 const Dashboard = () => {
     const [ activeSection, setActiveSection ] = useState(inbox);

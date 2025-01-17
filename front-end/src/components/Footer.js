@@ -41,7 +41,7 @@ export const Footer = () => {
                 </div>
             </div>
 
-            <h2 id="dev-info">Developed By Pedram Negahban - 2025</h2>
+            <h3 id="dev-info">Developed By Pedram Negahban - 2025</h3>
         </footer>
     );
 };

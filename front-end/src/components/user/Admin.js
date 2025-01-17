@@ -1,9 +1,11 @@
 import React from "react";
 
+import '../../styles/dashboard/DashboardSection.css'
+
 export const CreateBlog = () => {
     return (
-        <section className="section">
-            <h2 className="title">New Blog Post</h2>
+        <section className="dashboard">
+            <h2>New Blog Post</h2>
                     
             <div className="content">
                 <form>
@@ -22,8 +24,8 @@ export const CreateBlog = () => {
 
 export const EditBlog = () => {
     return (
-        <section className="section">
-            <h2 className="title">Edit Blog Post</h2>
+        <section className="dashboard">
+            <h2>Edit Blog Post</h2>
                     
             <div className="content">
                 <div className="blogs">
@@ -72,8 +74,8 @@ export const EditBlog = () => {
 
 export const Tickets = () => {
     return (
-        <section className="section">
-            <h2 className="title">Customer Tickets</h2>
+        <section className="dashboard">
+            <h2>Customer Tickets</h2>
                     
             <div className="content">
                 <table>

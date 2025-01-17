@@ -3,7 +3,7 @@ import React from "react";
 import '../../styles/Overlay.css';
 import { useGlobalState } from '../../utils/gloablStateContext';
 
-export const SignUp = ({onCancel}) => {
+export const SignUpOverlay = ({onCancel}) => {
     const { setSignup, setSignin } = useGlobalState();
     
     return (
@@ -45,7 +45,7 @@ export const SignUp = ({onCancel}) => {
     );
 };
 
-export const SignIn = ({onCancel}) => {
+export const SignInOverlay = ({onCancel}) => {
     const { setSignup, setSignin } = useGlobalState();
 
     return (

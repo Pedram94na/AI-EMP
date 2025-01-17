@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import '../styles/Overlay.css';
 
-export const Chatbot = () => {
+export const ChatbotOverlay = () => {
     const [isChatbotShown, showChatbot] = useState(false);
     
     if (!isChatbotShown)
@@ -25,7 +25,7 @@ export const Chatbot = () => {
                         <button onClick={() => showChatbot(false)}>X</button>
                     </div>
 
-                    <h3 className="title">AI EMP BOT</h3>
+                    <h4 className="title">AI EMP BOT</h4>
 
                     <div>
                         MESSAGE LOGS CONTAINER

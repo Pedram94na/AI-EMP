@@ -1,6 +1,6 @@
 .roll {
-    overflow: hidden; /* Hide overflow to create a seamless effect */
-    width: 100%;      /* Ensure it spans the container width */
+    overflow: hidden;
+    width: 100%;
     position: relative;
 }
 
@@ -12,17 +12,32 @@
     padding: 0;
     list-style: none;
     animation: list-scroll 60s linear infinite;
+    animation-play-state: running;
 }
 
-.roll ul li {
+.roll ul:hover {
+    animation-play-state: paused;
+}
+
+.roll li {
     flex: 0 0 auto;
+    transition: transform 0.3s ease;
+}
+
+.roll li:hover {
+    color: black;
+    transform: scale(1.2);
+}
+
+.roll li > a:hover {
+    color: black;
 }
 
 @keyframes list-scroll {
     from {
-        transform: translateX(50%); /* Start outside the container on the right */
+        transform: translateX(50%);
     }
     to {
-        transform: translateX(-50%); /* Move completely outside the container on the left */
+        transform: translateX(-50%);
     }
 }

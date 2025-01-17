@@ -1,9 +1,11 @@
 import React from "react";
 
+import '../../styles/dashboard/DashboardSection.css'
+
 export const Inbox = () => {
     return (
-        <section className="section">
-            <h3 id="title">Your Messages</h3>
+        <section className="dashboard">
+            <h2>Your Messages</h2>
 
             <div className="content">
                 <table>
@@ -19,6 +21,12 @@ export const Inbox = () => {
                             <td>Welcome to AI EMP. Happy you're here :D</td>
                             <td>01.14.2025</td>
                         </tr>
+
+                        <tr>
+                            <td>Welcome</td>
+                            <td>Welcome to AI EMP. Happy you're here :D</td>
+                            <td>01.14.2025</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -28,8 +36,8 @@ export const Inbox = () => {
 
 export const Models = () => {
     return (
-        <section className="section">
-            <h3 id="title">Your Models</h3>
+        <section className="dashboard">
+            <h2>Your Models</h2>
 
             <div className="content">
                 <table>
@@ -37,7 +45,7 @@ export const Models = () => {
                         <th>Name</th>
                         <th>ID</th>
                         <th>Creation Date</th>
-                        <th>Last Training Date</th>
+                        <th>Training Date</th>
                         <th>API</th>
                         <th>Download</th>
                     </thead>
@@ -60,8 +68,8 @@ export const Models = () => {
 
 export const TrainModel = () => {
     return (
-        <section className="section">
-            <h3 id="title">Train Model</h3>
+        <section className="dashboard">
+            <h2>Train Model</h2>
 
             <div className="content">
                 <form>
@@ -76,7 +84,7 @@ export const TrainModel = () => {
                     <input type="number" placeholder="batch"/>
                     <input type="number" placeholder="epoch"/>
 
-                    <button>Start Training</button>
+                    <button>Train</button>
                 </form>
             </div>
         </section>
@@ -85,8 +93,8 @@ export const TrainModel = () => {
 
 export const TestModel = () => {
     return (
-        <section className="section">
-            <h3 id="title">Test Model</h3>
+        <section className="dashboard">
+            <h2>Test Model</h2>
 
             <div className="content">
                 <select>

@@ -1,0 +1,39 @@
+.blogs-list ul {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: white;
+}
+
+.blogs-list li {
+    background-image: linear-gradient(to bottom, #3B5A74 20%, #4D869C 100%);
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding: 10px;
+    width: auto;
+    transition: transform 0.3s ease, padding 0.3s ease;
+}
+
+.blogs-list li:hover {
+    color: white;
+    padding: 20px;
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.blogs-list img {
+    width: 300px;
+    height: 300px;
+    margin-right: 20px;
+}
+
+.blogs-list div {
+   display: flex;
+   flex-direction: column;
+}
+
+.blogs-list div > h3 {
+    padding-bottom: 20px;
+    align-self: flex-start;
+}
