@@ -1,10 +1,10 @@
 from file.file_type import get_reader
 
-def file_controller(input_type, file):
+def process_file(file, file_extension):
     '''Controls data file operations'''
 
     try:
-        reader = get_reader(input_type, file)
+        reader = get_reader(file, file_extension)
         reader.process_data()
 
     except Exception as e:

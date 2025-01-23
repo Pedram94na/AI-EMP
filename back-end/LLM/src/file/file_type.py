@@ -1,6 +1,6 @@
 from file.file_reader import TextFileReader, CsvFileReader
 
-def get_reader(input_type, file):
+def get_reader(file, file_extension):
     '''Returns an object of a file reader'''
 
     cases = {
@@ -8,7 +8,7 @@ def get_reader(input_type, file):
         "2": CsvFileReader(file)
     }
     
-    if input_type not in cases:
-        raise ValueError(f"Undefined File Type: {input_type}")
+    if file_extension not in cases:
+        raise ValueError(f"Undefined File Type: {file_extension}")
 
-    return cases.get(input_type)
+    return cases.get(file_extension)

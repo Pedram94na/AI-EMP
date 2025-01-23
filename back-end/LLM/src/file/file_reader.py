@@ -1,7 +1,6 @@
 import os
 import json
 
-from os import path
 from csv import DictReader
 
 class FileReader:
@@ -12,13 +11,13 @@ class FileReader:
         self.file_data = None
         self.save_file = './data/training_data.json'
 
-        directory = path.dirname(self.save_file)
+        directory = os.path.dirname(self.save_file)
 
-        if not path.exists(directory):
+        if not os.path.exists(directory):
             os.makedirs(directory)
 
     def validate_file(self):
-        if not path.exists(self.file):
+        if not os.path.exists(self.file):
             raise FileNotFoundError(f"File doesn't exist: {self.file}")
         
     def process_data(self):
