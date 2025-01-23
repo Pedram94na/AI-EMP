@@ -1,0 +1,23 @@
+{
+    "title": "Sample JSON File",
+    "description": "This is a test JSON file for reading data in Python.",
+
+    "data": [
+        {
+            "id": 1,
+            "name": "Alice",
+            "age": 25
+        },
+        
+        {
+            "id": 2,
+            "name": "Bob",
+            "age": 30
+        }
+    ],
+
+    "metadata": {
+        "created_at": "2025-01-23",
+        "author": "Test User"
+    }
+}
