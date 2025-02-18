@@ -23,7 +23,7 @@ namespace services.MicroServices.CMS.Controller
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateNewBlog([FromBody] CreateBlogDto dto)
         {
             if (!ModelState.IsValid)
@@ -73,9 +73,6 @@ namespace services.MicroServices.CMS.Controller
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteBlog([FromRoute] int id)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
             var existingBlogModel = await blogRepo.GetByIdAsync(id);
 
             if (existingBlogModel is null)
@@ -89,9 +86,6 @@ namespace services.MicroServices.CMS.Controller
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
             var blogs = await blogRepo.GetAllAsync();
             var blogsDto = blogs.Select(b => b.ToBlogDto()).ToList();
 
@@ -102,9 +96,6 @@ namespace services.MicroServices.CMS.Controller
         [Route("{id:int}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
             var blog = await blogRepo.GetByIdAsync(id);
 
             return blog is null ? NotFound("Blog not found") : Ok(blog.ToBlogDto());

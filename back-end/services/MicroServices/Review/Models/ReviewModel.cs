@@ -6,6 +6,7 @@ namespace services.MicroServices.Review.Models
         public string Name { get; set; } = String.Empty;
         public string Content { get; set; } = String.Empty;
         public int Rating { get; set; }
+        // public byte[]? Image { get; set; }
         public DateTime CreatedOn { get; set; } = DateTime.Today;
     }
 }
