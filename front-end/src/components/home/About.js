@@ -2,7 +2,7 @@ import React from "react";
 
 const About = () => {
     return (
-        <section className="section">
+        <section>
             <h1>What is AI EMP?</h1>
 
             <div className="content">

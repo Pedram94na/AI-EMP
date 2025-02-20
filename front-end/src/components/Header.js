@@ -8,6 +8,7 @@ import '../styles/general/Header.css';
 import { useGlobalState } from '../utils/gloablStateContext';
 
 import ChatbotOverlay from "./Chatbot";
+import ReviewOverlay from "./review/ReviewOverlay";
 import SignUpOverlay from "./auth/SignupOverlay";
 import SignInOverlay from "./auth/SigninOverlay";
 
@@ -17,6 +18,7 @@ export const Header = () => {
     return (
         <header>
             <ChatbotOverlay />
+            <ReviewOverlay />
             {signupClicked && <SignUpOverlay onCancel={() => setSignup(false)} />}
             {signinClicked && <SignInOverlay onCancel={() => setSignin(false)} />}
 
