@@ -91,6 +91,11 @@
     background-color: rgba(122, 178, 178, 1);
 }
 
+.overlay.chatbot .content .chat-input-area button {
+    width: fit-content;
+    height: fit-content;
+}
+
 /* Review */
 .overlay.review {
     background-color: rgba(12, 30, 46, 0.603);
@@ -102,6 +107,10 @@
     align-items: center;
     z-index: 1000;
     padding: 0;
+}
+
+.overlay.overlay.review form {
+    background-color: transparent;
 }
 
 .overlay.review .rating {

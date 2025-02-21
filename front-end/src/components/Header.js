@@ -22,35 +22,18 @@ export const Header = () => {
             {signupClicked && <SignUpOverlay onCancel={() => setSignup(false)} />}
             {signinClicked && <SignInOverlay onCancel={() => setSignin(false)} />}
 
-            <a id="header-logo">
+            <a id="header-logo" href="/">
                 <img width={70} height={70} src={logo} alt="Logo" />
             </a>
 
             <nav id="header-nav">
                 <ul>
-                    <li>
-                        <a>Home</a>
-                    </li>
-
-                    <li>
-                        <a>About</a>
-                    </li>
-
-                    <li>
-                        <a>Guide</a>
-                    </li>
-
-                    <li>
-                        <a>Reviews</a>
-                    </li>
-
-                    <li>
-                        <a>Blog</a>
-                    </li>
-
-                    <li>
-                        <a>Contact</a>
-                    </li>
+                    <li><a href="#intro">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#guide">Guide</a></li>
+                    <li><a href="#reviews">Reviews</a></li>
+                    <li><a href="#blogs">Blog</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
 

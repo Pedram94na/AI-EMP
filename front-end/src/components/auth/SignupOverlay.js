@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import '../../styles/general/Overlay.css';
 import '../../styles/general/SignupButton.css';
@@ -7,6 +8,7 @@ import { useGlobalState } from '../../utils/gloablStateContext';
 
 const SignUpOverlay = ({onCancel}) => {
     const { setSignup, setSignin } = useGlobalState();
+    const navigate = new useNavigate();
     
     return (
         <section className="overlay auth">
@@ -25,6 +27,10 @@ const SignUpOverlay = ({onCancel}) => {
                         <button
                             onClick={(e) => {
                                 e.preventDefault();
+
+                                // Auth System Here
+
+                                navigate('/profile');
                             }}>Sign Up</button>
                         
                         <button

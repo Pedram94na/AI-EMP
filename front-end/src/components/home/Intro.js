@@ -4,7 +4,7 @@ import logo from '../../assets/images/Logo.png';
 
 const Intro = () => {
     return (
-        <section className="intro">
+        <section id="intro" className="intro">
             <img width={500} height={500} src={logo} alt="Logo" />
 
             <div className="content">

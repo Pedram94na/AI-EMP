@@ -4,7 +4,7 @@ import '../../styles/home/Roll.css';
 
 const Reviews = () => {
     return (
-        <section className="section">
+        <section id="reviews" className="section">
             <h1>What are our users saying about AI EMP?</h1>
             
             <div className="content">

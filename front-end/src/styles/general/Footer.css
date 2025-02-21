@@ -32,6 +32,11 @@ footer {
     width: 100%;
 }
 
+#footer-nav a {
+    color: white;
+    text-decoration: none;
+}
+
 #footer-nav ul {
     display: flex;
     flex-direction: column;

@@ -1,10 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import '../../styles/home/Roll.css';
 
 export const Blogs = () => {
+    const navigate = new useNavigate();
+
     return (
-        <section>
+        <section id="blogs">
             <h1>Blogs</h1>
 
             <div className="content">
@@ -47,6 +50,8 @@ export const Blogs = () => {
                         </li>
                     </ul>
                 </div>
+
+                <a onClick={() => navigate('/blog')}>See All</a>
             </div>
         </section>
     );

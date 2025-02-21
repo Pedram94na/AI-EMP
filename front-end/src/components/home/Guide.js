@@ -2,7 +2,7 @@ import React from "react";
 
 const Guide = () => {
     return (
-        <section>
+        <section id="guide">
             <h1>How does AI EMP work?</h1>
 
             <div className="content">

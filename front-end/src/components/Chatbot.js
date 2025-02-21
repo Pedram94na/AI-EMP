@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Submit from "../assets/images/Submit.svg";
 
 import '../styles/general/Overlay.css';
 
@@ -34,7 +35,9 @@ const ChatbotOverlay = () => {
                     <div className="chat-input-area">
                         <input type="text" placeholder="Message AI EMP" />
 
-                        <button>Send</button>
+                        <button>
+                            <img src={Submit} width={10} height={10} />
+                        </button>
                     </div>
                 </div>
             </section>

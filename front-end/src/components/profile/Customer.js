@@ -1,4 +1,5 @@
 import React from "react";
+import Submit from "../../assets/images/Submit.svg"
 
 import '../../styles/profile/Section.css'
 
@@ -108,7 +109,9 @@ export const TestModel = () => {
                 <div className="input-area">
                     <input type="text" placeholder="Type your message..." />
                     
-                    <button>Send</button>
+                    <button>
+                        <img src={Submit} width={10} height={10} />
+                    </button>
                 </div>
             </div>
         </section>

@@ -16,8 +16,8 @@ const Dashboard = () => {
     return (
         <div>
             <Header />
-            <Subscription />
-            <Payment />
+            {/* <Subscription />
+            <Payment /> */}
             <Intro />
             <Actions selectedSection={setActiveSection} />
 

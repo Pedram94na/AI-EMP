@@ -30,7 +30,7 @@ const ReviewOverlay = () => {
                 <form>
                     <div className="rating">
                         {[1, 2, 3, 4, 5].map((id) => (
-                            <img key={id} src={Star} id={id} width={50} height={50}
+                            <img key={id} src={Star} id={id} width={30} height={30}
                                 onClick={() => setClicked(id)}
                                 onMouseEnter={() => setHovered(id)}
                                 onMouseLeave={() => setHovered(0)}

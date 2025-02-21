@@ -11,21 +11,21 @@ export const Footer = () => {
     return (
         <footer>
             <div id="common-info">
-                <a id="footer-logo">
+                <a id="footer-logo" href="/">
                     <img width={150} height={150} src={logo} alt="Logo" />
                 </a>
                 
                 <nav id="footer-nav">
                     <ul>
-                        <li><a>Home</a></li>
-                        <li><a>About</a></li>
-                        <li><a>Reviews</a></li>
+                        <li><a href="#intro">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#guide">Guide</a></li>
                     </ul>
 
                     <ul>
-                        <li><a>Guide</a></li>
-                        <li><a>Blog</a></li>
-                        <li><a>Contact</a></li>
+                        <li><a href="#reviews">Reviews</a></li>
+                        <li><a href="#blogs">Blog</a></li>
+                        <li><a href="#contact">Contact</a></li>
                     </ul>
                 </nav>
 
