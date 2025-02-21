@@ -9,9 +9,8 @@ namespace services.MicroServices.User.Services
         private readonly string smtpHost, smtpUsername, smtpPassword, fromEmail, fromName;
         private readonly int smtpPort;
 
-        public EmailService(
-            string smtpHost, string smtpPort, string smtpUsername,
-            string smtpPassword, string fromEmail, string fromName)
+        public EmailService(string smtpHost, string smtpPort, string smtpUsername,
+                            string smtpPassword, string fromEmail, string fromName)
         {
             this.smtpHost = smtpHost;
             this.smtpPort = int.Parse(smtpPort);

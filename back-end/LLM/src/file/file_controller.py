@@ -1,7 +1,7 @@
 from file.file_type import get_reader
 
 def process_file(file, file_extension):
-    '''Controls data file operations'''
+    '''Runs the data file operations'''
 
     try:
         reader = get_reader(file, file_extension)

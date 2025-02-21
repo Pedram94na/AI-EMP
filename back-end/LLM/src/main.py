@@ -7,4 +7,4 @@ if __name__ == "__main__":
         raise TypeError(f"Invalid number of arguments: {len(argv)}")
 
     process_file(argv[1], argv[2])
-    start_training()
+    # start_training()
