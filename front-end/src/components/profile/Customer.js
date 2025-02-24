@@ -104,7 +104,23 @@ export const TestModel = () => {
                     <option>Model Z</option>
                 </select>
                 
-                <div className="message-log">MESSAGE LOGS</div>
+                <div className="message-log">
+                        <div key="1" className="message">
+                            <span className="label user">You: Hi</span>
+                        </div>
+
+                        < div key="2" className="message">
+                            <span className="label bot">Bot: Hello there</span>
+                        </div>
+
+                        <div key="3" className="message">
+                            <span className="label user">You: I need help!</span>
+                        </div>
+                        
+                        < div key="4" className="message">
+                            <span className="label bot">Bot: What is troubling you?</span>
+                        </div>
+                    </div>
                 
                 <div className="input-area">
                     <input type="text" placeholder="Type your message..." />

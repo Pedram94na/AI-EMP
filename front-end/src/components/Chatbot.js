@@ -28,8 +28,22 @@ const ChatbotOverlay = () => {
 
                     <h4 className="title">AI EMP BOT</h4>
 
-                    <div>
-                        MESSAGE LOGS CONTAINER
+                    <div className="message-log">
+                        <div key="1" className="message">
+                            <span className="label user">You: Hi</span>
+                        </div>
+
+                        < div key="2" className="message">
+                            <span className="label bot">Bot: Hello there</span>
+                        </div>
+
+                        <div key="3" className="message">
+                            <span className="label user">You: I need help!</span>
+                        </div>
+                        
+                        < div key="4" className="message">
+                            <span className="label bot">Bot: What is troubling you?</span>
+                        </div>
                     </div>
 
                     <div className="chat-input-area">

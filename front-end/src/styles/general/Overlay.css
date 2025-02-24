@@ -91,6 +91,34 @@
     background-color: rgba(122, 178, 178, 1);
 }
 
+.overlay.chatbot .message-log {
+    flex-grow: 1;
+    overflow-y: auto;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.overlay.chatbot .message {
+    padding: 5px 8px;
+    border-radius: 4px;
+    text-align: left;
+}
+
+.overlay.chatbot .message .label {
+    color: rgb(12, 30, 46);
+    font-weight: bold;
+    font-size: 10px;
+}
+
+.overlay.chatbot .label.user {
+    text-align: right;
+}
+
+.overlay.chatbot .label.bot {
+    
+}
+
 .overlay.chatbot .content .chat-input-area button {
     width: fit-content;
     height: fit-content;
