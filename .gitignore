@@ -24,3 +24,4 @@ front-end/yarn-error.log*
 
 back-end/services/bin
 back-end/services/obj
+back-end/services/.env
