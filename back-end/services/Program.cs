@@ -5,15 +5,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using services.Data;
-using services.MicroServices.CMS.Interfaces;
-using services.MicroServices.CMS.Repositories;
-using services.MicroServices.ContactForm.Interfaces;
-using services.MicroServices.ContactForm.Repositories;
-using services.MicroServices.Review.Interfaces;
-using services.MicroServices.Review.Repositories;
-using services.MicroServices.User.Interfaces;
-using services.MicroServices.User.Models;
-using services.MicroServices.User.Services;
+using services.Services.CMS.Interfaces;
+using services.Services.CMS.Repositories;
+using services.Services.ContactForm.Interfaces;
+using services.Services.ContactForm.Repositories;
+using services.Services.Review.Interfaces;
+using services.Services.Review.Repositories;
+using services.Services.User.Interfaces;
+using services.Services.User.Services;
+using services.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 

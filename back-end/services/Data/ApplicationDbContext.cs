@@ -1,10 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using services.MicroServices.ContactForm.Models;
-using services.MicroServices.Review.Models;
-using services.MicroServices.CMS.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using services.MicroServices.User.Models;
 using Microsoft.AspNetCore.Identity;
+using services.Models;
 
 namespace services.Data
 {
