@@ -235,13 +235,35 @@ namespace services.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Subscription Plan",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Price = table.Column<float>(type: "real", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Subscription Plan", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Subscription Plan_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "7f4dff77-a126-4a44-a1af-d98c96c02744", null, "Admin", "ADMIN" },
-                    { "c9d4738b-dd78-4948-9dfb-13d503560690", null, "User", "USER" }
+                    { "4e3f1234-5a72-47da-931b-4f2c80cde61e", null, "User", "USER" },
+                    { "87bd608c-c67e-44bf-8ecd-dc25c884595b", null, "Admin", "ADMIN" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -287,6 +309,12 @@ namespace services.Migrations
                 name: "IX_Blog_AppUserId",
                 table: "Blog",
                 column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Subscription Plan_AppUserId",
+                table: "Subscription Plan",
+                column: "AppUserId",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -318,6 +346,9 @@ namespace services.Migrations
 
             migrationBuilder.DropTable(
                 name: "Reviews");
+
+            migrationBuilder.DropTable(
+                name: "Subscription Plan");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

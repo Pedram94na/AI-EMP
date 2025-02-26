@@ -8,5 +8,6 @@ namespace services.Models
         public string LastName { get; set; } = String.Empty;
         public DateTime CreatedOn { get; set; } = DateTime.Today;
         public List<BlogModel> Blogs { get; set; } = [];
+        public SubscriptionPlanModel? CurrentSubscriptionPlan { get; set; }
     }
 }

@@ -14,6 +14,8 @@ using services.Services.Review.Repositories;
 using services.Services.User.Interfaces;
 using services.Services.User.Services;
 using services.Models;
+using services.Services.Subscription.Interfaces;
+using services.Services.Subscription.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -111,6 +113,7 @@ builder.Services.AddScoped<IContactFormRepo, ContactFormRepo>();
 builder.Services.AddScoped<IReviewRepo, ReviewRepo>();
 builder.Services.AddScoped<IBlogRepo, BlogRepo>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<ISubscriptionPlanRepo, SubscriptionPlanRepo>();
 builder.Services.AddScoped<IEmailService>(provider => new EmailService(
     builder.Configuration["EmailService:SmtpHost"],
     builder.Configuration["EmailService:SmtpPort"],

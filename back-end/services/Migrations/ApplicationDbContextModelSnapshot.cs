@@ -51,13 +51,13 @@ namespace services.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7f4dff77-a126-4a44-a1af-d98c96c02744",
+                            Id = "87bd608c-c67e-44bf-8ecd-dc25c884595b",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "c9d4738b-dd78-4948-9dfb-13d503560690",
+                            Id = "4e3f1234-5a72-47da-931b-4f2c80cde61e",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -369,6 +369,35 @@ namespace services.Migrations
                     b.ToTable("Reviews");
                 });
 
+            modelBuilder.Entity("services.Models.SubscriptionPlanModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("ExpirationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<float>("Price")
+                        .HasColumnType("real");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId")
+                        .IsUnique();
+
+                    b.ToTable("Subscription Plan");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -431,9 +460,22 @@ namespace services.Migrations
                     b.Navigation("AppUser");
                 });
 
+            modelBuilder.Entity("services.Models.SubscriptionPlanModel", b =>
+                {
+                    b.HasOne("services.Models.AppUser", "AppUser")
+                        .WithOne("CurrentSubscriptionPlan")
+                        .HasForeignKey("services.Models.SubscriptionPlanModel", "AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+                });
+
             modelBuilder.Entity("services.Models.AppUser", b =>
                 {
                     b.Navigation("Blogs");
+
+                    b.Navigation("CurrentSubscriptionPlan");
                 });
 #pragma warning restore 612, 618
         }

@@ -11,6 +11,7 @@ namespace services.Data
         public DbSet<MessageModel> Messages { get; set; }
         public DbSet<ReviewModel> Reviews { get; set; }
         public DbSet<BlogModel> Blogs { get; set; }
+        public DbSet<SubscriptionPlanModel> SubscriptionPlans { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
