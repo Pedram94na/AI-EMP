@@ -22,6 +22,7 @@ front-end/npm-debug.log*
 front-end/yarn-debug.log*
 front-end/yarn-error.log*
 
+# back-end
 back-end/services/bin
 back-end/services/obj
 back-end/services/.env
