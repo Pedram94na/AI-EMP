@@ -16,6 +16,8 @@ using services.Services.User.Services;
 using services.Models;
 using services.Services.Subscription.Interfaces;
 using services.Services.Subscription.Repositories;
+using services.Services.Chatbot.Interfaces;
+using services.Services.Chatbot.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -114,6 +116,8 @@ builder.Services.AddScoped<IReviewRepo, ReviewRepo>();
 builder.Services.AddScoped<IBlogRepo, BlogRepo>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<ISubscriptionPlanRepo, SubscriptionPlanRepo>();
+builder.Services.AddScoped<IChatbotRepository, ChatbotRepository>();
+// builder.Services.AddScoped<IPaymentRepository>(provider => new PaymentRepository(builder.Configuration["Stripe:SecretKey"]));
 builder.Services.AddScoped<IEmailService>(provider => new EmailService(
     builder.Configuration["EmailService:SmtpHost"],
     builder.Configuration["EmailService:SmtpPort"],
