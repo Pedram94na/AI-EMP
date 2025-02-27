@@ -3,7 +3,7 @@ import React from "react";
 import logo from "../assets/images/Logo.png";
 import '../styles/general/Footer.css';
 
-import { useGlobalState } from '../utils/gloablStateContext';
+import { useGlobalState } from '../utils/globalStateContext';
 
 export const Footer = () => {
     const { setSignup, setSignin } = useGlobalState();

@@ -5,7 +5,7 @@ import logo from '../assets/images/Logo.png';
 import '../styles/Main.css';
 import '../styles/general/Header.css';
 
-import { useGlobalState } from '../utils/gloablStateContext';
+import { useGlobalState } from '../utils/globalStateContext';
 
 import ChatbotOverlay from "./Chatbot";
 import ReviewOverlay from "./review/ReviewOverlay";

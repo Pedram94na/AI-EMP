@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import '../../styles/general/Overlay.css';
 import '../../styles/general/SignupButton.css';
 
-import { useGlobalState } from '../../utils/gloablStateContext';
+import { useGlobalState } from '../../utils/globalStateContext';
 
 const SignUpOverlay = ({onCancel}) => {
     const { setSignup, setSignin } = useGlobalState();

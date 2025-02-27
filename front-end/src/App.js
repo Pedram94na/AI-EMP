@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import { GlobalStateProvider } from './utils/gloablStateContext.js';
+import { GlobalStateProvider } from './utils/globalStateContext.js';
 
 import Home from './pages/Home';
 import Profile from './pages/Profile';
