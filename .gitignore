@@ -1,11 +1,35 @@
+# dependencies
+front-end/node_modules
+front-end/.pnp
+front-end/.pnp.js
+
+# testing
+front-end/coverage
+
+# production
+front-end/build
+
+# misc
+front-end/.DS_Store
+front-end/.env.local
+front-end/.env.development.local
+front-end/.env.test.local
+front-end/.env.production.local
+
+front-end/npm-debug.log*
+front-end/yarn-debug.log*
+front-end/yarn-error.log*
+
+# back-end
 .vscode
 AI-EMP.sln
 
-/front-end/node_modules
-
-/back-end/LLM/src/__pycache__
-/back-end/LLM/src/file/__pycache__
+# Systems
 /back-end/services/bin
 /back-end/services/obj
 /back-end/services/.env
 /back-end/services/Migrations/*.cs
+
+# LLM
+/back-end/LLM/src/__pycache__
+/back-end/LLM/src/file/__pycache__

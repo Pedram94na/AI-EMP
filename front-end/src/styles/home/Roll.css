@@ -1,0 +1,43 @@
+.roll {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+}
+
+.roll ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 10px;
+    padding: 0;
+    list-style: none;
+    animation: list-scroll 60s linear infinite;
+    animation-play-state: running;
+}
+
+.roll ul:hover {
+    animation-play-state: paused;
+}
+
+.roll li {
+    flex: 0 0 auto;
+    transition: transform 0.3s ease;
+}
+
+.roll li:hover {
+    color: black;
+    transform: scale(1.2);
+}
+
+.roll li > a:hover {
+    color: black;
+}
+
+@keyframes list-scroll {
+    from {
+        transform: translateX(50%);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}

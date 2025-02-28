@@ -1,0 +1,154 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    color: black;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 100%;
+}
+
+nav > a {
+    display: block;
+    width: 70px;
+    max-width: 100px;
+    font-size: 16px;
+    text-align: center;
+}
+
+a, button {
+    cursor: pointer;
+}
+
+a:hover {
+    color: rgb(214, 220, 45);
+}
+
+button {
+    background-color: #7AB2B2;
+    width: 100px;
+    padding: 7px;
+    font-size: 16px;
+    color: white;
+    border-style: ridge;
+    border-radius: 10px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+button:hover {
+    color: rgb(214, 220, 45);
+    background-color: #4D869C;
+}
+
+section {
+    text-align: center;
+    padding: 70px 10%;
+}
+
+h1, h2, h3, p {
+    margin: 0;
+    padding: 10px 0 50px 0;
+}
+
+h1 {
+    font-size: 50px;
+}
+
+h2 {
+    font-size: 15px;
+}
+
+h3 {
+    font-size: 25px;
+}
+
+p {
+    text-align: left;
+    text-indent: 10px;
+}
+
+ul {
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
+form {
+    background-color: #CDE8E5;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 250px;
+    padding: 25px;
+    margin: 0 auto;
+}
+
+input, textarea {
+    text-indent: 10px;
+    padding: 5px 0;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 250px;
+    max-width: 250px;
+}
+
+textarea {
+    height: 200px;
+    resize: none;
+}
+
+table {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+    margin: auto;
+}
+
+thead, tbody {
+    align-items: center;
+    width: 100%;
+}
+
+thead {
+    background-color: #4D869C;
+    display: flex;
+    flex-direction: row;
+    color: white;
+}
+
+tbody {
+    display: flex;
+    flex-direction: column;
+}
+
+tr {
+    background-color: #CDE8E5;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+th, td {
+    width: 150px;
+    min-width: 150px;
+    max-width: 150px;
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #EEF7FF;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
