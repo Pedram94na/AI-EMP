@@ -1,0 +1,4 @@
+Hello, this is a test file.
+Python is great for text processing!
+This system reads plain text files and displays their content.
+End of test.
