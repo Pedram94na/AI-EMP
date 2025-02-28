@@ -1,0 +1,11 @@
+.vscode
+AI-EMP.sln
+
+/front-end/node_modules
+
+/back-end/LLM/src/__pycache__
+/back-end/LLM/src/file/__pycache__
+/back-end/services/bin
+/back-end/services/obj
+/back-end/services/Migrations/*.cs
+/back-end/services/.env
