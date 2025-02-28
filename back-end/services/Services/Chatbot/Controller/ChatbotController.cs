@@ -16,10 +16,24 @@ namespace services.Services.Chatbot.Controller
             this.chatbotRepository = chatbotRepository;
         }
 
-        [HttpPost("message")]
-        public async Task<ActionResult<ChatbotDto>> GetBotResponse([FromBody] ChatbotDto dto)
+        [HttpPost("add")]
+        public async Task<IActionResult> AddQAndA([FromBody] ChatbotDto dto)
         {
-            var model = await chatbotRepository.GetResponseAsync(dto.UserMessage);
+            if (!ModelState.IsValid)
+                BadRequest(ModelState);
+
+            var result = await chatbotRepository.AddQAndAAsync(dto);
+
+            return result.Success ? Ok(result.Model.ChatbotModelToDto()) : Conflict(new { message = "Q&A already exists." });
+        }
+
+        [HttpPost("message")]
+        public async Task<ActionResult<ChatbotDto>> GetBotResponse([FromBody] ChatbotQuestionDto dto)
+        {
+            if (!ModelState.IsValid)
+                BadRequest(ModelState);
+
+            var model = await chatbotRepository.GetAnswerAsync(dto.Question);
             return Ok(model.ChatbotModelToDto());
         }
     }

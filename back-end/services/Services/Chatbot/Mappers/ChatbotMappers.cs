@@ -5,21 +5,21 @@ namespace services.Services.Chatbot.Mappers
 {
     public static class ChatbotMappers
     {
-        public static ChatbotDto ChatbotModelToDto(this ChatbotModel model)
+        public static ChatbotDto ChatbotModelToDto(this ChatbotQAndA model)
         {
             return new ChatbotDto
             {
-                UserMessage = model.UserMessage,
-                BotResponse = model.BotResponse
+                Question = model.Question,
+                Answer = model.Answer
             };
         }
 
-        public static ChatbotModel ChatbotDtoToModel(this ChatbotDto dto)
+        public static ChatbotQAndA ChatbotDtoToModel(this ChatbotDto dto)
         {
-            return new ChatbotModel
+            return new ChatbotQAndA
             {
-                UserMessage = dto.UserMessage,
-                BotResponse = dto.BotResponse
+                Question = dto.Question,
+                Answer = dto.Answer
             };
         }
     }

@@ -1,23 +1,45 @@
+using Microsoft.EntityFrameworkCore;
+using services.Data;
 using services.Models;
+using services.Services.Chatbot.DTOs;
 using services.Services.Chatbot.Interfaces;
+using services.Services.Chatbot.Mappers;
 
 namespace services.Services.Chatbot.Repositories
 {
     public class ChatbotRepository : IChatbotRepository
     {
-        private static readonly Dictionary<string, string> Responses = new()
-        {
-            { "Hi", "Hello! How can I help you?" },
-            { "How are you?", "I'm just a bot, but I'm doing great!" },
-            { "What is your purpose?", "I am here to assist you with your queries." },
-            { "Goodbye", "Have a great day!" }
-        };
+        private readonly ApplicationDbContext context;
 
-        public async Task<ChatbotModel> GetResponseAsync(string userMessage)
+        public ChatbotRepository(ApplicationDbContext context)
         {
-            await Task.Delay(100); // Simulating async operation
-            Responses.TryGetValue(userMessage, out string response);
-            return new ChatbotModel { UserMessage = userMessage, BotResponse = response ?? "I'm not sure how to respond to that." };
+            this.context = context;
+        }
+
+        public async Task<(ChatbotQAndA Model, bool Success)> AddQAndAAsync(ChatbotDto dto)
+        {
+            var existingModel = await context.ChatbotQAndAs.FirstOrDefaultAsync(c => c.Question == dto.Question || c.Answer == dto.Answer);
+
+            if (existingModel is not null)
+                return (existingModel, false);
+
+            var model = dto.ChatbotDtoToModel();
+
+            await context.ChatbotQAndAs.AddAsync(model);
+            await context.SaveChangesAsync();
+
+            return (model, true);
+        }
+
+        public async Task<ChatbotQAndA> GetAnswerAsync(string question)
+        {
+            var answer = await context.ChatbotQAndAs.FirstOrDefaultAsync(c => c.Question == question);
+
+            return answer ?? new ChatbotQAndA 
+            { 
+                Question = question, 
+                Answer = "I'm not sure how to respond to that."
+            };
         }
     }
 }

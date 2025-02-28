@@ -7,4 +7,5 @@ AI-EMP.sln
 /back-end/LLM/src/file/__pycache__
 /back-end/services/bin
 /back-end/services/obj
+/back-end/services/Migrations/*.cs
 /back-end/services/.env

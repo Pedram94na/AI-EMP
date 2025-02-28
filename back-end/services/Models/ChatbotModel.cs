@@ -1,9 +1,9 @@
 namespace services.Models
 {
-    public class ChatbotModel
+    public class ChatbotQAndA
     {
         public int Id { get; set; }
-        public string UserMessage { get; set; } = String.Empty;
-        public string BotResponse { get; set; } = String.Empty;
+        public string Question { get; set; } = String.Empty;
+        public string Answer { get; set; } = String.Empty;
     }
 }
