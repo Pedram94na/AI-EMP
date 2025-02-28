@@ -18,6 +18,8 @@ using services.Services.Subscription.Interfaces;
 using services.Services.Subscription.Repositories;
 using services.Services.Chatbot.Interfaces;
 using services.Services.Chatbot.Repositories;
+using services.Services.Payment.Interfaces;
+using services.Services.Payment.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -117,7 +119,8 @@ builder.Services.AddScoped<IBlogRepo, BlogRepo>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<ISubscriptionPlanRepo, SubscriptionPlanRepo>();
 builder.Services.AddScoped<IChatbotRepository, ChatbotRepository>();
-// builder.Services.AddScoped<IPaymentRepository>(provider => new PaymentRepository(builder.Configuration["Stripe:SecretKey"]));
+// builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
+builder.Services.AddScoped<IPaymentRepository>(provider => new PaymentRepository(provider.GetRequiredService<IConfiguration>()));
 builder.Services.AddScoped<IEmailService>(provider => new EmailService(
     builder.Configuration["EmailService:SmtpHost"],
     builder.Configuration["EmailService:SmtpPort"],
