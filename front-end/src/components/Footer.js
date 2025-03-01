@@ -8,6 +8,8 @@ import { useGlobalState } from '../utils/globalStateContext';
 export const Footer = () => {
     const { setSignup, setSignin } = useGlobalState();
     
+    const isSessionActive = Boolean (localStorage.getItem('token'));
+
     return (
         <footer>
             <div id="common-info">
@@ -30,13 +32,17 @@ export const Footer = () => {
                 </nav>
 
                 <div id="footer-auth">
-                    <button className="signup" onClick = {() => setSignup(true)}>
-                            Sign Up
-                    </button>
+                    {!isSessionActive && (
+                        <>
+                            <button className="signup" onClick = {() => setSignup(true)}>
+                                Sign Up
+                            </button>
 
-                    <button onClick = {() => setSignin(true)}>
-                            Sign In
-                    </button>
+                            <button onClick = {() => setSignin(true)}>
+                                    Sign In
+                            </button>
+                        </>
+                    )}
                 </div>
             </div>
 

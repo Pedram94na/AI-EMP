@@ -52,12 +52,15 @@ namespace services.Services.User.Controller
                     if (!roleResult.Succeeded)
                         return StatusCode(500, roleResult.Errors);
 
+                    var roles = await userManager.GetRolesAsync(appUser);
+
                     return Ok (
                         new NewUserDto
                         {
                             Username = appUser.UserName,
                             Email = appUser.Email,
-                            Token = tokenService.Create(appUser)
+                            Token = tokenService.Create(appUser),
+                            Roles = roles
                         }
                     );
                 }

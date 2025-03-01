@@ -15,6 +15,10 @@ import SignInOverlay from "./auth/SigninOverlay";
 export const Header = () => {
     const { signupClicked, setSignup, signinClicked, setSignin } = useGlobalState();
 
+    const isSessionActive = Boolean (localStorage.getItem('token'));
+
+    const handleSignout = () => { localStorage.removeItem('token'); };
+
     return (
         <header>
             <ChatbotOverlay />
@@ -38,17 +42,23 @@ export const Header = () => {
             </nav>
 
             <div id="header-auth">
-                <button className="signup" onClick={() => setSignup(true)}>
-                        Sign Up
-                </button>
+                {!isSessionActive && (
+                    <>
+                        <button className="signup" onClick={() => setSignup(true)}>
+                                Sign Up
+                        </button>
 
-                <button onClick = {() => setSignin(true)}>
-                        Sign In
-                </button>
+                        <button onClick = {() => setSignin(true)}>
+                                Sign In
+                        </button>
+                    </>
+                )};
 
-                <button onClick = {() => console.log("Sign Out")}>
-                    Sign Out
-                </button>
+                {isSessionActive && (
+                    <>
+                        <button onClick={handleSignout}>Sign Out</button>
+                    </>
+                )};
             </div>
         </header>
     );

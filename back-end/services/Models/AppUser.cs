@@ -6,6 +6,7 @@ namespace services.Models
     {
         public string FirstName { get; set; } = String.Empty;
         public string LastName { get; set; } = String.Empty;
+        public bool HasReview { get; set; } = false;
         public DateTime CreatedOn { get; set; } = DateTime.Today;
         public List<BlogModel> Blogs { get; set; } = [];
         public SubscriptionPlanModel? CurrentSubscriptionPlan { get; set; }

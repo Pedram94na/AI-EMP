@@ -22,9 +22,9 @@ namespace services.Services.ContactForm.Repositories
             var existingCustomer = await context
                                     .Customers
                                     .FirstOrDefaultAsync(c =>
-                                        c.Name == c.Name &&
-                                        c.EmailAddress == c.EmailAddress);
-
+                                        c.Name == contactFormDto.Name &&
+                                        c.EmailAddress == contactFormDto.EmailAddress);
+                                        
             if (existingCustomer is not null)
                 return existingCustomer;
 
