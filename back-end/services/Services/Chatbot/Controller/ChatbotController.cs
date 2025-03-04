@@ -5,7 +5,7 @@ using services.Services.Chatbot.Mappers;
 
 namespace services.Services.Chatbot.Controller
 {
-    [Route("api/chatbot")]
+    [Route("chatbot")]
     [ApiController]
     public class ChatbotController : ControllerBase
     {
@@ -16,7 +16,7 @@ namespace services.Services.Chatbot.Controller
             this.chatbotRepository = chatbotRepository;
         }
 
-        [HttpPost("add")]
+        [HttpPost("add-Q&A")]
         public async Task<IActionResult> AddQAndA([FromBody] ChatbotDto dto)
         {
             if (!ModelState.IsValid)

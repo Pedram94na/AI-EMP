@@ -24,16 +24,8 @@ namespace services.Data
                 .HasForeignKey(b => b.AppUserId);
 
             List<IdentityRole> roles = new() {
-                new IdentityRole {
-                    Name = "Admin",
-                    NormalizedName = "ADMIN"
-                },
-                
-                new IdentityRole
-                {
-                    Name = "User",
-                    NormalizedName = "USER"
-                }
+                new IdentityRole { Name = "Admin", NormalizedName = "ADMIN" },
+                new IdentityRole { Name = "User", NormalizedName = "USER"}
             };
 
             builder.Entity<IdentityRole>().HasData(roles);

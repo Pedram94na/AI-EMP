@@ -118,8 +118,8 @@ builder.Services.AddScoped<IReviewRepo, ReviewRepo>();
 builder.Services.AddScoped<IBlogRepo, BlogRepo>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<ISubscriptionPlanRepo, SubscriptionPlanRepo>();
+builder.Services.AddScoped<INewSubscriptionPlanStrategy, NewSubscriptionPlanStrategy>();
 builder.Services.AddScoped<IChatbotRepository, ChatbotRepository>();
-// builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
 builder.Services.AddScoped<IPaymentRepository>(provider => new PaymentRepository(provider.GetRequiredService<IConfiguration>()));
 builder.Services.AddScoped<IEmailService>(provider => new EmailService(
     builder.Configuration["EmailService:SmtpHost"],

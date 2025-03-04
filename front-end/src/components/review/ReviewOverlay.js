@@ -1,25 +1,44 @@
 import React, { useState } from "react";
+
 import Star from "../../assets/images/Star.svg";
 
 import '../../styles/general/Overlay.css';
+import { sendReview } from "../../services/review";
 
 const ReviewOverlay = () => {
-    const [isReviewRequestShown, showReviewRequest] = useState(true);
+    const [isReviewPanelShown, showReviewPanel] = useState(true);
     const [isHovered, setHovered] = useState(0);
     const [isClicked, setClicked] = useState(0);
 
-    if (!isReviewRequestShown)
-    {
-        // Check if user has submitted a review
+    const userData = JSON.parse(localStorage.getItem('user'));
 
+    if (!userData)
         return;
-    }
+    
+    console.log(userData.hasReview);
+    
+    if (userData.hasReview)
+        return
 
-    function submitRating()
-    {
-        console.log("Send review to back-end!");
+    if (!isReviewPanelShown)
+        return;
 
-        showReviewRequest(false);
+    const handleReviewSubmission = async (e) => {
+        e.preventDefault();
+    
+        const formData = new FormData(e.target);
+
+        const formValues = {
+            content: formData.get('content'),
+            rating: isClicked
+        };
+
+        const result = await sendReview(formValues);
+
+        if (result.success)
+        {
+            showReviewPanel(false);   
+        }
     }
 
     return (
@@ -27,7 +46,7 @@ const ReviewOverlay = () => {
             <div className="content">
                 <h4 className="title">How do your rate AI EMP?</h4>
 
-                <form>
+                <form onSubmit={handleReviewSubmission}>
                     <div className="rating">
                         {[1, 2, 3, 4, 5].map((id) => (
                             <img key={id} src={Star} id={id} width={30} height={30}
@@ -40,10 +59,10 @@ const ReviewOverlay = () => {
                     </div>
 
                     <div className="review-input-area">
-                        <textarea placeholder="Write a review. . ." />
+                        <textarea placeholder="Write a review. . ." name="content"/>
                     </div>
                     
-                    <button onClick={() => submitRating()}>Submit</button>
+                    <button>Submit</button>
                 </form>
             </div>
         </section>

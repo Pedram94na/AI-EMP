@@ -5,11 +5,12 @@ namespace services.Services.Subscription.Mappers
 {
     public static class SubscriptionMappers
     {
-        public static SubscriptionPlanModel FromCreateSubscriptionDtoToModel(this CreateSubscriptionDto dto, AppUser appUser)
+        public static SubscriptionPlanModel FromCreateSubscriptionDtoToModel(this NewSubscriptionPlanDto dto, AppUser appUser)
         {
             return new SubscriptionPlanModel {
+                Price = dto.Price,
                 StartDate = DateTime.Today,
-                ExpirationDate = DateTime.Today.AddDays(30),
+                ExpirationDate = dto.ExpirationDate,
                 AppUserId = appUser.Id,
                 AppUser = appUser
             };

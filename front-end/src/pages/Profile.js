@@ -8,7 +8,6 @@ import { CreateBlog, EditBlog, Tickets } from "../components/profile/Admin";
 import { Inbox, Models, TrainModel, TestModel } from "../components/profile/Customer";
 import { Actions, inbox, models, trainModel, testModel, createBlog, editBlog, tickets } from '../components/profile/Actions';
 import Subscription from "../components/subscription/Subscription";
-import Payment from "../components/subscription/Payment";
 
 const Dashboard = () => {
     const [ activeSection, setActiveSection ] = useState(inbox);
@@ -16,8 +15,7 @@ const Dashboard = () => {
     return (
         <div>
             <Header />
-            {/* <Subscription />
-            <Payment /> */}
+            <Subscription />
             <Intro />
             <Actions selectedSection={setActiveSection} />
 

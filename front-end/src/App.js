@@ -11,6 +11,10 @@ import Blog from './pages/Blog.js';
 import './App.css';
 
 function App() {
+  window.addEventListener("beforeunload", () => {
+    localStorage.clear();
+  });
+
   return (
     <GlobalStateProvider>
       <Router>

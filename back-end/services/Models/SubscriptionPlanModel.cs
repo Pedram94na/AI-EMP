@@ -8,7 +8,7 @@ namespace services.Models
     {
         [Key]
         public int Id { get; set; }
-        public float Price { get; set; } = 20.0f;
+        public float Price { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime ExpirationDate { get; set; }
         

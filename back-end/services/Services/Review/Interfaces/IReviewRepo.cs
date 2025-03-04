@@ -5,7 +5,7 @@ namespace services.Services.Review.Interfaces
 {
     public interface IReviewRepo
     {
-        Task<ReviewModel> CreateReviewAsync(ReviewDto dto);
+        Task<ReviewModel> CreateReviewAsync(ReviewDto dto, string firstName);
         Task<List<ReviewModel>> GetTopReviewsAsync();
     }
 }

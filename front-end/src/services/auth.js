@@ -14,7 +14,7 @@ export const sendRegistration = async (formValues) => {
 
         if (response.status === 200)
         {
-            handleLoginSession(response.data.token);
+            handleLoginSession(response.data);
             return { response: response, success: true }
         }
 
@@ -40,7 +40,7 @@ export const sendLogin = async (formValues) => {
 
         if (response.status === 200)
         {
-            handleLoginSession(response.data.token);
+            handleLoginSession(response.data);
             return { response: response, success: true }
         }
 
@@ -55,7 +55,10 @@ export const sendLogin = async (formValues) => {
     }
 };
 
-function handleLoginSession(token)
-{   
-    localStorage.setItem('token', token);
+function handleLoginSession(userData)
+{
+    const { token, ...otherData } = userData;
+    
+    localStorage.setItem("user", JSON.stringify(otherData));
+    localStorage.setItem("token", token);
 }

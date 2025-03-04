@@ -1,8 +1,32 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import '../../styles/home/Roll.css';
+import { sendFetchReviews } from '../../services/review';
 
 const Reviews = () => {
+    const [ reviews, setReviews ] = new useState();
+    const [ loading, setLoading ] = new useState(true);
+
+    useEffect(() => {
+        const fetchReviews = async () => {
+            const result = await sendFetchReviews();
+            
+            if (!result.response.data)
+                return;
+            
+            if (result.success)
+                setReviews(result.response.data);
+
+            setLoading(false);
+        }
+
+        fetchReviews();
+    }, []);
+
+    if (loading) {
+        return <p>Loading reviews...</p>;
+    }
+
     return (
         <section id="reviews" className="section">
             <h1>What are our users saying about AI EMP?</h1>
@@ -10,19 +34,24 @@ const Reviews = () => {
             <div className="content">
                 <div className="roll">
                     <ul>
-                        <li>
-                            <img src="" width={300} height={300} style={{ backgroundColor: "red" }} alt="" className="image" />
+                        {reviews.length === 0 ? (
+                            <p>NO REVIEWS YET!</p>
+                        ) : (
+                            reviews.map(r => (
+                                    <li key={r.id}>
+                                        <p className="name">{ r.name }</p>
 
-                            <p className="name">Pedram</p>
-                            <p className="review">Very happy with this service :D</p>
-                        </li>
+                                        <div className="rating">
+                                            {Array.from({ length: r.rating }).map((_, index) => (
+                                                <span key={index}>⭐</span>
+                                            ))}
+                                        </div>
 
-                        <li>
-                            <img src="" width={300} height={300} style={{ backgroundColor: "red" }} alt="" className="image" />
-
-                            <p className="name">Pedram2</p>
-                            <p className="review">333333333333333333333333</p>
-                        </li>
+                                        <p className="review">{ r.content }</p>
+                                    </li>
+                                )
+                            )
+                        )}
                     </ul>
                 </div>
             </div>

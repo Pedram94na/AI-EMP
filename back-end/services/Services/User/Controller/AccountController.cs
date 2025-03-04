@@ -47,7 +47,7 @@ namespace services.Services.User.Controller
 
                 if (createdUser.Succeeded)
                 {
-                    var roleResult = await userManager.AddToRoleAsync(appUser, "Admin");
+                    var roleResult = await userManager.AddToRoleAsync(appUser, "User");
 
                     if (!roleResult.Succeeded)
                         return StatusCode(500, roleResult.Errors);
@@ -55,12 +55,14 @@ namespace services.Services.User.Controller
                     var roles = await userManager.GetRolesAsync(appUser);
 
                     return Ok (
-                        new NewUserDto
+                        new AuthorizedDto
                         {
+                            FirstName = appUser.FirstName,
+                            LastName = appUser.LastName,
                             Username = appUser.UserName,
-                            Email = appUser.Email,
-                            Token = tokenService.Create(appUser),
-                            Roles = roles
+                            EmailAddress = appUser.Email,
+                            HasReview = appUser.HasReview,
+                            Token = tokenService.Create(appUser)
                         }
                     );
                 }
@@ -91,12 +93,15 @@ namespace services.Services.User.Controller
                 return Unauthorized("Username not found and/or password is not valid");
 
             return Ok (
-                new NewUserDto
-                {
-                    Username = user.UserName,
-                    Email = user.Email,
-                    Token = tokenService.Create(user)
-                }
+                new AuthorizedDto
+                        {
+                            FirstName = user.FirstName,
+                            LastName = user.LastName,
+                            Username = user.UserName,
+                            EmailAddress = user.Email,
+                            HasReview = user.HasReview,
+                            Token = tokenService.Create(user)
+                        }
             );
         }
 

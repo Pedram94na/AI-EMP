@@ -23,7 +23,7 @@ namespace services.Services.CMS.Controller
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         public async Task<IActionResult> CreateNewBlog([FromBody] CreateBlogDto dto)
         {
             if (!ModelState.IsValid)
@@ -44,7 +44,7 @@ namespace services.Services.CMS.Controller
 
         [HttpPut]
         [Route("{id:int}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         public async Task<IActionResult> EditBlog([FromRoute] int id, [FromBody] EditBlogDto updateBlogDto)
         {
             if (!ModelState.IsValid)
@@ -70,9 +70,15 @@ namespace services.Services.CMS.Controller
 
         [HttpDelete]
         [Route("{id:int}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         public async Task<IActionResult> DeleteBlog([FromRoute] int id)
         {
+            var username = User.GetUsername();
+            var appUser = await userManager.FindByNameAsync(username);
+
+            if (appUser is null)
+                return NotFound("User not found");
+
             var existingBlogModel = await blogRepo.GetByIdAsync(id);
 
             if (existingBlogModel is null)

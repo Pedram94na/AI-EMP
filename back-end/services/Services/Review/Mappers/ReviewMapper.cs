@@ -5,10 +5,10 @@ namespace services.Services.Review.Mappers
 {
     public static class ReviewMapper
     {
-        public static ReviewModel CreateReview(ReviewDto dto)
+        public static ReviewModel CreateReview(ReviewDto dto, string firstName)
         {
             return new ReviewModel {
-                Name = dto.Name,
+                Name = firstName,
                 Content = dto.Content,
                 Rating = dto.Rating
             };
@@ -17,7 +17,6 @@ namespace services.Services.Review.Mappers
         public static ReviewDto CreateReviewDto(ReviewModel reviewModel)
         {
             return new ReviewDto {
-                Name = reviewModel.Name,
                 Content = reviewModel.Content,
                 Rating = reviewModel.Rating
             };

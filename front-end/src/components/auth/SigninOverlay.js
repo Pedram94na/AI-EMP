@@ -12,11 +12,8 @@ const SignInOverlay = ({onCancel}) => {
     const handleSignin = async (e) => {
         e.preventDefault();
 
-        // Auth System Here
         const formData = new FormData(e.target);
 
-        // Password check
-        
         const formValues = {
             username: formData.get('username'),
             password: formData.get('password')

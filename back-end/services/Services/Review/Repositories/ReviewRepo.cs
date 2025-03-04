@@ -16,15 +16,10 @@ namespace services.Services.Review.Repositories
             this.context = context;
         }
 
-        public async Task<ReviewModel> CreateReviewAsync(ReviewDto dto)
+        public async Task<ReviewModel> CreateReviewAsync(ReviewDto dto, string firstName)
         {
-            var reviewModel = ReviewMapper.CreateReview(dto);
-            var existingReview = await context
-                                    .Reviews
-                                    .FirstOrDefaultAsync(r =>
-                                        r.Name == reviewModel.Name &&
-                                        r.Content == reviewModel.Content &&
-                                        r.Rating == reviewModel.Rating);
+            var reviewModel = ReviewMapper.CreateReview(dto, firstName);
+            var existingReview = await context.Reviews.FirstOrDefaultAsync(r => r.Name == firstName);
 
             if (existingReview is not null)
                 return existingReview;
