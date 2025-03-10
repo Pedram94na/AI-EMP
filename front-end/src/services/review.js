@@ -22,7 +22,14 @@ export const sendReview = async (formValues) => {
         });
 
         if (response.status === 201)
+        {
+            const user = JSON.parse(localStorage.getItem('user'));
+
+            user.hasReview = true;
+            localStorage.setItem('user', JSON.stringify(user));
+
             return { response: response, success: true }
+        }
 
         console.error("Unexpected response status:", response.status);
         return { response: response, success: false }

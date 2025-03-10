@@ -9,10 +9,7 @@ export const sendNewSubscription = async (id) => {
         const token = localStorage.getItem('token');
 
         if (!token)
-        {
-            console.error("No token found, user is unauthorized");
             return { success: false, message: "Unauthorized" };
-        }
 
         const response = await axios.post(`${newSubscriptionApi}/${id}`, null, {
             headers: {

@@ -35,7 +35,7 @@ namespace services.Services.User.Controller
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
 
-                var appUser = new AppUser
+                var user = new AppUser
                                 {
                                     FirstName = dto.FirstName,
                                     LastName = dto.LastName,
@@ -43,26 +43,27 @@ namespace services.Services.User.Controller
                                     Email = dto.Email
                                 };
 
-                var createdUser = await userManager.CreateAsync(appUser, dto.Password);
+                var createdUser = await userManager.CreateAsync(user, dto.Password);
 
                 if (createdUser.Succeeded)
                 {
-                    var roleResult = await userManager.AddToRoleAsync(appUser, "User");
+                    var roleResult = await userManager.AddToRoleAsync(user, "User");
 
                     if (!roleResult.Succeeded)
                         return StatusCode(500, roleResult.Errors);
 
-                    var roles = await userManager.GetRolesAsync(appUser);
+                    var roles = await userManager.GetRolesAsync(user);
 
                     return Ok (
                         new AuthorizedDto
                         {
-                            FirstName = appUser.FirstName,
-                            LastName = appUser.LastName,
-                            Username = appUser.UserName,
-                            EmailAddress = appUser.Email,
-                            HasReview = appUser.HasReview,
-                            Token = tokenService.Create(appUser)
+                            FirstName = user.FirstName,
+                            LastName = user.LastName,
+                            Username = user.UserName,
+                            EmailAddress = user.Email,
+                            HasReview = user.HasReview,
+                            HasSubscribed = user.HasSubscribed,
+                            Token = tokenService.Create(user)
                         }
                     );
                 }
@@ -100,6 +101,7 @@ namespace services.Services.User.Controller
                             Username = user.UserName,
                             EmailAddress = user.Email,
                             HasReview = user.HasReview,
+                            HasSubscribed = user.HasSubscribed,
                             Token = tokenService.Create(user)
                         }
             );

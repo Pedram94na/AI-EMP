@@ -52,13 +52,13 @@ export const Header = () => {
                                 Sign In
                         </button>
                     </>
-                )};
+                )}
 
                 {isSessionActive && (
                     <>
                         <button onClick={handleSignout}>Sign Out</button>
                     </>
-                )};
+                )}
             </div>
         </header>
     );

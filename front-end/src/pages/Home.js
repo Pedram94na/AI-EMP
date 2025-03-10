@@ -13,6 +13,7 @@ import Contact from '../components/home/Contact';
 const Home = () => {
     return (
         <div>
+            
             <Header />
 
             <Intro />
@@ -21,7 +22,7 @@ const Home = () => {
             <Reviews />
             <Blogs />
             <Contact />
-
+            
             <Footer />
         
         </div>

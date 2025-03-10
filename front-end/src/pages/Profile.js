@@ -11,11 +11,22 @@ import Subscription from "../components/subscription/Subscription";
 
 const Dashboard = () => {
     const [ activeSection, setActiveSection ] = useState(inbox);
+    const [ showSubscription, setShowSubscription ] = useState(true);
+
+    const { hasReview, hasSubscribed } = localStorage.getItem('user');
+    console.log(localStorage.getItem('user'));
+    
+    console.log(hasReview);
+    console.log(hasSubscribed);    
+
+    const handlePaymentSuccess = () => {
+        setShowSubscription(false);
+    };
 
     return (
         <div>
             <Header />
-            <Subscription />
+            {showSubscription && <Subscription onPaymentSuccess={handlePaymentSuccess}/>}
             <Intro />
             <Actions selectedSection={setActiveSection} />
 

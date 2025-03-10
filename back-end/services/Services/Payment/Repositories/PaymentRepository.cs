@@ -18,7 +18,7 @@ namespace services.Services.Payment.Repositories
             {
                 Amount = (long)(dto.Amount * 100),
                 Currency = dto.Currency,
-                PaymentMethod = dto.PaymentMethodId, // pm_card_visa
+                PaymentMethod = dto.PaymentMethodId,
                 Confirm = true,
                 AutomaticPaymentMethods = new PaymentIntentAutomaticPaymentMethodsOptions
                 {

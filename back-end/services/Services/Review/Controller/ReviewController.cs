@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace services.Services.Review.Controller
 {
-    [Route("reviews")]
+    [Route("review")]
     [ApiController]
     public class ReviewController(IReviewRepo reviewRepo, UserManager<AppUser> userManager) : ControllerBase
     {
@@ -36,14 +36,14 @@ namespace services.Services.Review.Controller
             if (!result.Succeeded)
                 return StatusCode(500, "Failed to update user review status");
 
-            return Created("/reviews/submit/success", dto);
+            return Created("/review/submit/success", dto);
         }
 
         [HttpGet("fetch-reviews")]
         public async Task<IActionResult> FetchTopReviews()
         {
             var reviews = await reviewRepo.GetTopReviewsAsync();
-
+            
             if (reviews.Count == 0)
                 return NoContent();
 

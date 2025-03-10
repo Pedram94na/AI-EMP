@@ -45,3 +45,33 @@
     padding: 0;
 }
 
+.card-input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
+    font-family: inherit;
+}
+
+.StripeElement {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    background-color: white;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
+    font-family: inherit;
+}
+
+.StripeElement--focus {
+    border-color: rgba(12, 30, 46, 0.603);
+}
+
+.StripeElement--invalid {
+    border-color: red;
+}

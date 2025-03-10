@@ -1,25 +1,59 @@
-import React, { useState } from 'react';
-import '../../styles/profile/Overlay.css';
+import React, { useState } from "react";
+import { useStripe, useElements, CardNumberElement, CardExpiryElement, CardCvcElement } from "@stripe/react-stripe-js";
+import { sendPayment } from "../../services/payment";
+
+import "../../styles/profile/Overlay.css";
 
 const Payment = ({ onPaymentSuccess }) => {
-    const [formData, setFormData] = useState({
-        cardName: '',
-        cardNumber: '',
-        expiry: '',
-        cvv: '',
-    });
+    const stripe = useStripe();
+    const elements = useElements();
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(false);
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
+    const [cardName, setCardName] = useState("");
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
+        setError(null);
 
-        setTimeout(() => {
-            alert("Payment Successful!");
-            onPaymentSuccess();
-        }, 1500);
+        if (!stripe || !elements) {
+            setError("Stripe is not initialized");
+            setLoading(false);
+            return;
+        }
+
+        const { error, paymentMethod } = await stripe.createPaymentMethod({
+            type: "card",
+            card: elements.getElement(CardNumberElement),
+            billing_details: {
+                name: cardName,
+            },
+        });
+
+        if (error) {
+            setError(error.message);
+            setLoading(false);
+            return;
+        }
+
+        const response = await sendPayment({
+            paymentMethodId: paymentMethod.id,
+            amount: 1000,
+            currency: "eur",
+        });
+
+        if (response.success) {
+            setSuccess(true);
+            setTimeout(() => {
+                onPaymentSuccess();
+            }, 1500);
+        } else {
+            setError(response.message || "Payment failed");
+        }
+
+        setLoading(false);
     };
 
     return (
@@ -32,44 +66,28 @@ const Payment = ({ onPaymentSuccess }) => {
                     <input 
                         type="text" 
                         name="cardName" 
-                        value={formData.cardName} 
-                        onChange={handleChange} 
-                        required 
+                        className="card-input"
+                        value={cardName} 
+                        onChange={(e) => setCardName(e.target.value)} 
+                        required
                     />
 
                     <label>Card Number</label>
-                    <input 
-                        type="text" 
-                        name="cardNumber" 
-                        value={formData.cardNumber} 
-                        onChange={handleChange} 
-                        pattern="\d{16}" 
-                        placeholder="Enter 16-digit card number" 
-                        required 
-                    />
+                    <CardNumberElement className="card-input" />
 
                     <label>Expiry Date</label>
-                    <input 
-                        type="month" 
-                        name="expiry" 
-                        value={formData.expiry} 
-                        onChange={handleChange} 
-                        required 
-                    />
+                    <CardExpiryElement className="card-input" />
 
                     <label>CVV</label>
-                    <input 
-                        type="text" 
-                        name="cvv" 
-                        value={formData.cvv} 
-                        onChange={handleChange} 
-                        pattern="\d{3}" 
-                        placeholder="3-digit CVV" 
-                        required 
-                    />
+                    <CardCvcElement className="card-input" />
 
-                    <button type="submit">Submit Payment</button>
+                    <button type="submit" disabled={loading || !stripe}>
+                        {loading ? "Processing..." : "Submit Payment"}
+                    </button>
                 </form>
+
+                {error && <p style={{ color: "red" }}>{error}</p>}
+                {success && <p style={{ color: "green" }}>Payment Successful!</p>}
             </div>
         </section>
     );
