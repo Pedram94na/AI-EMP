@@ -17,10 +17,16 @@ export const sendNewSubscription = async (id) => {
             }
         });
         
-        console.log(response.status);
-        
         if (response.status === 200)
+        {
+            const user = JSON.parse(localStorage.getItem('user'));
+
+            user.hasSubscribed = true;
+            localStorage.setItem('user', JSON.stringify(user));
+            console.log("After subs: " + localStorage.getItem('user'));
+            
             return { response: response, success: true }
+        }
 
         console.error("Unexpected response status:", response.status);
         return { response: response, success: false }

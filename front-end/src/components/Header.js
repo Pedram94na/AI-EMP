@@ -1,28 +1,38 @@
-import React from "react";
-
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import logo from '../assets/images/Logo.png';
-
 import '../styles/Main.css';
 import '../styles/general/Header.css';
 
 import { useGlobalState } from '../utils/globalStateContext';
-
 import ChatbotOverlay from "./Chatbot";
-import ReviewOverlay from "./review/ReviewOverlay";
 import SignUpOverlay from "./auth/SignupOverlay";
 import SignInOverlay from "./auth/SigninOverlay";
+import { signout } from "../utils/signout";
 
 export const Header = () => {
     const { signupClicked, setSignup, signinClicked, setSignin } = useGlobalState();
+    const [isSessionActive, setIsSessionActive] = useState(Boolean(localStorage.getItem('token')));
+    
+    const navigate = useNavigate();
 
-    const isSessionActive = Boolean (localStorage.getItem('token'));
+    useEffect(() => {
+        const handleStorageChange = () => {
+            setIsSessionActive(Boolean(localStorage.getItem('token')));
+        };
 
-    const handleSignout = () => { localStorage.removeItem('token'); };
+        window.addEventListener('storage', handleStorageChange);
 
+        setIsSessionActive(Boolean(localStorage.getItem('token')));
+
+        return () => {
+            window.removeEventListener('storage', handleStorageChange);
+        };
+    }, []);
+    
     return (
         <header>
             <ChatbotOverlay />
-            <ReviewOverlay />
             {signupClicked && <SignUpOverlay onCancel={() => setSignup(false)} />}
             {signinClicked && <SignInOverlay onCancel={() => setSignin(false)} />}
 
@@ -48,7 +58,7 @@ export const Header = () => {
                                 Sign Up
                         </button>
 
-                        <button onClick = {() => setSignin(true)}>
+                        <button onClick={() => setSignin(true)}>
                                 Sign In
                         </button>
                     </>
@@ -56,7 +66,7 @@ export const Header = () => {
 
                 {isSessionActive && (
                     <>
-                        <button onClick={handleSignout}>Sign Out</button>
+                        <button onClick={() => signout(setIsSessionActive, navigate)}>Sign Out</button>
                     </>
                 )}
             </div>

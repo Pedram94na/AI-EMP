@@ -12,4 +12,10 @@ namespace services.Models
         public List<BlogModel> Blogs { get; set; } = [];
         public SubscriptionPlanModel? CurrentSubscriptionPlan { get; set; }
     }
+
+    public enum UserRole
+    {
+        Admin,
+        User
+    }
 }

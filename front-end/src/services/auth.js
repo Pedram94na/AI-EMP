@@ -59,6 +59,6 @@ function handleLoginSession(userData)
 {
     const { token, ...otherData } = userData;
     
-    localStorage.setItem("user", JSON.stringify(otherData));
     localStorage.setItem("token", token);
+    localStorage.setItem("user", JSON.stringify(otherData));
 }

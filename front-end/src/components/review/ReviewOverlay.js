@@ -5,7 +5,7 @@ import Star from "../../assets/images/Star.svg";
 import '../../styles/general/Overlay.css';
 import { sendReview } from "../../services/review";
 
-const ReviewOverlay = () => {
+export const ReviewOverlay = () => {
     const [isReviewPanelShown, showReviewPanel] = useState(true);
     const [isHovered, setHovered] = useState(0);
     const [isClicked, setClicked] = useState(0);
@@ -14,11 +14,6 @@ const ReviewOverlay = () => {
 
     if (!userData)
         return;
-    
-    console.log(userData.hasReview);
-    
-    if (userData.hasReview)
-        return
 
     if (!isReviewPanelShown)
         return;
@@ -68,5 +63,3 @@ const ReviewOverlay = () => {
         </section>
     );
 };
-
-export default ReviewOverlay;

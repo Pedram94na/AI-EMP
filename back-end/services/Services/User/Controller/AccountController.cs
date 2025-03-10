@@ -47,12 +47,15 @@ namespace services.Services.User.Controller
 
                 if (createdUser.Succeeded)
                 {
-                    var roleResult = await userManager.AddToRoleAsync(user, "User");
+                    var roleResult = await userManager.AddToRoleAsync(user, UserRole.User.ToString());
 
                     if (!roleResult.Succeeded)
                         return StatusCode(500, roleResult.Errors);
 
                     var roles = await userManager.GetRolesAsync(user);
+
+                    if (roles == null || !roles.Any())
+                        return BadRequest("User has no assigned roles.");
 
                     return Ok (
                         new AuthorizedDto
@@ -63,6 +66,7 @@ namespace services.Services.User.Controller
                             EmailAddress = user.Email,
                             HasReview = user.HasReview,
                             HasSubscribed = user.HasSubscribed,
+                            Role = roles.FirstOrDefault(),
                             Token = tokenService.Create(user)
                         }
                     );
@@ -93,6 +97,11 @@ namespace services.Services.User.Controller
             if (!result.Succeeded)
                 return Unauthorized("Username not found and/or password is not valid");
 
+            var roles = await userManager.GetRolesAsync(user);
+
+            if (roles == null || !roles.Any())
+                return BadRequest("Role not assigned for this user");
+
             return Ok (
                 new AuthorizedDto
                         {
@@ -102,6 +111,7 @@ namespace services.Services.User.Controller
                             EmailAddress = user.Email,
                             HasReview = user.HasReview,
                             HasSubscribed = user.HasSubscribed,
+                            Role = roles.FirstOrDefault(),
                             Token = tokenService.Create(user)
                         }
             );
