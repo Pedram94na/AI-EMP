@@ -1,10 +1,17 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
+import { useBlogsData } from '../../data/BlogsData';
 import '../../styles/home/Roll.css';
+import { HomePageBlogs } from "../blog/GetBlogs";
 
 export const Blogs = () => {
     const navigate = new useNavigate();
+    const blogsData = useBlogsData();
+
+    const handleBlogSelection = (blog) => {
+        navigate(`/blog?blogId=${blog.id}`);
+    }
 
     return (
         <section id="blogs">
@@ -13,41 +20,7 @@ export const Blogs = () => {
             <div className="content">
                 <div className="roll">
                     <ul>
-                        <li>
-                            <a>
-                                <img src="" width={300} height={300} style={{ backgroundColor: "red" }} alt="" className="image" />
-
-                                <h2>What is software engineering?</h2>
-                                <p>Finding solutions with architectural patterns</p>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a>
-                                <img src="" width={300} height={300} style={{ backgroundColor: "blue" }} alt="" className="image" />
-
-                                <h2>How to use AI in business?</h2>
-                                <p>Make AI work for you!</p>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a>
-                                <img src="" width={300} height={300} style={{ backgroundColor: "black" }} alt="" className="image" />
-
-                                <h2>What is software engineering?</h2>
-                                <p>Finding solutions with architectural patterns</p>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a>
-                                <img src="" width={300} height={300} style={{ backgroundColor: "yellow" }} alt="" className="image" />
-
-                                <h2>How to use AI in business?</h2>
-                                <p>Make AI work for you!</p>
-                            </a>
-                        </li>
+                        { blogsData.map(b => HomePageBlogs(b, handleBlogSelection))}
                     </ul>
                 </div>
 

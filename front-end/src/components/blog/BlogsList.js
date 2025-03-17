@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation } from 'react-router-dom';
 
 import '../../styles/blog/BlogsList.css';
 
-import Blogs from '../../data/Blogs';
+import { useBlogsData, fetchBlogById } from '../../data/BlogsData';
+import { BlogPageBlogs } from "./GetBlogs";
 
-const BlogsList = ({onSelectBlog}) => {
-    const blogsData = Blogs();
-    
+const BlogsList = ({ onSelectBlog }) => {
+    const blogsData = useBlogsData();
+    const location = useLocation();
+
+    useEffect(() => {
+        const searchParams = new URLSearchParams(location.search);
+        const blogId = parseInt(searchParams.get('blogId'));
+
+        if (blogId) {
+            const blog = fetchBlogById(blogsData, blogId);
+            
+            if (blog)
+                onSelectBlog(blog);
+        }
+    }, [location.search, blogsData]);
+
     return (
         <section className="blogs-list">
             <h1>Blog Post</h1>
@@ -14,17 +29,8 @@ const BlogsList = ({onSelectBlog}) => {
             <div className="content">
                 <ul>
                     {
-                        blogsData.map((b) => (
-                            <li key={b.id} onClick={(e) => onSelectBlog(b) }>
-                                <img src="" width={300} height={300} style={{ backgroundColor: b.image }} alt="" className="image" />
-
-                                <div>
-                                    <h3>{b.title}</h3>
-                                    <p>{b.text}</p>
-                                </div>
-                            </li>
-                        ))
-                    };
+                        blogsData.map((b) => BlogPageBlogs(b, onSelectBlog))
+                    }
                 </ul>
             </div>
         </section>

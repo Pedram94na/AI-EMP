@@ -1,19 +1,34 @@
 import React from "react";
 
 import '../../styles/profile/Section.css'
+import { sendCreateBlog } from "../../services/blog";
 
 export const CreateBlog = () => {
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.target);
+        const formValues = {
+            title: formData.get('title'),
+            content: formData.get('content')
+        };
+        
+        const result = await sendCreateBlog(formValues);
+
+        console.log(result);
+        
+    };
+
     return (
         <section className="dashboard">
             <h2>New Blog Post</h2>
                     
             <div className="content">
-                <form>
-                    <input type="text" placeholder="Author" value={"Pedram"}/>
-                    <input type="text" placeholder="Title"/>
-                    <textarea placeholder="Content"/>
-                    <input type="file" />
-                    <input type="url" />
+                <form onSubmit={handleSubmit}>
+                    <input type="text" placeholder="Title" name="title"/>
+                    <textarea placeholder="Content" name="content"/>
+                    {/* <input type="file" />
+                    <input type="url" /> */}
 
                     <button>Publish</button>
                 </form>

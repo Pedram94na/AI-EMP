@@ -13,6 +13,7 @@ namespace services.Services.CMS.Mappers
                 Content = dto.Content,
                 // Image = dto.Image,
                 CreatedOn = DateTime.Today,
+                EditedOn = DateTime.Today,
                 AppUserId = appUser.Id,
                 AppUser = appUser
             };

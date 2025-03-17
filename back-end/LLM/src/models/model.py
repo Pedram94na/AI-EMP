@@ -1,14 +1,14 @@
 # import transformers
-import torch
-import json
+# import torch
+# import json
 
-from data.data_manager import fetch_data
+# from data.data_manager import fetch_data
 
-def start_training():
+# def start_training():
     
-    print(torch.__version__)
+#     print(torch.__version__)
 
-    dataset = fetch_data()
+#     dataset = fetch_data()
     # model_name = "mistralai/Mixtral-8x7B"
     # tokenizer = AutoTokenizer.from_pretrained(model_name)
     # model = AutoModelForCausalLM.from_pretrained(model_name)

@@ -12,7 +12,7 @@ export const sendContactForm = async (data) => {
         });
 
         if (response.status === 201)
-            return { success: true, message: "Your message has been sent successfully!" };
+            return { success: true, response: "Your message has been sent successfully!" };
     }
 
     catch (e)

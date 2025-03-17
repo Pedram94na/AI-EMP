@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate  } from 'react-router-dom';
 
 import { Header } from '../components/Header';
 import { Footer } from "../components/Footer";
@@ -8,17 +9,29 @@ import BlogDetail from "../components/blog/BlogDetails";
 
 const Blogs = () => {
     const [ blog, setBlog ] = new useState(null);
+    const navigate = useNavigate();
 
     const handleBlogSelection = (blog) => {
         setBlog(blog);
         window.scrollTo({ top: 0, behavior: "smooth" });
+
+        navigate(`?blogId=${blog.id}`);
     };
+
+    const handleClosing = () => {
+        setBlog(null);
+        navigate('', true);
+    }
 
     return (
         <div>
             <Header />
 
-            { !blog ? <BlogsList onSelectBlog={handleBlogSelection} /> : <BlogDetail blog={blog} onClose={() => setBlog(null)}/> }
+            {
+                !blog ?
+                <BlogsList onSelectBlog={handleBlogSelection} /> :
+                <BlogDetail blog={blog} onClose={handleClosing}/>
+            }
 
             <Footer />
         

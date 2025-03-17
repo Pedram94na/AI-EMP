@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import '../../styles/blog/BlogDetails.css';
 
@@ -16,7 +16,7 @@ const BlogDetail = ({blog, onClose}) => {
 
             <img src="" style={{ backgroundColor: blog.image }} alt="" className="image" />
 
-            <p>{blog.text}</p>
+            <p>{blog.content}</p>
         </section>
     );
 };

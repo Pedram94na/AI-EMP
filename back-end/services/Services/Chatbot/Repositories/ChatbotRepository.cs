@@ -31,6 +31,11 @@ namespace services.Services.Chatbot.Repositories
             return (model, true);
         }
 
+        public async Task<List<ChatbotQAndA>> GetAllQAndAAsync()
+        {
+            return await context.ChatbotQAndAs.ToListAsync();
+        }
+
         public async Task<ChatbotQAndA> GetAnswerAsync(string question)
         {
             var answer = await context.ChatbotQAndAs.FirstOrDefaultAsync(c => c.Question == question);
@@ -38,7 +43,7 @@ namespace services.Services.Chatbot.Repositories
             return answer ?? new ChatbotQAndA 
             { 
                 Question = question, 
-                Answer = "I'm not sure how to respond to that."
+                Answer = "Sorry! I don't know the answer to that 😔"
             };
         }
     }

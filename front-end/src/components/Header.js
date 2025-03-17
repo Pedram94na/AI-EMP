@@ -5,7 +5,7 @@ import '../styles/Main.css';
 import '../styles/general/Header.css';
 
 import { useGlobalState } from '../utils/globalStateContext';
-import ChatbotOverlay from "./Chatbot";
+import ChatbotOverlay from "./chatbot/Chatbot";
 import SignUpOverlay from "./auth/SignupOverlay";
 import SignInOverlay from "./auth/SigninOverlay";
 import { signout } from "../utils/signout";

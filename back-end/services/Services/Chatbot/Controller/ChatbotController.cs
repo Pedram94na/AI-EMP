@@ -27,6 +27,14 @@ namespace services.Services.Chatbot.Controller
             return result.Success ? Ok(result.Model.ChatbotModelToDto()) : Conflict(new { message = "Q&A already exists." });
         }
 
+        [HttpGet("q-and-a")]
+        public async Task<IActionResult> GetAllQAndA()
+        {
+            var model = await chatbotRepository.GetAllQAndAAsync();
+
+            return Ok(model);
+        }
+
         [HttpPost("message")]
         public async Task<ActionResult<ChatbotDto>> GetBotResponse([FromBody] ChatbotQuestionDto dto)
         {
