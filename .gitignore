@@ -35,3 +35,8 @@ AI-EMP.sln
 # LLM
 /back-end/LLM/src/__pycache__
 /back-end/LLM/src/file/__pycache__
+/back-end/LLM/__pycache__
+/back-end/LLM/data/__pycache__
+/back-end/LLM/file/__pycache__
+/back-end/LLM/models/__pycache__
+/back-end/LLM/results
