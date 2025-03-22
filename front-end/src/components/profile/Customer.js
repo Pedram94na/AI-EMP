@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Submit from "../../assets/images/Submit.svg"
 
 import '../../styles/profile/Section.css'
+import { sendFileToTrain } from "../../services/ai";
 
 export const Inbox = () => {
     return (
@@ -68,24 +69,56 @@ export const Models = () => {
 };
 
 export const TrainModel = () => {
+    const [fileData, setFileData] = useState(null);
+    const [uploading, setUploading] = useState(false);
+
+    const handleFileChange = (e) => setFileData(e.target.files[0]);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        if (!fileData) {
+            alert("Please select a file first.");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", fileData);
+        
+        setUploading(true);
+
+        const result = await sendFileToTrain(formData);
+        console.log(result);
+
+        if (result.success)
+            alert("File uploaded successfully!");
+        
+        else
+            alert("Upload failed: " + result.message);
+        
+        setUploading(false);
+    };
+
     return (
         <section className="dashboard">
             <h2>Train Model</h2>
 
             <div className="content">
-                <form>
+                <form onSubmit={handleSubmit}>
                     <select>
                         <option>Model X</option>
                         <option>Model Y</option>
                         <option>Model Z</option>
                     </select>
 
-                    <input type="file" />
+                    <input type="file" name="file" onChange={handleFileChange}/>
 
                     <input type="number" placeholder="batch"/>
                     <input type="number" placeholder="epoch"/>
 
-                    <button>Train</button>
+                    <button type="submit" disabled={uploading}>
+                        {uploading ? "Uploading..." : "Train"}
+                    </button>
                 </form>
             </div>
         </section>

@@ -1,19 +1,13 @@
-import torch, evaluate
+import torch, evaluate, json, os, zipfile
 from transformers import BertTokenizer, BertForSequenceClassification, Trainer, TrainingArguments
 from datasets import Dataset
 
 from data.data_manager import fetch_data, fetch_label_keys, fetch_label_values
 
-model = None
-tokenizer = None
-label_map = None
-
-def train_model():
-    global model, tokenizer, label_map
-
-    data_list = fetch_data()
-    label_keys_list = fetch_label_keys()
-    label_values_list = fetch_label_values()
+def train_model(id):
+    data_list = fetch_data(id)
+    label_keys_list = fetch_label_keys(id)
+    label_values_list = fetch_label_values(id)
 
     label_map = {label: index for index, label in enumerate(label_values_list)}
     
@@ -46,7 +40,7 @@ def train_model():
         return {"accuracy": accuracy["accuracy"]}
 
     training_args = TrainingArguments(
-        output_dir="./results",
+        output_dir=f"./results/{id}",
         num_train_epochs=3,
         per_device_train_batch_size=4,
         per_device_eval_batch_size=4,
@@ -71,11 +65,22 @@ def train_model():
         compute_metrics=compute_metrics,
     ).train()
 
-    model.save_pretrained("./trained_model")
-    tokenizer.save_pretrained("./trained_model")
+    model_dir = f'./trained_model/{id}'
 
-def test_model(user_message):
-    global model, tokenizer, label_map
+    model.save_pretrained(model_dir)
+    tokenizer.save_pretrained(model_dir)
+
+    with open(f'{model_dir}/label_map.json', 'w') as f:
+        json.dump(label_map, f)
+
+def test_model(user_message, id):
+    model_dir = f'./trained_model/{id}'
+
+    model = BertForSequenceClassification.from_pretrained(model_dir)
+    tokenizer = BertTokenizer.from_pretrained(model_dir)
+
+    with open(f'{model_dir}/label_map.json', 'r') as f:
+        label_map = json.load(f)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
@@ -94,3 +99,18 @@ def test_model(user_message):
         predicted_class_idx = logits.argmax(dim=-1).item()
 
     return index_to_label[predicted_class_idx]
+
+def fetch_model(id):
+    model_dir = f'./trained_model/{id}'
+    zip_filename = os.path.join(model_dir, 'model_package.zip')
+
+    with zipfile.ZipFile(zip_filename, 'w') as zipf:
+        for root, _, files in os.walk(model_dir):
+            for file in files:
+                if file == 'model_package.zip':
+                    continue
+                file_path = os.path.join(root, file)
+                arcname = os.path.relpath(file_path, model_dir)
+                zipf.write(file_path, arcname=arcname)
+
+    return zip_filename

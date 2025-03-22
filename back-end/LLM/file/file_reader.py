@@ -5,12 +5,12 @@ from csv import DictReader
 class FileReader:
     '''Parent to all file readers'''
 
-    def __init__(self, file):
+    def __init__(self, file, id):
         self.file = file
         self.file_data = None
-        self.save_file = './data/training_data.json'
-        self.label_keys_file = './data/label_keys.json'
-        self.label_values_file = './data/label_values.json'
+        self.save_file = f'./data/users/{id}/training_data.json'
+        self.label_keys_file = f'./data/users/{id}/label_keys.json'
+        self.label_values_file = f'./data/users/{id}/label_values.json'
 
         def set_directory(file):
             directory = os.path.dirname(file)
@@ -20,6 +20,7 @@ class FileReader:
 
         set_directory(self.save_file)
         set_directory(self.label_keys_file)
+        set_directory(self.label_values_file)
 
     def validate_file(self):
         if not os.path.exists(self.file):
