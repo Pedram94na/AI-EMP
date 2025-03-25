@@ -14,7 +14,7 @@ const BlogDetail = ({blog, onClose}) => {
 
             <h3>{blog.title}</h3>
 
-            <img src="" style={{ backgroundColor: blog.image }} alt="" className="image" />
+            <img src={blog.imageUrl} style={{ backgroundColor: blog.image }} alt="" className="image" />
 
             <p>{blog.content}</p>
         </section>

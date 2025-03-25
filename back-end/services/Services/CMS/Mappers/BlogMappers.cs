@@ -5,27 +5,30 @@ namespace services.Services.CMS.Mappers
 {
     public static class BlogMappers
     {
-        public static BlogModel CreateNewBlog(this CreateBlogDto dto, AppUser appUser)
+        public static BlogModel CreateNewBlog(this CreateBlogDto dto, AppUser appUser, string baseUrl)
         {
             return new BlogModel {
                 Author = $"{appUser.FirstName} {appUser.LastName}",
                 Title = dto.Title,
                 Content = dto.Content,
-                // Image = dto.Image,
                 CreatedOn = DateTime.Today,
                 EditedOn = DateTime.Today,
+                ImageDir = dto.ImageDir,
+                ImageUrl = baseUrl + Path.GetFileName(dto.ImageDir),
                 AppUserId = appUser.Id,
                 AppUser = appUser
             };
         }
         
-        public static BlogDto ToBlogDto(this BlogModel blog)
+        public static BlogDto ToBlogDto(this BlogModel blog, string baseUrl)
         {
             return new BlogDto {
+                Id = blog.Id,
                 Author = blog.Author,
                 Title = blog.Title,
                 Content = blog.Content,
-                // Image = dto.Image,
+                ImageDir = blog.ImageDir,
+                ImageUrl = baseUrl + Path.GetFileName(blog.ImageDir),
                 CreatedOn = blog.CreatedOn,
                 EditedOn = blog.EditedOn
             };
@@ -36,7 +39,7 @@ namespace services.Services.CMS.Mappers
             return new BlogModel {
                 Title = dto.Title,
                 Content = dto.Content,
-                // Image = dto.Image,
+                ImageDir = dto.Image_Dir,
                 EditedOn = DateTime.Today,
                 AppUserId = appUser.Id,
                 AppUser = appUser

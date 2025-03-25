@@ -12,7 +12,7 @@ export const Blogs = () => {
     const handleBlogSelection = (blog) => {
         navigate(`/blog?blogId=${blog.id}`);
     }
-
+    
     return (
         <section id="blogs">
             <h1>Blogs</h1>
@@ -20,7 +20,7 @@ export const Blogs = () => {
             <div className="content">
                 <div className="roll">
                     <ul>
-                        { blogsData.map(b => HomePageBlogs(b, handleBlogSelection))}
+                        { blogsData.map((b) => HomePageBlogs(b, handleBlogSelection))}
                     </ul>
                 </div>
 

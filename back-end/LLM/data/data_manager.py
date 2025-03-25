@@ -1,4 +1,4 @@
-import json, os
+import json
 
 def fetch_data(id):
     data_set = f'./data/users/{id}/training_data.json'

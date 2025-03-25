@@ -34,19 +34,21 @@ const ChatbotOverlay = () => {
         }, 1000);
     };
 
-    const handleShowQuestions = () => {
-        setQuestionsVisible(true);
-    };
+    // const handleShowQuestions = () => {
+    //     setQuestionsVisible(true);
+    // };
 
-    const handleHideQuestions = () => {
-        setQuestionsVisible(false);
-    };
+    // const handleHideQuestions = () => {
+    //     setQuestionsVisible(false);
+    // };
 
     if (!isChatbotShown) {
         return (
             <section className="overlay chatbot button">
                 <div className="content">
-                    <button onClick={() => showChatbot(true)}></button>
+                    <button onClick={() => showChatbot(true)}>
+                        <img src={process.env.PUBLIC_URL + '/icons/support.png'} alt="Description" width={30} height={30}/>
+                    </button>
                 </div>
             </section>
         );

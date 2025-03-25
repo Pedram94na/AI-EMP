@@ -19,9 +19,20 @@
     animation-play-state: paused;
 }
 
-.roll li {
+.section.reviews .roll li {
     flex: 0 0 auto;
     transition: transform 0.3s ease;
+    background-color: #7AB2B2;
+    border-radius: 20px;
+    padding: 0 20px;
+}
+
+.section.reviews .roll li p {
+    padding: 0;
+}
+
+.section.reviews .roll li p {
+    padding: 10px;
 }
 
 .roll li:hover {

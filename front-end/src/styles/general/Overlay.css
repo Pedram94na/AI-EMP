@@ -57,6 +57,7 @@
     height: auto;
     padding: 20px;
     z-index: 999;
+    background-color: none;
 }
 
 .overlay.chatbot.button {
@@ -72,6 +73,7 @@
 .overlay.chatbot.button > .content > button {
     width: auto;
     height: auto;
+    border-radius: 50px;
 }
 
 .overlay.chatbot .content .sub-header {
@@ -129,6 +131,10 @@
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.overlay.overlay.chatbot .message-log ul:hover {
+    cursor: pointer;
 }
 
 .overlay.overlay.chatbot .message-log ul > li.user-message {

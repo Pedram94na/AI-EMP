@@ -8,12 +8,9 @@ export const CreateBlog = () => {
         e.preventDefault();
 
         const formData = new FormData(e.target);
-        const formValues = {
-            title: formData.get('title'),
-            content: formData.get('content')
-        };
-        
-        const result = await sendCreateBlog(formValues);
+        formData.forEach((value, key) => console.log(key, value))
+
+        const result = await sendCreateBlog(formData);
 
         console.log(result);
         
@@ -27,8 +24,7 @@ export const CreateBlog = () => {
                 <form onSubmit={handleSubmit}>
                     <input type="text" placeholder="Title" name="title"/>
                     <textarea placeholder="Content" name="content"/>
-                    {/* <input type="file" />
-                    <input type="url" /> */}
+                    <input type="file" name="imageFile" accept="image/*" />
 
                     <button>Publish</button>
                 </form>

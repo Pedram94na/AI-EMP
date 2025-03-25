@@ -14,11 +14,20 @@
 
 .dashboard .message-log {
     flex-grow: 1;
+    height: auto;
     overflow-y: auto;
     background-color: white;
     border-radius: 10px;
     padding: 10px;
     margin: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard .message-log ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .dashboard .message {
@@ -30,7 +39,7 @@
 .dashboard .message .label {
     color: rgb(12, 30, 46);
     font-weight: bold;
-    font-size: 10px;
+    font-size: 20px;
 }
 
 .dashboard .label.user {
@@ -38,5 +47,97 @@
 }
 
 .dashboard .label.bot {
-    
+    color: #4D869C;
+}
+
+.dashboard.chat {
+    background-color: #7AB2B2;
+    margin: 0 150px 30px 150px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.dashboard.chat .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.dashboard.chat .content select {
+    width: 25%;
+    height: 30px;
+    margin: auto;
+}
+
+.dashboard.chat .message-log {
+    display: flex;
+    flex-direction: column-reverse;
+    flex-grow: 1;
+    width: 100%;
+    max-height: 300px;
+    overflow-y: auto;
+    background-color: white;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+.dashboard .message-log ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dashboard .message {
+    padding: 5px 8px;
+    border-radius: 4px;
+    text-align: left;
+}
+
+.dashboard .message .label {
+    color: rgb(12, 30, 46);
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.dashboard .label.user {
+    text-align: right;
+}
+
+.dashboard .label.bot {
+    color: #4D869C;
+}
+
+.dashboard .input-area {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+}
+
+.dashboard .input-area input {
+    flex-grow: 1;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    max-width: 100%;
+}
+
+.dashboard .input-area button {
+    background-color: #4D869C;
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+}
+
+.dashboard .input-area button img {
+    width: 20px;
+    height: 20px;
 }

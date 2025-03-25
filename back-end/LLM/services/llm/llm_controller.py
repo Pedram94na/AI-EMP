@@ -1,13 +1,14 @@
 import torch, evaluate, json, os, zipfile
 from transformers import BertTokenizer, BertForSequenceClassification, Trainer, TrainingArguments
 from datasets import Dataset
+from datetime import datetime
 
 from data.data_manager import fetch_data, fetch_label_keys, fetch_label_values
 
-def train_model(id):
-    data_list = fetch_data(id)
-    label_keys_list = fetch_label_keys(id)
-    label_values_list = fetch_label_values(id)
+def train_model(username, epoch, batch, existing_model_dir=None):
+    data_list = fetch_data(username)
+    label_keys_list = fetch_label_keys(username)
+    label_values_list = fetch_label_values(username)
 
     label_map = {label: index for index, label in enumerate(label_values_list)}
     
@@ -16,13 +17,19 @@ def train_model(id):
     
     data = Dataset.from_list(data_list)
 
-    model_name = "bert-base-uncased"
-    tokenizer = BertTokenizer.from_pretrained(model_name)
-    model = BertForSequenceClassification.from_pretrained(model_name, num_labels=len(label_values_list))
+    if existing_model_dir:
+        model_path = f'./trained_model/{username}/{existing_model_dir}'
+        model = BertForSequenceClassification.from_pretrained(model_path)
+        tokenizer = BertTokenizer.from_pretrained(model_path)
 
-    def preprocess_dataset(batch):
-        encoding = tokenizer(batch[label_keys_list[1]], padding="max_length", truncation=True, max_length=len(data))
-        encoding["labels"] = batch["labels"]
+    else:
+        model_name = "bert-base-uncased"
+        tokenizer = BertTokenizer.from_pretrained(model_name)
+        model = BertForSequenceClassification.from_pretrained(model_name, num_labels=len(label_values_list))
+
+    def preprocess_dataset(b):
+        encoding = tokenizer(b[label_keys_list[1]], padding="max_length", truncation=True, max_length=len(data))
+        encoding["labels"] = b["labels"]
         return encoding
 
     tokenized_data = data.map(preprocess_dataset, batched=True)
@@ -40,10 +47,10 @@ def train_model(id):
         return {"accuracy": accuracy["accuracy"]}
 
     training_args = TrainingArguments(
-        output_dir=f"./results/{id}",
-        num_train_epochs=3,
-        per_device_train_batch_size=4,
-        per_device_eval_batch_size=4,
+        output_dir=f"./results/{username}",
+        num_train_epochs=epoch,
+        per_device_train_batch_size=batch,
+        per_device_eval_batch_size=batch,
         warmup_steps=100,
         weight_decay=0.01,
         logging_dir="./logs",
@@ -65,16 +72,17 @@ def train_model(id):
         compute_metrics=compute_metrics,
     ).train()
 
-    model_dir = f'./trained_model/{id}'
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    trained_model_dir = f'./trained_model/{username}/{timestamp}'
 
-    model.save_pretrained(model_dir)
-    tokenizer.save_pretrained(model_dir)
+    model.save_pretrained(trained_model_dir)
+    tokenizer.save_pretrained(trained_model_dir)
 
-    with open(f'{model_dir}/label_map.json', 'w') as f:
+    with open(f'{trained_model_dir}/label_map.json', 'w') as f:
         json.dump(label_map, f)
 
-def test_model(user_message, id):
-    model_dir = f'./trained_model/{id}'
+def test_model(user_message, username, dir):
+    model_dir = f'./trained_model/{username}/{dir}'
 
     model = BertForSequenceClassification.from_pretrained(model_dir)
     tokenizer = BertTokenizer.from_pretrained(model_dir)
@@ -100,8 +108,13 @@ def test_model(user_message, id):
 
     return index_to_label[predicted_class_idx]
 
-def fetch_model(id):
-    model_dir = f'./trained_model/{id}'
+def get_all_directories(username):
+    base_dir = f"./trained_model/{username}"
+    
+    return [d for d in os.listdir(base_dir) if os.path.isdir(os.path.join(base_dir, d))]
+
+def fetch_model(username, date):
+    model_dir = f'./trained_model/{username}/{date}'
     zip_filename = os.path.join(model_dir, 'model_package.zip')
 
     with zipfile.ZipFile(zip_filename, 'w') as zipf:
@@ -109,6 +122,7 @@ def fetch_model(id):
             for file in files:
                 if file == 'model_package.zip':
                     continue
+                
                 file_path = os.path.join(root, file)
                 arcname = os.path.relpath(file_path, model_dir)
                 zipf.write(file_path, arcname=arcname)

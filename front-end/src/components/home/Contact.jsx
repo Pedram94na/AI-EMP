@@ -19,6 +19,8 @@ const Contact = () => {
         
         const result = await sendContactForm(formValues);
         setResponseMessage(result.message);
+
+        window.location.reload();
     };
 
     return (

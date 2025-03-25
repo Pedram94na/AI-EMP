@@ -28,14 +28,14 @@ const Reviews = () => {
     }
 
     return (
-        <section id="reviews" className="section">
+        <section id="reviews" className="section reviews">
             <h1>What are our users saying about AI EMP?</h1>
             
             <div className="content">
                 <div className="roll">
                     <ul>
                         {reviews.length === 0 ? (
-                            <p>NO REVIEWS YET!</p>
+                            <></>
                         ) : (
                             reviews.map(r => (
                                     <li key={r.id}>

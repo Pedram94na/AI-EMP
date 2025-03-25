@@ -43,3 +43,6 @@ AI-EMP.sln
 /back-end/LLM/data/users
 /back-end/LLM/llm/__pycache__
 /back-end/LLM/trained_model
+/back-end/LLM/services/file/__pycache__
+*.pyc
+/back-end/services/wwwroot

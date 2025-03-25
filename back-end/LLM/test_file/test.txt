@@ -1,6 +1,0 @@
-This is TITLE
-
-Hello, this is a test file. Using Python, we train an AI model!
-How you ask? This system reads plain text files and displays their content.
-Then they choose a model to train the data on.
-End of test.

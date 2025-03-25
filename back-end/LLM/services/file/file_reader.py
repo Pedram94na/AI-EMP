@@ -1,16 +1,14 @@
-import os, json, re
-
-from csv import DictReader
+import os, json
 
 class FileReader:
     '''Parent to all file readers'''
 
-    def __init__(self, file, id):
+    def __init__(self, file, username):
         self.file = file
         self.file_data = None
-        self.save_file = f'./data/users/{id}/training_data.json'
-        self.label_keys_file = f'./data/users/{id}/label_keys.json'
-        self.label_values_file = f'./data/users/{id}/label_values.json'
+        self.training_data_file = f'./data/users/{username}/training_data.json'
+        self.label_keys_file = f'./data/users/{username}/label_keys.json'
+        self.label_values_file = f'./data/users/{username}/label_values.json'
 
         def set_directory(file):
             directory = os.path.dirname(file)
@@ -18,7 +16,7 @@ class FileReader:
             if not os.path.exists(directory):
                 os.makedirs(directory)
 
-        set_directory(self.save_file)
+        set_directory(self.training_data_file)
         set_directory(self.label_keys_file)
         set_directory(self.label_values_file)
 
@@ -54,7 +52,7 @@ class CsvFileReader(FileReader):
         for row in self.file_data:
             unique_values.add(row[labels[0]])
 
-        with open(self.save_file, "w", encoding="utf-8") as file:
+        with open(self.training_data_file, "w", encoding="utf-8") as file:
             json.dump(self.file_data, file, indent=4)
 
         with open(self.label_keys_file, "w", encoding="utf-8") as file:

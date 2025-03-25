@@ -21,22 +21,44 @@ const Dashboard = () => {
         setShowSubscription(false);
     };
 
+    const isAdmin = JSON.parse(localStorage.getItem("user")).role === "Admin";
+    
     return (
         <div>
             <Header />
-            {!hasReview  && <ReviewOverlay />}
-            {!hasSubscribed && showSubscription && <Subscription onPaymentSuccess={handlePaymentSuccess}/>}
-            <Intro />
-            <Actions selectedSection={setActiveSection} />
-
-            {activeSection === inbox && <Inbox />}
-            {activeSection === models && <Models />}
-            {activeSection === trainModel && <TrainModel />}
-            {activeSection === testModel && <TestModel />}
             
-            {activeSection === createBlog && <CreateBlog />}
-            {activeSection === editBlog && <EditBlog />}
-            {activeSection === tickets && <Tickets />}
+            {
+                !isAdmin && (
+                    <>
+                        {!hasReview  && <ReviewOverlay />}
+                        {!hasSubscribed && showSubscription && <Subscription onPaymentSuccess={handlePaymentSuccess}/>}
+                    </>
+                )
+            };
+
+            {/* <Intro /> */}
+            <Actions selectedSection={setActiveSection} isAdmin={isAdmin}/>
+
+            {
+                !isAdmin && (
+                    <>
+                        {/* {activeSection === inbox && <Inbox />} */}
+                        {activeSection === trainModel && <TrainModel />}
+                        {activeSection === testModel && <TestModel />}
+                        {activeSection === models && <Models />}
+                    </>
+                )
+            };
+            
+            {
+                isAdmin && (
+                    <>
+                        {activeSection === createBlog && <CreateBlog />}
+                        {activeSection === editBlog && <EditBlog />}
+                        {/* {activeSection === tickets && <Tickets />} */}
+                    </>
+                )
+            };
 
             <Footer />
         </div>

@@ -15,19 +15,25 @@ namespace services.Services.CMS.Controller
     {
         private readonly UserManager<AppUser> userManager;
         private readonly IBlogRepo blogRepo;
+        private readonly string imageDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
 
         public BlogController(UserManager<AppUser> userManager, IBlogRepo blogRepo)
         {
             this.userManager = userManager;
             this.blogRepo = blogRepo;
+
+            if (!Directory.Exists(imageDirectory))
+                Directory.CreateDirectory(imageDirectory);
         }
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> CreateNewBlog([FromBody] CreateBlogDto dto)
+        public async Task<IActionResult> CreateNewBlog([FromForm] CreateBlogDto dto, [FromForm] IFormFile imageFile)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+
+            var baseUrl = $"{Request.Scheme}://{Request.Host}/images/";
 
             var username = User.GetUsername();
             var appUser = await userManager.FindByNameAsync(username);
@@ -35,11 +41,27 @@ namespace services.Services.CMS.Controller
             if (appUser is null)
                 return NotFound("User not found");
 
-            var blogModel = dto.CreateNewBlog(appUser);
+            string? imagePath = null;
+            if (imageFile != null && imageFile.Length > 0)
+            {
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
+                var filePath = Path.Combine(imageDirectory, fileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    await imageFile.CopyToAsync(fileStream);
+
+                imagePath = Path.Combine("images", fileName);
+            }
+
+            if (imagePath is null)
+                return BadRequest();
+
+            var blogModel = dto.CreateNewBlog(appUser, baseUrl);
+            blogModel.ImageDir = imagePath;
             
             blogModel = await blogRepo.CreateBlogAsync(blogModel);
             
-            return Ok(blogModel.ToBlogDto());
+            return Ok(blogModel.ToBlogDto(baseUrl));
         }
 
         [HttpPut]
@@ -49,6 +71,8 @@ namespace services.Services.CMS.Controller
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+
+            var baseUrl = $"{Request.Scheme}://{Request.Host}/images/";
 
             var username = User.GetUsername();
             var appUser = await userManager.FindByNameAsync(username);
@@ -65,7 +89,7 @@ namespace services.Services.CMS.Controller
 
             var newBlogModel = await blogRepo.EditBlogAsync(existingBlogModel, editedBlogModel);
 
-            return newBlogModel is null ? NotFound("Blog not found") : Ok(newBlogModel.ToBlogDto());
+            return newBlogModel is null ? NotFound("Blog not found") : Ok(newBlogModel.ToBlogDto(baseUrl));
         }
 
         [HttpDelete]
@@ -92,19 +116,12 @@ namespace services.Services.CMS.Controller
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
+            var baseUrl = $"{Request.Scheme}://{Request.Host}/images/";
             var blogs = await blogRepo.GetAllAsync();
-            var blogsDto = blogs.Select(b => b.ToBlogDto()).ToList();
+            
+            var blogsDto = blogs.Select(b => b.ToBlogDto(baseUrl)).ToList();
 
             return Ok(blogsDto);
-        }
-
-        [HttpGet]
-        [Route("{id:int}")]
-        public async Task<IActionResult> GetById([FromRoute] int id)
-        {
-            var blog = await blogRepo.GetByIdAsync(id);
-
-            return blog is null ? NotFound("Blog not found") : Ok(blog.ToBlogDto());
         }
     }
 }

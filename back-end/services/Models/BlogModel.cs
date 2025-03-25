@@ -11,7 +11,8 @@ namespace services.Models
         public string Author { get; set; } = string.Empty;
         public string Title { get; set; } = string.Empty;
         public string Content { get; set; } = string.Empty;
-        // public byte[]? Image { get; set; } // Best to test when API is ready to see results on the front-end
+        public string ImageDir { get; set; } = string.Empty;
+        public string ImageUrl { get; set; } = string.Empty;
         public DateTime CreatedOn { get; set; }
         public DateTime EditedOn { get; set; }
         [ForeignKey("AppUser")]

@@ -7,6 +7,8 @@ export const useBlogsData = () => {
     useEffect(() => {
         const fetchBlogs = async () => {
             const result = await sendGetAllBlogs();
+            console.log("BLOGS");
+            
             console.log(result.response.data);
             
             if (result.success)

@@ -1,3 +1,7 @@
+.blogs-list {
+    padding-top: 100px;
+}
+
 .blogs-list ul {
     display: flex;
     flex-direction: column;

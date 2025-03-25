@@ -5,9 +5,10 @@ const blogApi = process.env.REACT_APP_BLOG_API;
 export const sendCreateBlog = async (data) => {
     try
     {
+        data.forEach((value, key) => console.log(key, value))
+        
         const response = await axios.post(blogApi, data, {
             headers: {
-                'Content-Type': 'application/json',
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         });

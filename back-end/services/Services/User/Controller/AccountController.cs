@@ -35,20 +35,26 @@ namespace services.Services.User.Controller
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
 
+                if (dto.FirstName is null || dto.LastName is null || dto.Password is null)
+                    return BadRequest("Missing fields");
+
+                var userRole = UserRole.User;
+
                 var user = new AppUser
                                 {
                                     FirstName = dto.FirstName,
                                     LastName = dto.LastName,
                                     UserName = dto.Username,
-                                    Email = dto.Email
+                                    Email = dto.Email,
+                                    Role = userRole.ToString()
                                 };
 
                 var createdUser = await userManager.CreateAsync(user, dto.Password);
 
                 if (createdUser.Succeeded)
                 {
-                    var roleResult = await userManager.AddToRoleAsync(user, UserRole.User.ToString());
-
+                    var roleResult = await userManager.AddToRoleAsync(user, userRole.ToString());
+                    
                     if (!roleResult.Succeeded)
                         return StatusCode(500, roleResult.Errors);
 
