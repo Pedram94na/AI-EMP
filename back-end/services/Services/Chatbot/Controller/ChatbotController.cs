@@ -22,9 +22,9 @@ namespace services.Services.Chatbot.Controller
             if (!ModelState.IsValid)
                 BadRequest(ModelState);
 
-            var result = await chatbotRepository.AddQAndAAsync(dto);
+            var (Model, Success) = await chatbotRepository.AddQAndAAsync(dto);
 
-            return result.Success ? Ok(result.Model.ChatbotModelToDto()) : Conflict(new { message = "Q&A already exists." });
+            return Success ? Ok(Model.ChatbotModelToDto()) : Conflict(new { message = "Q&A already exists." });
         }
 
         [HttpGet("q-and-a")]

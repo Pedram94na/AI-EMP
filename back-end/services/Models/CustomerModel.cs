@@ -1,10 +1,12 @@
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace services.Models
 {
-    [Table("Customer")]
+    [Table("Customers")]
     public class CustomerModel
     {
+        [Key]
         public int Id { get; set; }
         public string Name { get; set; } = String.Empty;
         public string EmailAddress { get; set; } = String.Empty;

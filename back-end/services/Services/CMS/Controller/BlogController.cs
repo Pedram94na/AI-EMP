@@ -41,6 +41,9 @@ namespace services.Services.CMS.Controller
             if (appUser is null)
                 return NotFound("User not found");
 
+            if (appUser.Role != UserRole.Admin.ToString())
+                return Unauthorized();
+
             string? imagePath = null;
             if (imageFile != null && imageFile.Length > 0)
             {
@@ -80,6 +83,9 @@ namespace services.Services.CMS.Controller
             if (appUser is null)
                 return NotFound("User not found");
 
+            if (appUser.Role != UserRole.Admin.ToString())
+                return Unauthorized();
+
             var existingBlogModel = await blogRepo.GetByIdAsync(id);
 
             if (existingBlogModel is null)
@@ -102,6 +108,9 @@ namespace services.Services.CMS.Controller
 
             if (appUser is null)
                 return NotFound("User not found");
+
+            if (appUser.Role != UserRole.Admin.ToString())
+                return Unauthorized();
 
             var existingBlogModel = await blogRepo.GetByIdAsync(id);
 

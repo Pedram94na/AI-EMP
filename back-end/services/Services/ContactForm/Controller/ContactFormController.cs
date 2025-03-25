@@ -9,7 +9,7 @@ namespace services.Services.ContactForm.Controller
     public class ContactFormController(IContactFormRepo contactFormRepo) : ControllerBase
     {
         private readonly IContactFormRepo contactFormRepo = contactFormRepo;
-
+        
         [HttpPost("submit")]
         public async Task<IActionResult> Submit([FromBody] ContactFormDto dto)
         {

@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using services.Services.User.DTOs;
 using services.Services.User.Interfaces;
 using services.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace services.Services.User.Controller
 {
@@ -140,12 +141,12 @@ namespace services.Services.User.Controller
 
             var resetUrl = $"http://localhost:5264/api/account/reset-password?token={encodedToken}&email={user.Email}";
 
-            var emailSent = await emailService.SendResetPasswordEmail(user.Email, resetUrl);
+            var emailSent = await emailService.SendResetPasswordEmailAsync(user.Email, resetUrl);
 
             if (!emailSent)
                 return StatusCode(500, "Failed to send reset password link. Try again!");
 
-            return Ok("Password reset link has been sent to your email.");
+            return Ok(resetUrl);
         }
 
         [HttpPost("reset-password")]
