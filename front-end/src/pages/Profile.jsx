@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 
-import { Header } from "../components/Header";
+import { Navigation } from "../components/Navigation";
 import { Footer } from "../components/Footer";
 
-import Intro from "../components/profile/Intro";
-import { CreateBlog, EditBlog, Tickets } from "../components/profile/Admin";
-import { Inbox, Models, TrainModel, TestModel } from "../components/profile/Customer";
-import { Actions, inbox, models, trainModel, testModel, createBlog, editBlog, tickets } from '../components/profile/Actions';
+import { CreateBlog, ListAllBlogs } from "../components/profile/Admin";
+import { Models, TrainModel, TestModel } from "../components/profile/Customer";
+import { AdminActions, UserActions, models, trainModel, testModel, createBlog, blogsList } from '../components/profile/Actions';
 import { ReviewOverlay } from '../components/review/ReviewOverlay';
 import Subscription from "../components/subscription/Subscription";
 
 const Dashboard = () => {
-    const [ activeSection, setActiveSection ] = useState(inbox);
+    const [ activeSection, setActiveSection ] = useState();
     const [ showSubscription, setShowSubscription ] = useState(true);
+    const [selectedBlog, setSelectedBlog] = useState();
 
     const { hasReview, hasSubscribed, role } = JSON.parse(localStorage.getItem('user'));
     console.log(localStorage.getItem('user'));
@@ -25,24 +25,17 @@ const Dashboard = () => {
     
     return (
         <div>
-            <Header />
+            <Navigation />
             
             {
                 !isAdmin && (
+
                     <>
                         {!hasReview  && <ReviewOverlay />}
                         {!hasSubscribed && showSubscription && <Subscription onPaymentSuccess={handlePaymentSuccess}/>}
-                    </>
-                )
-            };
+                        
+                        <UserActions setActiveSection={setActiveSection} />
 
-            {/* <Intro /> */}
-            <Actions selectedSection={setActiveSection} isAdmin={isAdmin}/>
-
-            {
-                !isAdmin && (
-                    <>
-                        {/* {activeSection === inbox && <Inbox />} */}
                         {activeSection === trainModel && <TrainModel />}
                         {activeSection === testModel && <TestModel />}
                         {activeSection === models && <Models />}
@@ -53,9 +46,10 @@ const Dashboard = () => {
             {
                 isAdmin && (
                     <>
+                        <AdminActions setActiveSection={setActiveSection}/>
+
+                        {activeSection === blogsList && <ListAllBlogs />}
                         {activeSection === createBlog && <CreateBlog />}
-                        {activeSection === editBlog && <EditBlog />}
-                        {/* {activeSection === tickets && <Tickets />} */}
                     </>
                 )
             };

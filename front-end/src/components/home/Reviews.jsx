@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-import '../../styles/home/Roll.css';
+import './roll.css';
 import { sendFetchReviews } from '../../services/review';
 
 const Reviews = () => {
-    const [ reviews, setReviews ] = new useState();
-    const [ loading, setLoading ] = new useState(true);
+    const [reviews, setReviews] = useState();
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchReviews = async () => {
@@ -27,32 +27,33 @@ const Reviews = () => {
         return <p>Loading reviews...</p>;
     }
 
+    const limitedReviews = reviews.slice(0, 9);
+
     return (
-        <section id="reviews" className="section reviews">
-            <h1>What are our users saying about AI EMP?</h1>
+        <section id="reviews" className="d-flex flex-column align-items-center py-5">
+            <h1 className="text-center mb-4">What are our users saying about AI EMP?</h1>
             
-            <div className="content">
-                <div className="roll">
-                    <ul>
-                        {reviews.length === 0 ? (
-                            <></>
-                        ) : (
-                            reviews.map(r => (
-                                    <li key={r.id}>
-                                        <p className="name">{ r.name }</p>
+            <div className="container">
+                <div className="row">
+                    {limitedReviews.length === 0 ? (
+                        <></>
+                    ) : (
+                        limitedReviews.map((r, index) => (
+                            <div className="col-md-4 mb-4" key={r.id}>
+                                <div className="p-4 bg-light rounded shadow-sm animate__animated animate__fadeIn">
+                                    <p className="name fw-bold">{r.name}</p>
 
-                                        <div className="rating">
-                                            {Array.from({ length: r.rating }).map((_, index) => (
-                                                <span key={index}>⭐</span>
-                                            ))}
-                                        </div>
+                                    <div className="rating">
+                                        {Array.from({ length: r.rating }).map((_, index) => (
+                                            <span key={index}>⭐</span>
+                                        ))}
+                                    </div>
 
-                                        <p className="review">{ r.content }</p>
-                                    </li>
-                                )
-                            )
-                        )}
-                    </ul>
+                                    <p className="review">{r.content}</p>
+                                </div>
+                            </div>
+                        ))
+                    )}
                 </div>
             </div>
         </section>

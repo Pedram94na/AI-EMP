@@ -1,7 +1,5 @@
 import React from "react";
 
-import '../../styles/general/Intro.css';
-
 const Intro = () => {
     return (
         <section className="intro">

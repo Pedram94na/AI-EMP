@@ -1,9 +1,9 @@
 import React from "react";
 
+import { Navigation } from '../components/Navigation';
 import { Header } from '../components/Header';
 import { Footer } from "../components/Footer";
 
-import Intro from '../components/home/Intro';
 import About from '../components/home/About';
 import Reviews from '../components/home/Reviews';
 import Guide from '../components/home/Guide';
@@ -14,9 +14,9 @@ const Home = () => {
     return (
         <div>
             
+            <Navigation />
             <Header />
 
-            <Intro />
             <About />
             <Guide />
             <Reviews />

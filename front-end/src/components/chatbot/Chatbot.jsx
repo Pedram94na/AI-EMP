@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "../../styles/general/Overlay.css";
 import { sendGetAllQAndAs } from "../../services/chatbot";
 
 const ChatbotOverlay = () => {
@@ -34,62 +33,43 @@ const ChatbotOverlay = () => {
         }, 1000);
     };
 
-    // const handleShowQuestions = () => {
-    //     setQuestionsVisible(true);
-    // };
-
-    // const handleHideQuestions = () => {
-    //     setQuestionsVisible(false);
-    // };
-
     if (!isChatbotShown) {
         return (
-            <section className="overlay chatbot button">
-                <div className="content">
-                    <button onClick={() => showChatbot(true)}>
-                        <img src={process.env.PUBLIC_URL + '/icons/support.png'} alt="Description" width={30} height={30}/>
-                    </button>
-                </div>
-            </section>
+            <div className="position-fixed bottom-0 end-0 m-3">
+                <button style={{backgroundColor: "#4D869C"}} className="btn rounded-circle p-3" onClick={() => showChatbot(true)}>
+                    <img src={process.env.PUBLIC_URL + '/icons/support.png'} alt="Chatbot" width={30} height={30}/>
+                </button>
+            </div>
         );
     } else {
         return (
-            <section className="overlay chatbot">
-                <div className="content">
-                    <div className="sub-header">
-                        <button onClick={() => showChatbot(false)}>X</button>
-                    </div>
-
-                    <h4 className="title">AI EMP BOT</h4>
-
-                    <div className="message-log">
-                        <ul>
-                            {messages.map((msg) => (
-                                <li
-                                    key={msg.id}
-                                    className={msg.type === "user" ? "user-message" : "bot-message"}
-                                >
-                                    {msg.text}
+            <div className="position-fixed bottom-0 end-0 m-3 card shadow-lg" style={{ width: '300px' }}>
+                <div className="card-header d-flex justify-content-between align-items-center">
+                    <h5 className="mb-0">AI EMP BOT</h5>
+                    <button className="btn btn-close" onClick={() => showChatbot(false)}></button>
+                </div>
+                <div className="card-body" style={{ maxHeight: '400px', overflowY: 'auto' }}>
+                    <ul className="list-unstyled">
+                        {messages.map((msg) => (
+                            <li key={msg.id} className={msg.type === "user" ? "text-end text-primary" : "text-start text-secondary"}>
+                                {msg.text}
+                            </li>
+                        ))}
+                        {questionsVisible &&
+                            chatbotData.map((c, ind) => (
+                                <li key={c.id} 
+                                    className="text-primary text-decoration-none cursor-pointer" 
+                                    style={{ cursor: "pointer" }}
+                                    onClick={() => {
+                                        handleQuestionClick(c);
+                                        setQuestionsVisible(false);
+                                    }}>
+                                    {ind + 1}. {c.question}
                                 </li>
                             ))}
-
-                            {questionsVisible &&
-                                chatbotData.map((c, ind) => (
-                                    <li
-                                        key={c.id}
-                                        onClick={() => {
-                                            handleQuestionClick(c);
-                                            setQuestionsVisible(false);
-                                        }}
-                                        className="clickable"
-                                    >
-                                        {ind + 1}. {c.question}
-                                    </li>
-                                ))}
-                        </ul>
-                    </div>
+                    </ul>
                 </div>
-            </section>
+            </div>
         );
     }
 };

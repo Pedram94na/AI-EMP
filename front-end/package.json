@@ -5,9 +5,12 @@
   "dependencies": {
     "@stripe/react-stripe-js": "^3.3.0",
     "@stripe/stripe-js": "^5.10.0",
+    "animate.css": "^4.1.1",
     "axios": "^1.8.1",
+    "bootstrap": "^5.3.3",
     "cra-template": "1.2.0",
     "react": "^19.0.0",
+    "react-bootstrap": "^2.10.9",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.1",
     "react-scripts": "5.0.1"
