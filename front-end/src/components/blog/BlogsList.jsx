@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from 'react-router-dom';
 
-import '../../styles/blog/BlogsList.css';
-
 import { useBlogsData, fetchBlogById } from '../../data/BlogsData';
 import { BlogPageBlogs } from "./GetBlogs";
 
@@ -23,15 +21,17 @@ const BlogsList = ({ onSelectBlog }) => {
     }, [location.search, blogsData]);
 
     return (
-        <section className="blogs-list">
-            <h1>Blog Post</h1>
+        <section className="container py-5">
+            <h1 className="text-center mb-4">Blog Posts</h1>
 
-            <div className="content">
-                <ul>
-                    {
-                        blogsData.map((b) => BlogPageBlogs(b, onSelectBlog))
-                    }
-                </ul>
+            <div className="row justify-content-center">
+                <div className="col-12 col-md-8">
+                    <ul className="list-unstyled text-center">
+                        {
+                            blogsData.map((b) => BlogPageBlogs(b, onSelectBlog))
+                        }
+                    </ul>
+                </div>
             </div>
         </section>
     );

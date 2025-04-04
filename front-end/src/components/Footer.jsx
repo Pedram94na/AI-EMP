@@ -1,52 +1,68 @@
-import React from "react";
-
-import logo from "../assets/images/Logo.png";
-import '../styles/general/Footer.css';
+import React, { useState } from "react";
+import { Nav, Button, Container, Row, Col } from "react-bootstrap";
 
 import { useGlobalState } from '../utils/globalStateContext';
 
 export const Footer = () => {
     const { setSignup, setSignin } = useGlobalState();
-    
+    const [hover, setHover] = useState(false);
+
     const isSessionActive = Boolean (localStorage.getItem('token'));
 
     return (
-        <footer>
-            <div id="common-info">
-                <a id="footer-logo" href="/">
-                    <img width={150} height={150} src={logo} alt="Logo" />
-                </a>
-                
-                <nav id="footer-nav">
-                    <ul>
-                        <li><a href="#intro">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#guide">Guide</a></li>
-                    </ul>
-
-                    <ul>
-                        <li><a href="#reviews">Reviews</a></li>
-                        <li><a href="#blogs">Blog</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </nav>
-
-                <div id="footer-auth">
-                    {!isSessionActive && (
-                        <>
-                            <button className="signup" onClick = {() => setSignup(true)}>
-                                Sign Up
-                            </button>
-
-                            <button onClick = {() => setSignin(true)}>
-                                    Sign In
-                            </button>
-                        </>
-                    )}
-                </div>
-            </div>
-
-            <h3 id="dev-info">Developed By Pedram Negahban - 2025</h3>
-        </footer>
+        <footer className="bg-light py-4 mt-5">
+        <Container>
+          <Row className="align-items-center">
+            <Col md={4} className="text-center">
+              <a href="/">
+                <img src="/logo/Logo-w-bg.png" width={100} height={100} alt="Logo" />
+              </a>
+            </Col>
+            <Col md={2} className="text-center">
+              <Nav className="flex-column">
+                <Nav.Link href="#intro" style={{ color: "#4D869C" }}>Home</Nav.Link>
+                <Nav.Link href="#about" style={{ color: "#4D869C" }}>About</Nav.Link>
+              </Nav>
+            </Col>
+            <Col md={2} className="text-center">
+              <Nav className="flex-column">
+                <Nav.Link href="#guide" style={{ color: "#4D869C" }}>Guide</Nav.Link>
+                <Nav.Link href="#reviews" style={{ color: "#4D869C" }}>Reviews</Nav.Link>
+              </Nav>
+            </Col>
+            <Col md={2} className="text-center">
+              <Nav className="flex-column">
+                <Nav.Link href="#blogs" style={{ color: "#4D869C" }}>Blog</Nav.Link>
+                <Nav.Link href="#contact" style={{ color: "#4D869C" }}>Contact</Nav.Link>
+              </Nav>
+            </Col>
+          </Row>
+          <Row className="text-center mt-3">
+            <Col>
+              {!isSessionActive && (
+                <>
+                  <Button variant="primary" style={{ backgroundColor: "#4D869C" }} className="me-2" onClick={() => setSignup(true)}>
+                    Sign Up
+                  </Button>
+                  <Button variant="outline-primary" style={{
+                      backgroundColor: hover ? "#4D869C" : "transparent",
+                      color: hover ? "white" : "#4D869C",
+                      borderColor: "#4D869C"
+                    }} onClick={() => setSignin(true)}
+                      onMouseEnter={() => setHover(true)}
+                      onMouseLeave={() => setHover(false)}>
+                    Sign In
+                  </Button>
+                </>
+              )}
+            </Col>
+          </Row>
+          <Row className="text-center mt-3">
+            <Col>
+              <p>Developed By Pedram Negahban - 2025</p>
+            </Col>
+          </Row>
+        </Container>
+      </footer>
     );
 };

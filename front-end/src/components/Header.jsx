@@ -1,82 +1,28 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import logo from '../assets/images/Logo.png';
-import '../styles/Main.css';
-import '../styles/general/Header.css';
-
-import { useGlobalState } from '../utils/globalStateContext';
-import ChatbotOverlay from "./chatbot/Chatbot";
-import SignUpOverlay from "./auth/SignupOverlay";
-import SignInOverlay from "./auth/SigninOverlay";
-import { signout } from "../utils/signout";
+import React from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import { UseScrollToSection } from './home/useScrollToSection';
+import { Navigation } from "./Navigation";
 
 export const Header = () => {
-    const { signupClicked, setSignup, signinClicked, setSignin } = useGlobalState();
-    const [isSessionActive, setIsSessionActive] = useState(Boolean(localStorage.getItem('token')));
-    
-    const navigate = useNavigate();
-    const location = useLocation();
+    UseScrollToSection();
 
-    useEffect(() => {
-        const handleStorageChange = () => {
-            setIsSessionActive(Boolean(localStorage.getItem('token')));
-        };
-
-        window.addEventListener('storage', handleStorageChange);
-
-        setIsSessionActive(Boolean(localStorage.getItem('token')));
-
-        return () => window.removeEventListener('storage', handleStorageChange);
-    }, []);
-
-    const handleNavClick = (e, sectionId) => {
-        e.preventDefault();
-
-        location.pathname !== "/" ?
-            navigate(`/?scrollTo=${sectionId}`) :
-            document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
-    }
-    
     return (
-        <header>
-            <ChatbotOverlay />
-            {signupClicked && <SignUpOverlay onCancel={() => setSignup(false)} />}
-            {signinClicked && <SignInOverlay onCancel={() => setSignin(false)} />}
-
-            <a id="header-logo" href="/">
-                <img width={70} height={70} src={logo} alt="Logo" />
-            </a>
-
-            <nav id="header-nav">
-                <ul>
-                    <li><a href="#intro" onClick={(e) => handleNavClick(e, "intro")}>Home</a></li>
-                    <li><a href="#about" onClick={(e) => handleNavClick(e, "about")}>About</a></li>
-                    <li><a href="#guide" onClick={(e) => handleNavClick(e, "guide")}>Guide</a></li>
-                    <li><a href="#reviews" onClick={(e) => handleNavClick(e, "reviews")}>Reviews</a></li>
-                    <li><a href="#blogs" onClick={(e) => handleNavClick(e, "blogs")}>Blog</a></li>
-                    <li><a href="#contact" onClick={(e) => handleNavClick(e, "contact")}>Contact</a></li>
-                </ul>
-            </nav>
-
-            <div id="header-auth">
-                {!isSessionActive && (
-                    <>
-                        <button className="signup" onClick={() => setSignup(true)}>
-                                Sign Up
-                        </button>
-
-                        <button onClick={() => setSignin(true)}>
-                                Sign In
-                        </button>
-                    </>
-                )}
-
-                {isSessionActive && (
-                    <>
-                        <button onClick={() => signout(setIsSessionActive, navigate)}>Sign Out</button>
-                    </>
-                )}
-            </div>
+        <header className="d-flex flex-column">
+            <Container className="py-5">
+                <Row className="align-items-center">
+                    <Col md={6} className="text-center text-md-left">
+                        <img src="/logo/Logo-w-bg.png" width={500} height={500} alt="Logo" className="img-fluid" />
+                    </Col>
+                    <Col md={6} className="text-center text-md-left">
+                        <div className="mt-4 mt-md-0">
+                            <p className="fs-3 fw-bold">
+                                Train. Fine-Tune. Employ.<br />
+                                Your AI Employee.
+                            </p>
+                        </div>
+                    </Col>
+                </Row>
+            </Container>
         </header>
     );
 };

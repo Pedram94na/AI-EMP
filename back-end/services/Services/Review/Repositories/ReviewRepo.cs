@@ -18,7 +18,7 @@ namespace services.Services.Review.Repositories
 
         public async Task<ReviewModel> CreateReviewAsync(ReviewDto dto, string firstName)
         {
-            var reviewModel = ReviewMapper.CreateReview(dto, firstName);
+            var reviewModel = dto.CreateReviewFromDto(firstName);
             var existingReview = await context.Reviews.FirstOrDefaultAsync(r => r.Name == firstName);
 
             if (existingReview is not null)

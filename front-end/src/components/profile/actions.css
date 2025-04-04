@@ -1,0 +1,13 @@
+#categories li button {
+    width: 200px;
+}
+
+.action-btn {
+    background-color: white !important;
+    color: black;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.action-btn:hover {
+    background-color: #ccc !important;
+}

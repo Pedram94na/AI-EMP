@@ -1,8 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
 import { useBlogsData } from '../../data/BlogsData';
-import '../../styles/home/Roll.css';
 import { HomePageBlogs } from "../blog/GetBlogs";
 
 export const Blogs = () => {
@@ -14,17 +12,25 @@ export const Blogs = () => {
     }
     
     return (
-        <section id="blogs">
-            <h1>Blogs</h1>
+        <section id="blogs" className="py-5">
+            <div className="container text-center">
+                <h1 className="mb-4">Blogs</h1>
 
-            <div className="content">
-                <div className="roll">
-                    <ul>
-                        { blogsData.map((b) => HomePageBlogs(b, handleBlogSelection))}
-                    </ul>
+                <div className="d-flex justify-content-center flex-wrap">
+                    <div className="roll w-100">
+                        <ul className="list-unstyled">
+                            { blogsData.map((b) => (
+                                <li key={b.id} className="mb-4">
+                                    {HomePageBlogs(b, handleBlogSelection)}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                 </div>
 
-                <a onClick={() => navigate('/blog')}>See All</a>
+                <a onClick={() => navigate('/blog')} className="btn btn-link mt-4 text-white fs-4">
+                    See All
+                </a>
             </div>
         </section>
     );

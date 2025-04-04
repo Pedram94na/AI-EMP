@@ -38,8 +38,6 @@ async def start_training(username: str = Form(...),
     if not model:
         model = None
 
-    print(f"{model} {epoch} {batch} {file} {username}")
-
     try:
         await process_file(file, username)
         

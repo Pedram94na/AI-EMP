@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate  } from 'react-router-dom';
 
-import { Header } from '../components/Header';
+import { Navigation } from '../components/Navigation';
 import { Footer } from "../components/Footer";
 
 import BlogsList from '../components/blog/BlogsList';
@@ -25,7 +25,7 @@ const Blogs = () => {
 
     return (
         <div>
-            <Header />
+            <Navigation />
 
             {
                 !blog ?

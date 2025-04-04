@@ -2,17 +2,14 @@ import React, { useState } from "react";
 import { useStripe, useElements, CardNumberElement, CardExpiryElement, CardCvcElement } from "@stripe/react-stripe-js";
 import { sendPayment } from "../../services/payment";
 
-import "../../styles/profile/Overlay.css";
-
 const Payment = ({ onPaymentSuccess }) => {
     const stripe = useStripe();
     const elements = useElements();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(false);
-
     const [cardName, setCardName] = useState("");
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -27,9 +24,7 @@ const Payment = ({ onPaymentSuccess }) => {
         const { error, paymentMethod } = await stripe.createPaymentMethod({
             type: "card",
             card: elements.getElement(CardNumberElement),
-            billing_details: {
-                name: cardName,
-            },
+            billing_details: { name: cardName },
         });
 
         if (error) {
@@ -57,39 +52,48 @@ const Payment = ({ onPaymentSuccess }) => {
     };
 
     return (
-        <section className="overlay payment">
-            <div className="content">
-                <h4 className="title">Payment Details</h4>
+        <div className="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center" 
+             style={{ zIndex: 1050 }}>
+            <div className="card p-4 shadow-lg w-50">
+                <h4 className="text-center mb-4">Payment Details</h4>
 
-                <form onSubmit={handleSubmit}>
-                    <label>Cardholder Name</label>
+                <form onSubmit={handleSubmit} className="d-flex flex-column gap-3">
                     <input 
                         type="text" 
                         name="cardName" 
-                        className="card-input"
+                        className="form-control"
+                        placeholder="Cardholder Name"
                         value={cardName} 
                         onChange={(e) => setCardName(e.target.value)} 
                         required
                     />
 
-                    <label>Card Number</label>
-                    <CardNumberElement className="card-input" />
+                    <div className="form-control p-2">
+                        <CardNumberElement />
+                    </div>
 
-                    <label>Expiry Date</label>
-                    <CardExpiryElement className="card-input" />
+                    <div className="d-flex gap-2">
+                        <div className="form-control p-2">
+                            <CardExpiryElement />
+                        </div>
+                        <div className="form-control p-2">
+                            <CardCvcElement />
+                        </div>
+                    </div>
 
-                    <label>CVV</label>
-                    <CardCvcElement className="card-input" />
-
-                    <button type="submit" disabled={loading || !stripe}>
+                    <button type="submit" style={{ backgroundColor: '#4D869C'}} className="btn btn-primary w-100" disabled={loading || !stripe}>
                         {loading ? "Processing..." : "Submit Payment"}
+                    </button>
+
+                    <button type="button" className="btn btn-light w-100 mt-2" onClick={() => window.location.reload()}>
+                        Cancel
                     </button>
                 </form>
 
-                {error && <p style={{ color: "red" }}>{error}</p>}
-                {success && <p style={{ color: "green" }}>Payment Successful!</p>}
+                {error && <p className="text-danger text-center mt-3">{error}</p>}
+                {success && <p className="text-success text-center mt-3">Payment Successful!</p>}
             </div>
-        </section>
+        </div>
     );
 };
 
