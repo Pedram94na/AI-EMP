@@ -5,10 +5,9 @@ const blogApi = process.env.REACT_APP_BLOG_API;
 export const sendCreateBlog = async (data) => {
     try
     {
-        data.forEach((value, key) => console.log(key, value))
-        
         const response = await axios.post(blogApi, data, {
             headers: {
+                'Content-Type': 'multipart/form-data',
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         });
@@ -27,25 +26,25 @@ export const sendCreateBlog = async (data) => {
 };
 
 export const sendEditBlog = async (data, blogId) => {
-    try
-    {
-        const response = await axios.post(`${blogApi}/${blogId}`, data, {
+    try {
+
+        const response = await axios.put(`${blogApi}/${parseInt(blogId, 10)}`, data, {
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'multipart/form-data',
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         });
 
         if (response.status === 200)
-            return { success: true, response: response };
+            return { success: true, response: response.data };
 
-        return { success: false, response: response };
+        return { success: false, response: response.data };
+
     }
-
+    
     catch (e)
     {
-        console.log(e);
-        return { success: false, message: "ERROR SENDING MESSAGE!" };
+        return { success: false, message: e.response?.data?.message || "ERROR SENDING MESSAGE!" };
     }
 };
 

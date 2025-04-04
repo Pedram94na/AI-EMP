@@ -62,7 +62,7 @@ const Contact = () => {
                                         placeholder="Your Name" 
                                         name="name" 
                                         className="input-field" 
-                                        style={{ backgroundColor: '#ccc' }} 
+                                        style={{ backgroundColor: '#CDE8E5' }} 
                                     />
                                     {errors.name && <small className="text-danger">{errors.name}</small>}
                                 </Form.Group>
@@ -74,7 +74,7 @@ const Contact = () => {
                                         placeholder="Your Email" 
                                         name="emailAddress" 
                                         className="input-field"
-                                        style={{ backgroundColor: '#ccc' }} 
+                                        style={{ backgroundColor: '#CDE8E5' }} 
                                     />
                                     {errors.emailAddress && <small className="text-danger">{errors.emailAddress}</small>}
                                 </Form.Group>
@@ -86,7 +86,7 @@ const Contact = () => {
                                         placeholder="Your Phone Number" 
                                         name="phoneNumber" 
                                         className="input-field"
-                                        style={{ backgroundColor: '#ccc' }} 
+                                        style={{ backgroundColor: '#CDE8E5' }} 
                                     />
                                 </Form.Group>
 
@@ -97,7 +97,7 @@ const Contact = () => {
                                         placeholder="Company Name" 
                                         name="companyName" 
                                         className="input-field"
-                                        style={{ backgroundColor: '#ccc' }} 
+                                        style={{ backgroundColor: '#CDE8E5' }} 
                                     />
                                 </Form.Group>
 
@@ -108,7 +108,7 @@ const Contact = () => {
                                         placeholder="Website URL" 
                                         name="websiteUrl" 
                                         className="input-field"
-                                        style={{ backgroundColor: '#ccc' }} 
+                                        style={{ backgroundColor: '#CDE8E5' }} 
                                     />
                                 </Form.Group>
 
@@ -119,12 +119,12 @@ const Contact = () => {
                                         placeholder="Your Message..." 
                                         name="content" 
                                         className="input-field textarea-field"
-                                        style={{ backgroundColor: '#ccc', height: '200px', minHeight: '200px', maxHeight: '200px' }} 
+                                        style={{ backgroundColor: '#CDE8E5', height: '200px', minHeight: '200px', maxHeight: '200px' }} 
                                     />
                                     {errors.content && <small className="text-danger">{errors.content}</small>}
                                 </Form.Group>
 
-                                <Button variant="primary" type="submit">
+                                <Button variant="primary" type="submit" style={{ backgroundColor: "#4D869C" }}>
                                     Send
                                 </Button>
                             </Form>

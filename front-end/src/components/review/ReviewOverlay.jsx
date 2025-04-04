@@ -34,7 +34,7 @@ export const ReviewOverlay = () => {
                         {[1, 2, 3, 4, 5].map((id) => (
                             <img
                                 key={id}
-                                src={`${process.env.PUBLIC_URL}/icons/Star.png`}
+                                src={`${process.env.PUBLIC_URL}/icons/Star.svg`}
                                 width={30}
                                 height={30}
                                 onClick={() => setClicked(id)}
@@ -53,7 +53,7 @@ export const ReviewOverlay = () => {
 
                     <textarea className="form-control" placeholder="Write a review..." name="content" rows="3"></textarea>
 
-                    <button type="submit" className="btn btn-primary w-100">Submit</button>
+                    <button type="submit" className="btn btn-primary w-100" style={{ backgroundColor: '#4D869C'}}>Submit</button>
                     <button type="button" className="btn btn-light w-100" onClick={() => showReviewPanel(false)}>Cancel</button>
                 </form>
             </div>

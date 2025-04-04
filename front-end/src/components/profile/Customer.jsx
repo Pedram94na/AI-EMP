@@ -12,11 +12,6 @@ export const TrainModel = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!fileData) {
-            alert("Please select a file first.");
-            return;
-        }
-
         setUploading(true);
 
         const formData = new FormData(e.target);
@@ -50,7 +45,7 @@ export const TrainModel = () => {
             <div className="container d-flex flex-column justify-content-center align-items-center">
                 <h2 className="mb-4">Train Model</h2>
 
-                <div className="content w-100">
+                <div className="content w-100" >
                     <form onSubmit={handleSubmit} className="w-100 d-flex flex-column align-items-center">
                         <div className="mb-3 w-50">
                             <select name="model" className="form-select">
@@ -91,6 +86,7 @@ export const TrainModel = () => {
                         <button
                             type="submit"
                             className="btn btn-primary w-50"
+                            style={{ backgroundColor: '#4D869C', borderColor: '#7AB2B2'}}
                             disabled={uploading}
                         >
                             {uploading ? "Training In Progress. . ." : "Start Training"}
@@ -103,18 +99,13 @@ export const TrainModel = () => {
 };
 
 export const TestModel = () => {
-    const [messages, setMessages] = useState([
-        { id: 1, sender: 'user', text: 'Hi' },
-        { id: 2, sender: 'bot', text: 'Hello there' },
-        { id: 3, sender: 'user', text: 'I need help!' },
-        { id: 4, sender: 'bot', text: 'What is troubling you?' },
-        
-    ]);
-
+    const [messages, setMessages] = useState([]);
+    const [selectedModel, setSelectedModel] = useState("");
     const models = useAiModelsData();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         const formData = new FormData(e.target);
         const userMessage = formData.get("message").trim();
         const selectedModel = formData.get("model");
@@ -149,7 +140,8 @@ export const TestModel = () => {
         };
 
         setMessages([...messages, newMessage, botResponse]);
-        e.target.reset();
+        
+        e.target.message.value = "";
     };
 
     return (
@@ -190,8 +182,8 @@ export const TestModel = () => {
                                 required
                                 className="form-control me-2"
                             />
-                            <button type="submit" className="btn btn-primary">
-                                <img src={`${process.env.PUBLIC_URL}/icons/Submit.png`} width={10} height={10} alt="Submit" />
+                            <button style={{ backgroundColor: '#4D869C', borderColor: '#4D869C'}} type="submit" className="btn btn-primary">
+                                <img src={`${process.env.PUBLIC_URL}/icons/Submit.svg`} width={10} height={10} alt="Submit" />
                             </button>
                         </div>
                     </form>

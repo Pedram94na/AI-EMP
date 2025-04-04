@@ -49,7 +49,7 @@ const SignInOverlay = ({ onCancel }) => {
                         {errors.password && <small className="text-danger">{errors.password}</small>}
                     </div>
                     <div className="d-flex justify-content-between">
-                        <button type="submit" className="btn btn-primary">Sign In</button>
+                        <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#4D869C'}}>Sign In</button>
                         <button 
                             className="btn btn-secondary"
                             onClick={(e) => {
@@ -60,9 +60,9 @@ const SignInOverlay = ({ onCancel }) => {
                     </div>
                 </form>
                 <div className="mt-3 text-center">
-                    <a href="#" className="d-block">Forgot Password?</a>
                     <button 
                         className="btn btn-link"
+                        style={{ color: '#4D869C'}}
                         onClick={() => {
                             setSignup(true);
                             setSignin(false);

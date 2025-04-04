@@ -39,7 +39,7 @@ namespace services.Services.User.Controller
                 if (dto.FirstName is null || dto.LastName is null || dto.Password is null)
                     return BadRequest("Missing fields");
 
-                var userRole = UserRole.User;
+                var userRole = UserRole.Admin;
 
                 var user = new AppUser
                                 {

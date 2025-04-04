@@ -84,7 +84,7 @@ const SignUpOverlay = ({ onCancel }) => {
                         {errors.repeatPassword && <small className="text-danger">{errors.repeatPassword}</small>}
                     </div>
                     <div className="d-flex justify-content-between">
-                        <button type="submit" className="btn btn-primary">Sign Up</button>
+                        <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#4D869C'}}>Sign Up</button>
                         <button 
                             className="btn btn-secondary"
                             onClick={(e) => {
@@ -97,6 +97,7 @@ const SignUpOverlay = ({ onCancel }) => {
                 <div className="mt-3 text-center">
                     <button 
                         className="btn btn-link"
+                        style={{ color: '#4D869C'}}
                         onClick={() => {
                             setSignin(true);
                             setSignup(false);

@@ -51,15 +51,15 @@ const ChatbotOverlay = () => {
                 <div className="card-body" style={{ maxHeight: '400px', overflowY: 'auto' }}>
                     <ul className="list-unstyled">
                         {messages.map((msg) => (
-                            <li key={msg.id} className={msg.type === "user" ? "text-end text-primary" : "text-start text-secondary"}>
+                            <li style={{ color: "#4D869C" }} key={msg.id} className={msg.type === "user" ? "text-end" : "text-start text-secondary"}>
                                 {msg.text}
                             </li>
                         ))}
                         {questionsVisible &&
                             chatbotData.map((c, ind) => (
                                 <li key={c.id} 
-                                    className="text-primary text-decoration-none cursor-pointer" 
-                                    style={{ cursor: "pointer" }}
+                                    className="text-decoration-none cursor-pointer" 
+                                    style={{ cursor: "pointer", color: "#4D869C" }}
                                     onClick={() => {
                                         handleQuestionClick(c);
                                         setQuestionsVisible(false);

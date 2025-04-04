@@ -5,7 +5,6 @@ import Payment from "./Payment";
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_API);
 
 const PaymentElementsWrapper = ({ onPaymentSuccess }) => {
-    alert("HERE")
     return (
         <Elements stripe={stripePromise}>
             <Payment onPaymentSuccess={onPaymentSuccess} />

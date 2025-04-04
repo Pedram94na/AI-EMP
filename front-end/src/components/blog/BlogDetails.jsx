@@ -1,5 +1,9 @@
 import React from "react";
 
+const renderContentWithoutTags = (html) => {
+    return <div dangerouslySetInnerHTML={{ __html: html }} />;
+};
+
 const BlogDetail = ({ blog, onClose }) => {
     if (!blog) return null;
 
@@ -24,7 +28,7 @@ const BlogDetail = ({ blog, onClose }) => {
                     }}
                 />
 
-                <p className="lead">{blog.content}</p>
+                <p className="lead">{renderContentWithoutTags(blog.content)}</p>
 
                 <button onClick={onClose} className="btn btn-danger">Close</button>
             </div>

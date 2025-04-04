@@ -1,5 +1,10 @@
 import './blog.css';
 
+const stripHtmlTags = (html) => {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    return doc.body.textContent || "";
+};
+
 export const BlogPageBlogs = (blog, onSelectBlog) => {
     return (
         <li 
@@ -23,7 +28,7 @@ export const BlogPageBlogs = (blog, onSelectBlog) => {
 
             <div className="ms-3">
                 <h3 className="h5">{blog.title}</h3>
-                <p className="text-muted">{blog.content}</p>
+                <p className="text-muted">{stripHtmlTags(blog.content)}</p>
             </div>
         </li>
     );

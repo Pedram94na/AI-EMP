@@ -5,6 +5,8 @@ import PaymentElementsWrapper from "./PaymentElementsWrapper";
 const Subscription = ({ onPaymentSuccess }) => {
     const [selectedPlanId, setSelectedPlanId] = useState(null);
     const [showPayment, setShowPayment] = useState(false);
+    const [hover1, setHover1] = useState(false);
+    const [hover2, setHover2] = useState(false);
     const [showSubscriptionPlans, setShowSubscriptionPlans] = useState(true);
 
     const handleSubscriptionClick = (id) => {
@@ -44,16 +46,40 @@ const Subscription = ({ onPaymentSuccess }) => {
 
                         <div className="row g-3 mb-3">
                             <div className="col">
-                                <button className="btn btn-outline-primary w-100" onClick={() => handleSubscriptionClick(1)}>
-                                    <p className="mb-0 fw-bold">Plan 1</p>
-                                    <p className="text-muted">Description of Plan 1</p>
+                                <button className="btn btn-outline-primary w-100" onClick={() => handleSubscriptionClick(1)}
+                                    style={{
+                                        height: "350px",
+                                        backgroundColor: hover1 ? "#7AB2B2" : "transparent",
+                                        color: hover1 ? "white" : "#4D869C",
+                                        borderColor: "#4D869C"
+                                      }}
+                                      onMouseEnter={() => setHover1(true)}
+                                      onMouseLeave={() => setHover1(false)}
+                                    >
+                                    <p className="mb-0 fw-bold" style={{ color: '#4D869C'}}>Monthly Plan</p>
+                                    <p className="text-muted"><strong>10 Euros</strong></p>
+                                    <p className="text-muted">3 models to train</p>
+                                    <p className="text-muted">Infinite retraining</p>
+                                    <p className="text-muted">Downloading models</p>
                                 </button>
                             </div>
 
                             <div className="col">
-                                <button className="btn btn-outline-primary w-100" onClick={() => handleSubscriptionClick(2)}>
-                                    <p className="mb-0 fw-bold">Plan 2</p>
-                                    <p className="text-muted">Description of Plan 2</p>
+                                <button className="btn btn-outline-primary w-100" onClick={() => handleSubscriptionClick(2)}
+                                    style={{
+                                        height: "350px",
+                                        backgroundColor: hover2 ? "#7AB2B2" : "transparent",
+                                        color: hover2 ? "white" : "#4D869C",
+                                        borderColor: "#4D869C"
+                                    }}
+                                    onMouseEnter={() => setHover2(true)}
+                                    onMouseLeave={() => setHover2(false)}
+                                    >
+                                    <p className="mb-0 fw-bold" style={{ color: '#4D869C'}}>Yearly Plan</p>
+                                    <p className="text-muted"><strong>100 Euros</strong></p>
+                                    <p className="text-muted">Infinite models to train</p>
+                                    <p className="text-muted">Infinite retraining</p>
+                                    <p className="text-muted">Downloading models</p>
                                 </button>
                             </div>
                         </div>

@@ -81,7 +81,7 @@ const Payment = ({ onPaymentSuccess }) => {
                         </div>
                     </div>
 
-                    <button type="submit" className="btn btn-primary w-100" disabled={loading || !stripe}>
+                    <button type="submit" style={{ backgroundColor: '#4D869C'}} className="btn btn-primary w-100" disabled={loading || !stripe}>
                         {loading ? "Processing..." : "Submit Payment"}
                     </button>
 
