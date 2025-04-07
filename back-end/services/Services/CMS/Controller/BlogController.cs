@@ -41,7 +41,10 @@ namespace services.Services.CMS.Controller
             if (appUser is null)
                 return NotFound("User not found");
 
-            if (appUser.Role != UserRole.Admin.ToString())
+            Console.WriteLine(appUser.Role);
+            Console.WriteLine(UserRole.Admin.ToString() + "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+
+            if (appUser.Role.ToUpper() != UserRole.Admin.ToString().ToUpper())
                 return Unauthorized();
 
             string? imagePath = null;
@@ -70,12 +73,8 @@ namespace services.Services.CMS.Controller
         [HttpPut]
         [Route("{id:int}")]
         [Authorize]
-        public async Task<IActionResult> EditBlog([FromRoute] int id, [FromForm] EditBlogDto updateBlogDto, [FromForm] IFormFile imageFile)
+        public async Task<IActionResult> EditBlog([FromRoute] int id, [FromForm] EditBlogDto updateBlogDto)
         {
-            Console.WriteLine($"Request Method: {Request.Method}");
-            Console.WriteLine($"Request URL: {Request.Path}");
-            Console.WriteLine($"Request Body: {Request.Body}\n\n\n\nn\n\n\n\n\n\n\n\n");
-
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -95,35 +94,7 @@ namespace services.Services.CMS.Controller
             if (existingBlogModel is null)
                 return NotFound("Blog not found");
 
-            string? imagePath = null;
-
-            if (imageFile != null && imageFile.Length > 0)
-            {
-                var oldImagePath = existingBlogModel.ImageDir;
-                if (!string.IsNullOrEmpty(oldImagePath))
-                {
-                    var oldFilePath = Path.Combine(imageDirectory, Path.GetFileName(oldImagePath));
-
-                    if (System.IO.File.Exists(oldFilePath))
-                    {
-                        System.IO.File.Delete(oldFilePath);
-                    }
-                }
-
-                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
-                var filePath = Path.Combine(imageDirectory, fileName);
-
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    await imageFile.CopyToAsync(fileStream);
-                }
-
-                imagePath = Path.Combine("images", fileName);
-            }
-            else
-            {
-                imagePath = existingBlogModel.ImageDir;
-            }
+            var imagePath = existingBlogModel.ImageDir;
 
             var editedBlogModel = updateBlogDto.ToBlogFromEditedBlogDto(appUser);
             editedBlogModel.ImageDir = imagePath;

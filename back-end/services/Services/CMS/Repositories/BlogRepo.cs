@@ -29,6 +29,10 @@ namespace services.Services.CMS.Repositories
             existingBlog.Content = editedBlog.Content;
             existingBlog.CreatedOn = existingBlog.CreatedOn;
             existingBlog.EditedOn = editedBlog.EditedOn;
+            existingBlog.ImageDir = editedBlog.ImageDir;
+            existingBlog.ImageUrl = editedBlog.ImageUrl;
+            existingBlog.AppUserId = existingBlog.AppUserId;
+            existingBlog.AppUser = existingBlog.AppUser;
 
             await context.SaveChangesAsync();
 

@@ -174,14 +174,7 @@ export const EditBlog = ({ blog, onClose }) => {
         const formData = new FormData();
         formData.append('Title', e.target.Title.value);
         formData.append('Content', quillInstance.current.root.innerHTML);
-        formData.append('ImageDir', blog.imageUrl || 'placeholder.jpg');
-    
-        const imageFile = e.target.imageFile.files[0];
-        if (imageFile)
-            formData.append('imageFile', imageFile);
 
-        formData.forEach((value, key) => console.log(key + ' ' + value));
-        
         const result = await sendEditBlog(formData, blogId);
         console.log(result);
     
@@ -215,13 +208,6 @@ export const EditBlog = ({ blog, onClose }) => {
                     />
 
                     <div ref={quillRef} style={{ backgroundColor: 'white', height: '300px' }}></div>
-
-                    <input
-                        type="file"
-                        name="imageFile"
-                        accept="image/*"
-                        className="form-control"
-                    />
 
                     <button type="submit" className="btn btn-success w-100" style={{ borderColor: '#7AB2B2', backgroundColor: '#7AB2B2' }}>
                         Save Changes

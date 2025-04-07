@@ -9,7 +9,7 @@ const Guide = () => {
         <Col md={8} className="mb-4">
           <div className="d-flex flex-column align-items-center">
             <p className="text-center">
-              It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search
+              This video shows a step=by-step tutorial on how to use this application to train your own AI model, test it and download so that you can integrate it into your own application.
             </p>
 
             <div className="mt-4">

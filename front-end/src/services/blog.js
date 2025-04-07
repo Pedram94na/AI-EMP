@@ -27,7 +27,7 @@ export const sendCreateBlog = async (data) => {
 
 export const sendEditBlog = async (data, blogId) => {
     try {
-
+        
         const response = await axios.put(`${blogApi}/${parseInt(blogId, 10)}`, data, {
             headers: {
                 'Content-Type': 'multipart/form-data',

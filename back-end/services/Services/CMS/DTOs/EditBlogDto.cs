@@ -9,8 +9,5 @@ namespace services.Services.CMS.DTOs
 
         [Required]
         public string Content { get; set; } = string.Empty;
-
-        [Required]
-        public string ImageDir { get; set; } = string.Empty;
     }
 }

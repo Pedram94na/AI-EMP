@@ -16,8 +16,8 @@ export const Header = () => {
                     <Col md={6} className="text-center text-md-left">
                         <div className="mt-4 mt-md-0">
                             <p className="fs-3 fw-bold">
-                                Train. Fine-Tune. Employ.<br />
-                                Your AI Employee.
+                                Train. Test. Employ.<br />
+                                Your own AI Employee.
                             </p>
                         </div>
                     </Col>

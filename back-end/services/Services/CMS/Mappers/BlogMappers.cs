@@ -39,7 +39,6 @@ namespace services.Services.CMS.Mappers
             return new BlogModel {
                 Title = dto.Title,
                 Content = dto.Content,
-                ImageDir = dto.ImageDir,
                 EditedOn = DateTime.Today,
                 AppUserId = appUser.Id,
                 AppUser = appUser

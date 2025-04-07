@@ -28,7 +28,6 @@ export const BlogPageBlogs = (blog, onSelectBlog) => {
 
             <div className="ms-3">
                 <h3 className="h5">{blog.title}</h3>
-                <p className="text-muted">{stripHtmlTags(blog.content)}</p>
             </div>
         </li>
     );

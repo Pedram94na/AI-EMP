@@ -5,6 +5,7 @@ const contactFormApi = process.env.REACT_APP_CONTACT_FORM_API;
 export const sendContactForm = async (data) => {
     try
     {
+        data.forEach((k, v) => console.log(k + ' ' + v));
         const response = await axios.post(contactFormApi, data, {
             headers: {
                 'Content-Type': 'application/json'
