@@ -38,7 +38,7 @@ const SignInOverlay = ({ onCancel }) => {
     return (
         <section className="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center bg-dark bg-opacity-75" style={{ zIndex: 1050, backdropFilter: "blur(5px)" }}>
             <div className="card p-4 shadow-lg w-50">
-                <h3 className="text-center">Enter Account</h3>
+                <h3 style={{ fontFamily: "Georgia, serif" }} className="text-center">Enter Account</h3>
                 <form onSubmit={handleSignin} className="mt-3">
                     <div className="mb-3">
                         <input type="text" placeholder="Username" name="username" className="form-control" />

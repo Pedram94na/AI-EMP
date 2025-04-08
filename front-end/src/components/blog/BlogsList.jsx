@@ -22,7 +22,7 @@ const BlogsList = ({ onSelectBlog }) => {
 
     return (
         <section className="container py-5">
-            <h1 className="text-center mb-4">Blog Posts</h1>
+            <h1 style={{ fontFamily: "Georgia, serif" }} className="text-center mb-4">Blog Posts</h1>
 
             <div className="row justify-content-center">
                 <div className="col-12 col-md-8">

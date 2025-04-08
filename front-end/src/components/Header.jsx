@@ -1,7 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { UseScrollToSection } from './home/useScrollToSection';
-import { Navigation } from "./Navigation";
 
 export const Header = () => {
     UseScrollToSection();
@@ -15,9 +14,9 @@ export const Header = () => {
                     </Col>
                     <Col md={6} className="text-center text-md-left">
                         <div className="mt-4 mt-md-0">
-                            <p className="fs-3 fw-bold">
-                                Train. Test. Employ.<br />
-                                Your own AI Employee.
+                            <p style={{ fontFamily: "Georgia, serif" }} className="fs-3 fw-bold">
+                                Train Your AI Employee.<br />
+                                With No Code.
                             </p>
                         </div>
                     </Col>

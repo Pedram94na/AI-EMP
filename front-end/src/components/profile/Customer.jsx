@@ -25,15 +25,7 @@ export const TrainModel = () => {
             "batch": formData.get('batch')
         };
 
-        console.log(data);
-
         const result = await sendFileToTrain(data);
-        console.log(result);
-
-        if (result.success)
-            alert("File uploaded successfully!");
-        else
-            alert("Upload failed: " + result.message);
 
         setUploading(false);
     };
@@ -43,7 +35,6 @@ export const TrainModel = () => {
     return (
         <section className="dashboard py-5">
             <div className="container d-flex flex-column justify-content-center align-items-center">
-                <h2 className="mb-4">Train Model</h2>
 
                 <div className="content w-100" >
                     <form onSubmit={handleSubmit} className="w-100 d-flex flex-column align-items-center">
@@ -128,10 +119,8 @@ export const TestModel = () => {
 
         const result = await sendMessageToTest(data);
 
-        if (!result.success) {
-            alert("Failed to send message: " + result.message);
+        if (!result.success)
             return;
-        }
 
         const botResponse = {
             id: messages.length + 2,
@@ -147,7 +136,6 @@ export const TestModel = () => {
     return (
         <section className="dashboard chat py-5">
             <div className="container d-flex flex-column justify-content-center align-items-center">
-                <h2 className="mb-4">Test Model</h2>
 
                 <div className="content w-100">
                     <form onSubmit={handleSubmit} className="w-100 d-flex flex-column align-items-center">
@@ -205,7 +193,6 @@ export const Models = () => {
     return (
         <section className="dashboard py-5">
             <div className="container d-flex flex-column justify-content-center align-items-center">
-                <h2 className="mb-4">Your Models</h2>
 
                 <div className="content w-75">
                     <table className="table table-bordered" style={{ backgroundColor: 'white' }}>

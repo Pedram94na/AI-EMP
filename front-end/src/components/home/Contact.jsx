@@ -13,9 +13,9 @@ const Contact = () => {
 
         const name = formData.get('name');
         const emailAddress = formData.get('emailAddress');
-        const phoneNumber = formData.get('phoneNumber');
-        const companyName = formData.get('companyName');
-        const websiteUrl= formData.get('websiteUrl');
+        const phoneNumber = formData.get('phoneNumber') || '';
+        const companyName = formData.get('companyName') || '';
+        const websiteUrl = formData.get('websiteUrl') || '';
         const content = formData.get('content')
 
         const newErrors = {};
@@ -29,12 +29,12 @@ const Contact = () => {
         }
 
         const formValues = {
-            name: name,
-            emailAddress: emailAddress,
-            phoneNumber: phoneNumber,
-            companyName: companyName,
-            websiteUrl: websiteUrl,
-            content: content
+            name,
+            emailAddress,
+            content,
+            ...(phoneNumber.trim() && { phoneNumber }),
+            ...(companyName.trim() && { companyName }),
+            ...(websiteUrl.trim() && { websiteUrl }),
         };
 
         setErrors({});
@@ -42,13 +42,14 @@ const Contact = () => {
         const result = await sendContactForm(formValues);
         setResponseMessage(result.message);
 
-        window.location.reload();
+        if (result.success)
+            e.target.reset();
     };
 
     return (
         <section id="contact" className="py-5">
             <Container className="text-center">
-                <h1 className="mb-4">Contact Us</h1>
+                <h1 style={{ fontFamily: "Georgia, serif" }} className="mb-4">Contact Us</h1>
 
                 <Row className="justify-content-center">
                     <Col md={8} lg={6}>

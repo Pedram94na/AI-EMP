@@ -26,7 +26,6 @@ export const ListAllBlogs = () => {
     ) : (
         <section className="py-5">
             <div className="container text-center">
-                <h2 className="mb-4">Blogs</h2>
                 <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
                     {blogsData.map((blog) => (
                         AdminBlogs(blog, () => handleBlogSelection(blog))
@@ -76,8 +75,6 @@ export const CreateBlog = () => {
         formData.append('ImageDir', 'placeholder.jpg');
         formData.append('imageFile', e.target.imageFile.files[0]);
 
-        formData.forEach((value, key) => console.log(key + ' ' + value));
-
         const result = await sendCreateBlog(formData);
 
         if (result.success)
@@ -92,7 +89,6 @@ export const CreateBlog = () => {
     return (
         <section className="py-5">
             <div className="container d-flex flex-column align-items-center">
-                <h2 className="mb-4">New Blog Post</h2>
 
                 <form onSubmit={handleSubmit} className="w-50 d-flex flex-column gap-3">
                     <input 
@@ -176,15 +172,10 @@ export const EditBlog = ({ blog, onClose }) => {
         formData.append('Content', quillInstance.current.root.innerHTML);
 
         const result = await sendEditBlog(formData, blogId);
-        console.log(result);
     
         if (result.success) {
-            alert("Blog updated successfully!");
-            
             navigate(location.pathname);
             onClose();
-        } else {
-            alert(result.message || "Failed to update blog");
         }
     };    
 
@@ -196,7 +187,6 @@ export const EditBlog = ({ blog, onClose }) => {
     return (
         <section className="py-5">
             <div className="container d-flex flex-column align-items-center">
-                <h2 className="mb-4">Edit Blog Post</h2>
 
                 <form onSubmit={handleSubmit} className="w-50 d-flex flex-column gap-3">
                     <input

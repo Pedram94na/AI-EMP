@@ -14,7 +14,7 @@ export const Blogs = () => {
     return (
         <section id="blogs" className="py-5">
             <div className="container text-center">
-                <h1 className="mb-4">Blogs</h1>
+                <h1 style={{ fontFamily: "Georgia, serif" }} className="mb-4">Blogs</h1>
 
                 <div className="d-flex justify-content-center flex-wrap">
                     <div className="roll w-100">
@@ -28,7 +28,7 @@ export const Blogs = () => {
                     </div>
                 </div>
 
-                <a onClick={() => navigate('/blog')} className="btn btn-link mt-4 text-white fs-4">
+                <a style={{ fontFamily: "Georgia, serif" }} onClick={() => navigate('/blog')} className="btn btn-link mt-4 text-white fs-4">
                     See All
                 </a>
             </div>

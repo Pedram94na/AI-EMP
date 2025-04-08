@@ -31,7 +31,7 @@ const Reviews = () => {
 
     return (
         <section id="reviews" className="d-flex flex-column align-items-center py-5">
-            <h1 className="text-center mb-4">What are our users saying about AI EMP?</h1>
+            <h1 style={{ fontFamily: "Georgia, serif" }} className="text-center mb-4">What are our users saying about AI EMP?</h1>
             
             <div className="container">
                 <div className="row">
