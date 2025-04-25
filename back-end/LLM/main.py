@@ -31,10 +31,7 @@ async def start_training(username: str = Form(...),
     
     if not file:
         return JSONResponse(content={"error": "No file received"}, status_code=400)
-    
-    if not epoch or not batch:
-        raise JSONResponse(content={"error": "Parameters are missing"}, status_code=400)
-        
+
     if not model:
         model = None
 
