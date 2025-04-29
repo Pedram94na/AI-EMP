@@ -6,6 +6,7 @@ using services.Models;
 using services.Services.Subscription.DTOs;
 using services.Services.Subscription.Interfaces;
 using services.Services.Subscription.Mappers;
+using services.Services.Subscription.Repositories;
 
 namespace services.Services.Subscription.Controller
 {
@@ -15,16 +16,14 @@ namespace services.Services.Subscription.Controller
     {
         private readonly UserManager<AppUser> userManager;
         private readonly ISubscriptionPlanRepo subscriptionPlanRepo;
-        private readonly INewSubscriptionPlanStrategy newSubscriptionPlanStrategy;
 
-        public SubscriptionController(UserManager<AppUser> userManager, ISubscriptionPlanRepo subscriptionPlanRepo, INewSubscriptionPlanStrategy newSubscriptionPlanStrategy)
+        public SubscriptionController(UserManager<AppUser> userManager, ISubscriptionPlanRepo subscriptionPlanRepo)
         {
             this.userManager = userManager;
             this.subscriptionPlanRepo = subscriptionPlanRepo;
-            this.newSubscriptionPlanStrategy = newSubscriptionPlanStrategy;
         }
         
-        [HttpPost("new-subscription/{planId:int}")]
+        [HttpPost("{planId:int}")]
         [Authorize]
         public async Task<IActionResult> CreateSubscription([FromRoute] int planId)
         {
@@ -37,15 +36,16 @@ namespace services.Services.Subscription.Controller
             if (appUser is null)
                 return NotFound("User not found");
 
+            var isSubscribed = await subscriptionPlanRepo.IsSubscribed(appUser);
+            if (isSubscribed)
+                return Conflict("You are already subscribed!");
+                
             try
             {
-                var dto = newSubscriptionPlanStrategy.CreateNewSubscriptionPlan(planId);
+                var dto = SubscriptionPlanFactory.CreateSubscription(planId);
 
                 var subscriptionPlanModel = dto.FromCreateSubscriptionDtoToModel(appUser);
                 await subscriptionPlanRepo.CreateSubscriptionPlanAsync(subscriptionPlanModel);
-
-                appUser.HasSubscribed = true;
-                await userManager.UpdateAsync(appUser);
 
                 return Ok(subscriptionPlanModel.FromModelToSubscriptionPlanDto());
             }
@@ -54,33 +54,6 @@ namespace services.Services.Subscription.Controller
             {
                 return BadRequest(e.Message);
             }
-        }
-
-        [HttpDelete("cancel-subscription")]
-        [Authorize]
-        public async Task<IActionResult> CancelSubscription([FromBody] CancelSubscriptionPlanDtp dto)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var username = User.GetUsername();
-            var appUser = await userManager.FindByNameAsync(username);
-
-            if (appUser is null)
-                return NotFound("User not found");
-
-            var isSubscribed = appUser.CurrentSubscriptionPlan is not null;
-
-            if (!isSubscribed)
-                return NotFound("User is not subscribed");
-
-            var subscriptionPlanModel = dto.FromCancelSubscriptionDtoToModel(appUser);
-            await subscriptionPlanRepo.CancelSubscriptionPlanAsync(subscriptionPlanModel);
-
-            appUser.HasSubscribed = false;
-            await userManager.UpdateAsync(appUser);
-
-            return Ok(subscriptionPlanModel.FromModelToSubscriptionPlanDto());
         }
     }
 }

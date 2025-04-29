@@ -1,11 +1,11 @@
-using services.Services.Review.DTOs;
 using services.Models;
 
 namespace services.Services.Review.Interfaces
 {
     public interface IReviewRepo
     {
-        Task<ReviewModel> CreateReviewAsync(ReviewDto dto, string firstName);
-        Task<List<ReviewModel>> GetTopReviewsAsync();
+        Task<bool> HasReview(AppUser appUser);
+        Task<Models.ReviewModel> CreateReviewAsync(Models.ReviewModel model);
+        Task<List<Models.ReviewModel>> GetTopReviewsAsync();
     }
 }

@@ -1,11 +1,9 @@
-using System.Web;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using services.Services.User.DTOs;
 using services.Services.User.Interfaces;
 using services.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace services.Services.User.Controller
 {
@@ -16,16 +14,72 @@ namespace services.Services.User.Controller
         private readonly UserManager<AppUser> userManager;
         private readonly SignInManager<AppUser> signinManager;
         private readonly ITokenService tokenService;
-        private readonly IEmailService emailService;
     
         public AccountController(
             UserManager<AppUser> userManager, SignInManager<AppUser> signinManager,
-            ITokenService tokenService, IEmailService emailService)
+            ITokenService tokenService)
         {
             this.userManager = userManager;
             this.signinManager = signinManager;
             this.tokenService = tokenService;
-            this.emailService = emailService;
+        }
+
+        [HttpPost("register/admin")]
+        public async Task<IActionResult> RegisterAdmin([FromBody] RegisterDto dto)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+
+                if (dto.FirstName is null || dto.LastName is null || dto.Password is null)
+                    return BadRequest("Missing fields");
+
+                var userRole = UserRole.Admin;
+
+                var user = new AppUser
+                                {
+                                    FirstName = dto.FirstName,
+                                    LastName = dto.LastName,
+                                    UserName = dto.Username,
+                                    Email = dto.Email,
+                                    Role = userRole.ToString()
+                                };
+
+                var createdUser = await userManager.CreateAsync(user, dto.Password);
+
+                if (createdUser.Succeeded)
+                {
+                    var roleResult = await userManager.AddToRoleAsync(user, userRole.ToString());
+                    
+                    if (!roleResult.Succeeded)
+                        return StatusCode(500, roleResult.Errors);
+
+                    var roles = await userManager.GetRolesAsync(user);
+
+                    if (roles == null || !roles.Any())
+                        return BadRequest("User has no assigned roles.");
+
+                    return Ok (
+                        new AuthorizedDto
+                        {
+                            FirstName = user.FirstName,
+                            LastName = user.LastName,
+                            Username = user.UserName,
+                            EmailAddress = user.Email,
+                            Role = roles.FirstOrDefault(),
+                            Token = tokenService.Create(user)
+                        }
+                    );
+                }
+
+                return StatusCode(500, createdUser.Errors);
+            }
+
+            catch (Exception e)
+            {
+                return StatusCode(500, e);
+            }
         }
 
         [HttpPost("register")]
@@ -71,8 +125,6 @@ namespace services.Services.User.Controller
                             LastName = user.LastName,
                             Username = user.UserName,
                             EmailAddress = user.Email,
-                            HasReview = user.HasReview,
-                            HasSubscribed = user.HasSubscribed,
                             Role = roles.FirstOrDefault(),
                             Token = tokenService.Create(user)
                         }
@@ -116,58 +168,10 @@ namespace services.Services.User.Controller
                             LastName = user.LastName,
                             Username = user.UserName,
                             EmailAddress = user.Email,
-                            HasReview = user.HasReview,
-                            HasSubscribed = user.HasSubscribed,
                             Role = roles.FirstOrDefault(),
                             Token = tokenService.Create(user)
                         }
             );
-        }
-
-        [HttpPost("forgot-password")]
-        public async Task<IActionResult> SendPasswordResetLink([FromBody] PasswordResetLinkDto dto)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var user = await userManager.Users.FirstOrDefaultAsync(u => u.Email.ToLower() == dto.Email.ToLower());
-
-            if (user is null)
-                return Unauthorized("User with this email doesn't exist");
-
-            var resetToken = await userManager.GeneratePasswordResetTokenAsync(user);
-
-            var encodedToken = HttpUtility.UrlEncode(resetToken);
-
-            var resetUrl = $"http://localhost:5264/api/account/reset-password?token={encodedToken}&email={user.Email}";
-
-            var emailSent = await emailService.SendResetPasswordEmailAsync(user.Email, resetUrl);
-
-            if (!emailSent)
-                return StatusCode(500, "Failed to send reset password link. Try again!");
-
-            return Ok(resetUrl);
-        }
-
-        [HttpPost("reset-password")]
-        public async Task<IActionResult> ResetPassword([FromBody] PasswordResetDto dto)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var user = await userManager.Users.FirstOrDefaultAsync(u => u.Email.ToLower() == dto.Email.ToLower());
-
-            if (user is null)
-                return Unauthorized("Invalid email");
-
-            var decodedToken = HttpUtility.UrlDecode(dto.EncodedResetToken);
-
-            var result = await userManager.ResetPasswordAsync(user, decodedToken, dto.NewPassword);
-
-            if (!result.Succeeded)
-                return BadRequest("Password reset failed. Please ensure the token is correct and the new password meets the requirements.");
-
-            return Ok("Password has been successfuly reset.");
         }
     }
 }

@@ -4,9 +4,9 @@ using Stripe;
 
 namespace services.Services.Payment.Repositories
 {
-    public class PaymentRepository : IPaymentRepository
+    public class StripeService : IStripeService
     {
-        public PaymentRepository(IConfiguration configuration)
+        public StripeService(IConfiguration configuration)
         {
             StripeConfiguration.ApiKey = configuration["Stripe:SecretKey"];
         }

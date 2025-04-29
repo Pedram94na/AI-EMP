@@ -104,30 +104,6 @@ namespace services.Services.CMS.Controller
             return newBlogModel is null ? NotFound("Blog not found") : Ok(newBlogModel.ToBlogDto(baseUrl));
         }
 
-        [HttpDelete]
-        [Route("{id:int}")]
-        [Authorize]
-        public async Task<IActionResult> DeleteBlog([FromRoute] int id)
-        {
-            var username = User.GetUsername();
-            var appUser = await userManager.FindByNameAsync(username);
-
-            if (appUser is null)
-                return NotFound("User not found");
-
-            if (appUser.Role != UserRole.Admin.ToString())
-                return Unauthorized();
-
-            var existingBlogModel = await blogRepo.GetByIdAsync(id);
-
-            if (existingBlogModel is null)
-                return NotFound("Blog not found");
-
-            var deletedBlogModel = await blogRepo.DeleteBlogAsync(existingBlogModel);
-
-            return deletedBlogModel is null ? NotFound("Blog not found") : NoContent();
-        }
-
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {

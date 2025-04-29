@@ -11,8 +11,8 @@ namespace services.Data
         public DbSet<MessageModel> Messages { get; set; }
         public DbSet<ReviewModel> Reviews { get; set; }
         public DbSet<BlogModel> Blogs { get; set; }
-        public DbSet<SubscriptionPlanModel> SubscriptionPlans { get; set; }
-        public DbSet<ChatbotQAndA> ChatbotQAndAs { get; set; }
+        public DbSet<SubscriptionModel> Subscriptions { get; set; }
+        public DbSet<ChatbotModel> Chatbot { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

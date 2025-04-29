@@ -9,40 +9,36 @@ namespace services.Services.Chatbot.Controller
     [ApiController]
     public class ChatbotController : ControllerBase
     {
-        private readonly IChatbotRepository chatbotRepository;
+        private readonly IChatbotRepository chatbotRepo;
 
-        public ChatbotController(IChatbotRepository chatbotRepository)
+        public ChatbotController(IChatbotRepository chatbotRepo)
         {
-            this.chatbotRepository = chatbotRepository;
+            this.chatbotRepo = chatbotRepo;
         }
 
-        [HttpPost("add-Q&A")]
+        [HttpPost]
         public async Task<IActionResult> AddQAndA([FromBody] ChatbotDto dto)
         {
             if (!ModelState.IsValid)
                 BadRequest(ModelState);
 
-            var (Model, Success) = await chatbotRepository.AddQAndAAsync(dto);
+            var model = dto.DtoToModel();
 
-            return Success ? Ok(Model.ChatbotModelToDto()) : Conflict(new { message = "Q&A already exists." });
+            var exists = await chatbotRepo.Exists(model);
+            if (exists)
+                Conflict("Q&A already exists.");
+
+            await chatbotRepo.AddQAndAAsync(model);
+
+            return Ok(model.ModelToDto());
         }
 
-        [HttpGet("q-and-a")]
+        [HttpGet]
         public async Task<IActionResult> GetAllQAndA()
         {
-            var model = await chatbotRepository.GetAllQAndAAsync();
+            var model = await chatbotRepo.GetAllQAndAAsync();
 
             return Ok(model);
-        }
-
-        [HttpPost("message")]
-        public async Task<ActionResult<ChatbotDto>> GetBotResponse([FromBody] ChatbotQuestionDto dto)
-        {
-            if (!ModelState.IsValid)
-                BadRequest(ModelState);
-
-            var model = await chatbotRepository.GetAnswerAsync(dto.Question);
-            return Ok(model.ChatbotModelToDto());
         }
     }
 }

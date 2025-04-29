@@ -5,9 +5,9 @@ namespace services.Services.Subscription.Mappers
 {
     public static class SubscriptionMappers
     {
-        public static SubscriptionPlanModel FromCreateSubscriptionDtoToModel(this NewSubscriptionPlanDto dto, AppUser appUser)
+        public static SubscriptionModel FromCreateSubscriptionDtoToModel(this CreateSubscriptionPlanDto dto, AppUser appUser)
         {
-            return new SubscriptionPlanModel {
+            return new SubscriptionModel {
                 Price = dto.Price,
                 StartDate = DateTime.Today,
                 ExpirationDate = dto.ExpirationDate,
@@ -16,15 +16,7 @@ namespace services.Services.Subscription.Mappers
             };
         }
 
-        public static SubscriptionPlanModel FromCancelSubscriptionDtoToModel(this CancelSubscriptionPlanDtp dto, AppUser appUser)
-        {
-            return new SubscriptionPlanModel {
-                AppUserId = appUser.Id,
-                AppUser = appUser
-            };
-        }
-
-        public static SubscriptionPlanDto FromModelToSubscriptionPlanDto(this SubscriptionPlanModel model)
+        public static SubscriptionPlanDto FromModelToSubscriptionPlanDto(this SubscriptionModel model)
         {
             return new SubscriptionPlanDto {
                 Price = model.Price,

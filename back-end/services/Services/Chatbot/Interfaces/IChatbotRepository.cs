@@ -1,12 +1,11 @@
 using services.Models;
-using services.Services.Chatbot.DTOs;
 
 namespace services.Services.Chatbot.Interfaces
 {
     public interface IChatbotRepository
     {
-        Task<(ChatbotQAndA Model, bool Success)> AddQAndAAsync(ChatbotDto dto);
-        Task<List<ChatbotQAndA>> GetAllQAndAAsync();
-        Task<ChatbotQAndA> GetAnswerAsync(string userMessage);
+        Task<bool> Exists(Models.ChatbotModel model);
+        Task<Models.ChatbotModel> AddQAndAAsync(Models.ChatbotModel model);
+        Task<List<Models.ChatbotModel>> GetAllQAndAAsync();
     }
 }

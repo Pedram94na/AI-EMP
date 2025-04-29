@@ -1,11 +1,11 @@
-using services.Models;
 using services.Services.Chatbot.DTOs;
+using services.Models;
 
 namespace services.Services.Chatbot.Mappers
 {
     public static class ChatbotMappers
     {
-        public static ChatbotDto ChatbotModelToDto(this ChatbotQAndA model)
+        public static ChatbotDto ModelToDto(this Models.ChatbotModel model)
         {
             return new ChatbotDto
             {
@@ -14,9 +14,9 @@ namespace services.Services.Chatbot.Mappers
             };
         }
 
-        public static ChatbotQAndA ChatbotDtoToModel(this ChatbotDto dto)
+        public static ChatbotModel DtoToModel(this ChatbotDto dto)
         {
-            return new ChatbotQAndA
+            return new ChatbotModel
             {
                 Question = dto.Question,
                 Answer = dto.Answer
