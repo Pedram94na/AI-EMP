@@ -15,12 +15,12 @@ const SignInOverlay = ({ onCancel }) => {
         const username = formData.get("username");
         const password = formData.get("password");
 
-        const validationErrors = {};
-        if (!username) validationErrors.username = "Username is required";
-        if (!password) validationErrors.password = "Password is required";
+        const tempErrors = {};
+        if (!username) tempErrors.username = "Username is required";
+        if (!password) tempErrors.password = "Password is required";
 
-        if (Object.keys(validationErrors).length > 0) {
-            setErrors(validationErrors);
+        if (Object.keys(tempErrors).length > 0) {
+            setErrors(tempErrors);
             return;
         }
         const formValues = {
@@ -33,12 +33,18 @@ const SignInOverlay = ({ onCancel }) => {
             setSignin(false);
             navigate("/profile");
         }
+
+        else {
+            tempErrors.unauthorized = result.response;
+            setErrors(tempErrors);
+        }
     };
 
     return (
         <section className="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center bg-dark bg-opacity-75" style={{ zIndex: 1050, backdropFilter: "blur(5px)" }}>
             <div className="card p-4 shadow-lg w-50">
                 <h3 style={{ fontFamily: "Georgia, serif" }} className="text-center">Enter Account</h3>
+                {errors.unauthorized && <small className="text-danger text-center">{errors.unauthorized}</small>}
                 <form onSubmit={handleSignin} className="mt-3">
                     <div className="mb-3">
                         <input type="text" placeholder="Username" name="username" className="form-control" />

@@ -13,7 +13,6 @@ const Contact = () => {
 
         const name = formData.get('name');
         const emailAddress = formData.get('emailAddress');
-        const phoneNumber = formData.get('phoneNumber') || '';
         const companyName = formData.get('companyName') || '';
         const websiteUrl = formData.get('websiteUrl') || '';
         const content = formData.get('content')
@@ -22,6 +21,11 @@ const Contact = () => {
         if (!name.trim()) newErrors.name = "Name is required.";
         if (!emailAddress.trim()) newErrors.emailAddress = "Email is required.";
         if (!content.trim()) newErrors.content = "Message is required.";
+        
+        if (websiteUrl) {
+            try { new URL(websiteUrl); }
+            catch (_) { newErrors.websiteUrl = "Invalid URL."; }
+        }
 
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
@@ -32,7 +36,6 @@ const Contact = () => {
             name,
             emailAddress,
             content,
-            ...(phoneNumber.trim() && { phoneNumber }),
             ...(companyName.trim() && { companyName }),
             ...(websiteUrl.trim() && { websiteUrl }),
         };
@@ -80,17 +83,6 @@ const Contact = () => {
                                     {errors.emailAddress && <small className="text-danger">{errors.emailAddress}</small>}
                                 </Form.Group>
 
-                                <Form.Group className="mb-3" controlId="formPhone">
-                                    <Form.Label className="text-left">Phone (Optional)</Form.Label>
-                                    <Form.Control 
-                                        type="tel" 
-                                        placeholder="Your Phone Number" 
-                                        name="phoneNumber" 
-                                        className="input-field"
-                                        style={{ backgroundColor: '#CDE8E5' }} 
-                                    />
-                                </Form.Group>
-
                                 <Form.Group className="mb-3" controlId="formCompanyName">
                                     <Form.Label className="text-left">Company Name (Optional)</Form.Label>
                                     <Form.Control 
@@ -105,12 +97,13 @@ const Contact = () => {
                                 <Form.Group className="mb-3" controlId="formWebsite">
                                     <Form.Label className="text-left">Company Website (Optional)</Form.Label>
                                     <Form.Control 
-                                        type="url" 
+                                        type="text" 
                                         placeholder="Website URL" 
                                         name="websiteUrl" 
                                         className="input-field"
                                         style={{ backgroundColor: '#CDE8E5' }} 
                                     />
+                                    {errors.websiteUrl && <small className="text-danger">{errors.websiteUrl}</small>}
                                 </Form.Group>
 
                                 <Form.Group className="mb-3" controlId="formMessage">

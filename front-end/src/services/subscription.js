@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const newSubscriptionApi = process.env.REACT_APP_NEW_SUBSCRIPTION_API;
-const cancelSubscriptionApi = process.env.REACT_APP_CANCEL_SUBSCRIPTION_API;
+const subscriptionApi = process.env.REACT_APP_SUBSCRIPTION_API;
 
 export const sendNewSubscription = async (id) => {
     try
@@ -11,7 +10,7 @@ export const sendNewSubscription = async (id) => {
         if (!token)
             return { success: false, message: "Unauthorized" };
 
-        const response = await axios.post(`${newSubscriptionApi}/${id}`, null, {
+        const response = await axios.post(`${subscriptionApi}/${id}`, null, {
             headers: {
                 "Authorization": `Bearer ${token}`
             }

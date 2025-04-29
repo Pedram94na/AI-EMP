@@ -5,6 +5,7 @@ export const ReviewOverlay = () => {
     const [isReviewPanelShown, showReviewPanel] = useState(true);
     const [isHovered, setHovered] = useState(0);
     const [isClicked, setClicked] = useState(0);
+    const [errors, setErrors] = useState({});
 
     const userData = JSON.parse(localStorage.getItem("user"));
 
@@ -13,12 +14,33 @@ export const ReviewOverlay = () => {
     const handleReviewSubmission = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
-        const formValues = { content: formData.get("content"), rating: isClicked };
+        const content = formData.get("content").trim();
+
+        const newErrors = {};
+
+        if (isClicked === 0) newErrors.rating = "Please select a rating.";
+        
+        if (!content) newErrors.content = "Pleas write us a review.";
+        else if (content.length < 4) newErrors.content = "Content must have at least 4 letters.";
+
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+            return;
+        }
+
+        setErrors({});
+        
+        const formValues = {
+            content,
+            rating: isClicked
+        };
 
         const result = await sendReview(formValues);
-        if (result.success) {
+        if (result.success)
+
             showReviewPanel(false);
-        }
+        else
+            setErrors({ server: result.message || "Failed to submit review." });
     };
 
     return (
@@ -50,8 +72,10 @@ export const ReviewOverlay = () => {
                             />
                         ))}
                     </div>
+                    {errors.rating && <small className="text-danger">{errors.rating}</small>}
 
                     <textarea className="form-control" placeholder="Write a review..." name="content" rows="3"></textarea>
+                    {errors.content && <small className="text-danger">{errors.content}</small>}
 
                     <button type="submit" className="btn btn-primary w-100" style={{ backgroundColor: '#4D869C'}}>Submit</button>
                     <button type="button" className="btn btn-light w-100" onClick={() => showReviewPanel(false)}>Cancel</button>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { sendNewSubscription } from "../../services/subscription";
 import PaymentElementsWrapper from "./PaymentElementsWrapper";
+import { useNavigate  } from "react-router-dom";
 
 const Subscription = ({ onPaymentSuccess }) => {
     const [selectedPlanId, setSelectedPlanId] = useState(null);
@@ -8,6 +9,7 @@ const Subscription = ({ onPaymentSuccess }) => {
     const [hover1, setHover1] = useState(false);
     const [hover2, setHover2] = useState(false);
     const [showSubscriptionPlans, setShowSubscriptionPlans] = useState(true);
+    const navigate = useNavigate();
 
     const handleSubscriptionClick = (id) => {
         setSelectedPlanId(id);
@@ -28,7 +30,7 @@ const Subscription = ({ onPaymentSuccess }) => {
         onPaymentSuccess();
     };
 
-    const handleMaybeLater = () => window.location.reload();
+    const handleMaybeLater = () => navigate('/');
 
     return (
         <>

@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using services.Extensions;
 using services.Models;
-using services.Services.Subscription.DTOs;
 using services.Services.Subscription.Interfaces;
 using services.Services.Subscription.Mappers;
 using services.Services.Subscription.Repositories;

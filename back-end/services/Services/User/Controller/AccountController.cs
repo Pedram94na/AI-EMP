@@ -24,64 +24,6 @@ namespace services.Services.User.Controller
             this.tokenService = tokenService;
         }
 
-        [HttpPost("register/admin")]
-        public async Task<IActionResult> RegisterAdmin([FromBody] RegisterDto dto)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                    return BadRequest(ModelState);
-
-                if (dto.FirstName is null || dto.LastName is null || dto.Password is null)
-                    return BadRequest("Missing fields");
-
-                var userRole = UserRole.Admin;
-
-                var user = new AppUser
-                                {
-                                    FirstName = dto.FirstName,
-                                    LastName = dto.LastName,
-                                    UserName = dto.Username,
-                                    Email = dto.Email,
-                                    Role = userRole.ToString()
-                                };
-
-                var createdUser = await userManager.CreateAsync(user, dto.Password);
-
-                if (createdUser.Succeeded)
-                {
-                    var roleResult = await userManager.AddToRoleAsync(user, userRole.ToString());
-                    
-                    if (!roleResult.Succeeded)
-                        return StatusCode(500, roleResult.Errors);
-
-                    var roles = await userManager.GetRolesAsync(user);
-
-                    if (roles == null || !roles.Any())
-                        return BadRequest("User has no assigned roles.");
-
-                    return Ok (
-                        new AuthorizedDto
-                        {
-                            FirstName = user.FirstName,
-                            LastName = user.LastName,
-                            Username = user.UserName,
-                            EmailAddress = user.Email,
-                            Role = roles.FirstOrDefault(),
-                            Token = tokenService.Create(user)
-                        }
-                    );
-                }
-
-                return StatusCode(500, createdUser.Errors);
-            }
-
-            catch (Exception e)
-            {
-                return StatusCode(500, e);
-            }
-        }
-
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDto dto)
         {
@@ -92,8 +34,8 @@ namespace services.Services.User.Controller
 
                 if (dto.FirstName is null || dto.LastName is null || dto.Password is null)
                     return BadRequest("Missing fields");
-
-                var userRole = UserRole.User;
+                Console.WriteLine(dto.Role + "\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+                var userRole = dto.Role == "User" ? UserRole.User : UserRole.Admin;
 
                 var user = new AppUser
                                 {

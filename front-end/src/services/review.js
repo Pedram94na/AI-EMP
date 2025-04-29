@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-const submitReviewApi = process.env.REACT_APP_SUBMIT_REVIEW_API;
-const fetchReviewsApi = process.env.REACT_APP_FETCH_REVIEWS_API;
+const reviewApi = process.env.REACT_APP_REVIEW_API;
 
 export const sendReview = async (formValues) => {
     try
@@ -14,7 +13,7 @@ export const sendReview = async (formValues) => {
             return { success: false, message: "Unauthorized" };
         }
 
-        const response = await axios.post(submitReviewApi, formValues, {
+        const response = await axios.post(reviewApi, formValues, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
@@ -38,14 +37,14 @@ export const sendReview = async (formValues) => {
     catch (e)
     {
         console.log(e);
-        return false;
+        return { response: e.response.data, success: false }
     }
 };
 
 export const sendFetchReviews = async () => {
     try
     {
-        const response = await axios.get(fetchReviewsApi);
+        const response = await axios.get(reviewApi);
         
         if (response.status === 200)
             return { response: response, success: true }

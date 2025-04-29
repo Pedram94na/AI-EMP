@@ -27,6 +27,9 @@ def train_model(username, epoch, batch, existing_model_dir=None):
         tokenizer = BertTokenizer.from_pretrained(model_name)
         model = BertForSequenceClassification.from_pretrained(model_name, num_labels=len(label_values_list))
 
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model.to(device)
+
     def preprocess_dataset(b):
         encoding = tokenizer(b[label_keys_list[1]], padding="max_length", truncation=True, max_length=len(data))
         encoding["labels"] = b["labels"]
@@ -110,11 +113,15 @@ def test_model(user_message, username, dir):
 
 def get_all_directories(username):
     base_dir = f"./trained_model/{username}"
+
+    if not os.path.isdir(base_dir):
+        raise FileNotFoundError(f"No models found.")
     
     return [d for d in os.listdir(base_dir) if os.path.isdir(os.path.join(base_dir, d))]
 
 def fetch_model(username, date):
     model_dir = f'./trained_model/{username}/{date}'
+    
     zip_filename = os.path.join(model_dir, 'model_package.zip')
 
     with zipfile.ZipFile(zip_filename, 'w') as zipf:

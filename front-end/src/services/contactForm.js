@@ -1,13 +1,13 @@
 import axios from 'axios'
 
-const contactFormApi = process.env.REACT_APP_CONTACT_FORM_API;
+const contactApi = process.env.REACT_APP_CONTACT_API;
 
 export const sendContactForm = async (data) => {
     try
     {
         console.log(data);
         
-        const response = await axios.post(contactFormApi, data, {
+        const response = await axios.post(contactApi, data, {
             headers: {
                 'Content-Type': 'application/json'
             }

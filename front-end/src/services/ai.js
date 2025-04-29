@@ -13,16 +13,16 @@ export const sendFileToTrain = async (data) => {
                 'Content-Type': 'multipart/form-data'
             }
         });
-
+        
         if (response.status === 200)
-            return { success: true, response: response };
+            return { success: true, response: response.data.message };
 
-        return { success: false, response: response };
+        return { success: false, response: response.data.message };
     }
 
     catch (e)
     {
-        return { success: false, message: e };
+        return { success: false, message: e.response.data.message };
     }
 };
 
@@ -66,7 +66,7 @@ export const sendGetAllAiModels = async () => {
 
     catch (e)
     {
-        return { success: false, message: e };
+        return { success: false, message: e.response.data };
     }
 }
 
