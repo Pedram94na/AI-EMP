@@ -22,11 +22,10 @@ front-end/yarn-error.log*
 
 front-end/.env
 
-# back-end
+# services
 .vscode
 AI-EMP.sln
 
-# Systems
 /back-end/services/bin
 /back-end/services/obj
 /back-end/services/.env
