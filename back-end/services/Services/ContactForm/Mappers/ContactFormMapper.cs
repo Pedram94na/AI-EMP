@@ -5,7 +5,7 @@ namespace services.Services.ContactForm.Mappers
 {
     public static class ContactFormMapper
     {
-        public static CustomerModel CreateCustomer(ContactFormDto dto)
+        public static CustomerModel CreateCustomer(this ContactFormDto dto)
         {
             return new CustomerModel {
                 Name = dto.Name,
@@ -16,12 +16,13 @@ namespace services.Services.ContactForm.Mappers
             };
         }
 
-        public static MessageModel CreateMessage(ContactFormDto dto, int id)
+        public static MessageModel CreateMessage(this ContactFormDto dto, CustomerModel customerModel)
         {
             return new MessageModel {
                 Email = dto.EmailAddress,
                 Content = dto.Content,
-                CustomerID = id
+                CustomerID = customerModel.Id,
+                Customer = customerModel
             };
         }
     }

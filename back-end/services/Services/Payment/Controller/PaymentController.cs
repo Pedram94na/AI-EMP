@@ -5,7 +5,6 @@ using services.Extensions;
 using services.Models;
 using services.Services.Payment.DTOs;
 using services.Services.Payment.Interfaces;
-using services.Services.Payment.Mappers;
 
 namespace services.Services.Payment.Controller
 {
@@ -14,12 +13,12 @@ namespace services.Services.Payment.Controller
     public class PaymentController : ControllerBase
     {
         private readonly UserManager<AppUser> userManager;
-        private readonly IPaymentRepository paymentRepo;
+        private readonly IStripeService stripeService;
 
-        public PaymentController( UserManager<AppUser> userManager, IPaymentRepository paymentRepo)
+        public PaymentController( UserManager<AppUser> userManager, IStripeService stripeService)
         {
             this.userManager = userManager;
-            this.paymentRepo = paymentRepo;
+            this.stripeService = stripeService;
         }
 
         [HttpPost]
@@ -37,10 +36,15 @@ namespace services.Services.Payment.Controller
 
             try
             {
-                var PaymentIntent = await paymentRepo.ProcessPaymentAsync(dto);
-                var model = dto.FromPaymentDtoToModel(PaymentIntent);
+                var paymentIntent = await stripeService.ProcessPaymentAsync(dto);
 
-                return Ok(model);
+                return Ok(new StripeDto
+                        {
+                            PaymentIntentId = paymentIntent.Id,
+                            Amount = dto.Amount,
+                            Currency = dto.Currency,
+                            Status = paymentIntent.Status
+                        });
             }
 
             catch (Exception e)

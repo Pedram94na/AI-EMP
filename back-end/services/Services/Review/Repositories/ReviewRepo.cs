@@ -1,8 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using services.Data;
-using services.Services.Review.DTOs;
 using services.Services.Review.Interfaces;
-using services.Services.Review.Mappers;
 using services.Models;
 
 namespace services.Services.Review.Repositories
@@ -16,21 +14,20 @@ namespace services.Services.Review.Repositories
             this.context = context;
         }
 
-        public async Task<ReviewModel> CreateReviewAsync(ReviewDto dto, string firstName)
+        public async Task<bool> HasReview(AppUser appUser)
         {
-            var reviewModel = dto.CreateReviewFromDto(firstName);
-            var existingReview = await context.Reviews.FirstOrDefaultAsync(r => r.Name == firstName);
-
-            if (existingReview is not null)
-                return existingReview;
-
-            await context.Reviews.AddAsync(reviewModel);
-            await context.SaveChangesAsync();
-
-            return reviewModel;
+            return await context.Reviews.AnyAsync(r => r.AppUserId == appUser.Id);
         }
 
-        public async Task<List<ReviewModel>> GetTopReviewsAsync()
+        public async Task<Models.ReviewModel> CreateReviewAsync(Models.ReviewModel model)
+        {
+            await context.Reviews.AddAsync(model);
+            await context.SaveChangesAsync();
+
+            return model;
+        }
+
+        public async Task<List<Models.ReviewModel>> GetTopReviewsAsync()
         {
             return await context.Reviews
                 .Where(r => r.Rating > 4)

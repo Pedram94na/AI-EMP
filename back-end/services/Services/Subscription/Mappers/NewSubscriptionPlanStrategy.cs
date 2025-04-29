@@ -1,11 +1,10 @@
-using services.Services.Subscription.Interfaces;
 using services.Services.Subscription.DTOs;
 
 namespace services.Services.Subscription.Repositories
 {
-    public class NewSubscriptionPlanStrategy : INewSubscriptionPlanStrategy
+    public static class SubscriptionPlanFactory
     {
-        public NewSubscriptionPlanDto CreateNewSubscriptionPlan(int planId)
+        public static CreateSubscriptionPlanDto CreateSubscription(int planId)
         {
             return planId switch
             {

@@ -14,5 +14,6 @@ namespace services.Models
         public string? CompanyName { get; set; } = String.Empty;
         public string? WebsiteUrl { get; set; } = String.Empty;
         public DateTime CreatedOn { get; set; } = DateTime.Today;
+        public List<MessageModel> Messages { get; set; } = [];
     }
 }

@@ -1,12 +1,12 @@
 namespace services.Services.Subscription.DTOs
 {
-    public abstract class NewSubscriptionPlanDto
+    public abstract class CreateSubscriptionPlanDto
     {
         public float Price { get; set; }
         public DateTime ExpirationDate { get; set; }
     }
 
-    public class MonthlySubscriptionPlanDto : NewSubscriptionPlanDto
+    public class MonthlySubscriptionPlanDto : CreateSubscriptionPlanDto
     {
         public MonthlySubscriptionPlanDto()
         {
@@ -15,7 +15,7 @@ namespace services.Services.Subscription.DTOs
         }
     }
 
-    public class YearlySubscriptionPlanDto : NewSubscriptionPlanDto
+    public class YearlySubscriptionPlanDto : CreateSubscriptionPlanDto
     {
         public YearlySubscriptionPlanDto()
         {

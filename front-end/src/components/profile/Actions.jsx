@@ -49,6 +49,12 @@ export const AdminActions = ({setActiveSection}) => {
                             New Blog
                         </button>
                     </li>
+
+                    <li className="me-3">
+                        <button onClick={() => setActiveSection(chatbot)} className="btn py-2 action-btn">
+                            Chatbot
+                        </button>
+                    </li>
                 </ul>
             </div>
         </section>
@@ -60,3 +66,4 @@ export const testModel = "TestModel";
 export const models = "Models";
 export const createBlog = "CreateBlog";
 export const blogsList = "BlogsList";
+export const chatbot = "Chatbot"

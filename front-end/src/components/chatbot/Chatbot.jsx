@@ -18,6 +18,9 @@ const ChatbotOverlay = () => {
         fetchData();
     }, []);
 
+    if (chatbotData.length == 0)
+        return;
+
     const handleQuestionClick = (c) => {
         const userMessage = { id: messages.length + 1, text: c.question, type: "user" };
         const botResponse = { id: messages.length + 2, text: c.answer, type: "bot" };

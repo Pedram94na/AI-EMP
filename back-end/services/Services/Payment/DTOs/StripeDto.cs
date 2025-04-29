@@ -1,6 +1,6 @@
 namespace services.Models
 {
-    public class PaymentModel
+    public class StripeDto
     {
         public string PaymentIntentId { get; set; } = String.Empty;
         public decimal Amount { get; set; }

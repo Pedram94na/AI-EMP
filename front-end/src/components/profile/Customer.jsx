@@ -1,41 +1,88 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { sendDownloadModel, sendFileToTrain, sendMessageToTest } from "../../services/ai";
 import { useAiModelsData } from "../../data/AIModelsData";
 
 export const TrainModel = () => {
     const [fileData, setFileData] = useState(null);
-    const [uploading, setUploading] = useState(false);
+    const [message, setMessage] = useState({});
+    const [loading, setLoading] = useState(
+        localStorage.getItem("trainingLoading") === "true"
+    );
+
+    useEffect(() => {
+        localStorage.setItem("trainingLoading", loading);
+    }, [loading]);
 
     const handleFileChange = (e) => setFileData(e.target.files[0]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        setUploading(true);
+        setLoading(true);
+        localStorage.setItem("trainingLoading", true);
 
         const formData = new FormData(e.target);
+
+        let epoch = formData.get('epoch');
+        let batch = formData.get('batch');
+
+        if (!epoch)
+            epoch = 3;
+
+        if (!batch)
+            batch = 3;
+
+        if (!fileData)
+            {
+            setMessage({"message": "File Required", "color": "text-danger" });
+            setLoading(false);
+            localStorage.setItem("trainingLoading", false);
+            
+            return;
+        }
+
+        const fileExtension = fileData.name.split('.').pop().toLowerCase();
+        if (fileExtension !== 'csv') {
+            setMessage({ message: "Only CSV files are allowed.", color: "text-danger" });
+            setLoading(false);
+            localStorage.setItem("trainingLoading", false);
+
+            return;
+        }
+
         formData.append("file", fileData);
 
         const data = {
             "username": JSON.parse(localStorage.getItem("user")).username,
             "model": formData.get("model"),
             "file": formData.get("file"),
-            "epoch": formData.get('epoch'),
-            "batch": formData.get('batch')
+            "epoch": epoch,
+            "batch": batch
         };
 
         const result = await sendFileToTrain(data);
 
-        setUploading(false);
+        if (!result.success)
+        {
+            setMessage({"message": result.response, "color": "text-danger" });
+            setLoading(false);
+            localStorage.setItem("trainingLoading", false);
+
+            return;
+        }
+
+        setMessage({"message": result.response, "color": "text-success" });
+        setLoading(false);
+        localStorage.setItem("trainingLoading", false);
     };
 
     const models = useAiModelsData();
 
     return (
         <section className="dashboard py-5">
-            <div className="container d-flex flex-column justify-content-center align-items-center">
-
+            <div className="container d-flex flex-column justify-content-center align-items-center bg-white w-50 py-4">
+                {message && <small className={message.color}>{message.message}</small>}
                 <div className="content w-100" >
                     <form onSubmit={handleSubmit} className="w-100 d-flex flex-column align-items-center">
                         <div className="mb-3 w-50">
@@ -78,9 +125,9 @@ export const TrainModel = () => {
                             type="submit"
                             className="btn btn-primary w-50"
                             style={{ backgroundColor: '#4D869C', borderColor: '#7AB2B2'}}
-                            disabled={uploading}
+                            disabled={loading}
                         >
-                            {uploading ? "Training In Progress. . ." : "Start Training"}
+                            {loading ? "Training In Progress. . ." : "Start Training"}
                         </button>
                     </form>
                 </div>
@@ -122,13 +169,13 @@ export const TestModel = () => {
         if (!result.success)
             return;
 
-        const botResponse = {
+        const modelResponse = {
             id: messages.length + 2,
-            sender: 'bot',
+            sender: 'model',
             text: result.response.data?.message || "Sorry, something went wrong.",
         };
 
-        setMessages([...messages, newMessage, botResponse]);
+        setMessages([...messages, newMessage, modelResponse]);
         
         e.target.message.value = "";
     };
@@ -155,7 +202,7 @@ export const TestModel = () => {
                                 {messages.map((message) => (
                                     <li key={message.id} className="mb-2 ps-3">
                                         <span className={`label ${message.sender}`}>
-                                            {message.sender === 'user' ? 'You' : 'Bot'}: {message.text}
+                                            {message.sender === 'user' ? 'You' : 'Model'}: {message.text}
                                         </span>
                                     </li>
                                 ))}

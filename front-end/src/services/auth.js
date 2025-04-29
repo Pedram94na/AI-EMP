@@ -19,13 +19,13 @@ export const sendRegistration = async (formValues) => {
         }
 
         console.error("Unexpected response status:", response.status);
-        return { response: response, success: false }
+        return { response: response.data[0].description, success: false }
     }
 
     catch (e)
     {
         console.log(e);
-        return false;
+        return { response: e.response.data[0].description, success: false };
     }
 };
 
@@ -51,7 +51,7 @@ export const sendLogin = async (formValues) => {
     catch (e)
     {
         console.log(e);
-        return false;
+        return { response: e.response.data, success: false }
     }
 };
 

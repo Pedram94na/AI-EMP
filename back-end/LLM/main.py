@@ -27,10 +27,10 @@ async def start_training(username: str = Form(...),
                          file: UploadFile = File(...)):
     
     if not username:
-        return JSONResponse(content={"error": "Username is missing"}, status_code=400)
+        return JSONResponse(content={"message": "Username is missing"}, status_code=400)
     
     if not file:
-        return JSONResponse(content={"error": "No file received"}, status_code=400)
+        return JSONResponse(content={"message": "No file received"}, status_code=400)
 
     if not model:
         model = None
@@ -40,21 +40,21 @@ async def start_training(username: str = Form(...),
         
         train_model(username, int(epoch), int(batch), model)
         
-        return JSONResponse(content={"message": "Training started successfully"}, status_code=200)
+        return JSONResponse(content={"message": "Training ended successfully"}, status_code=200)
 
     except Exception as e:
-        raise HTTPException(status_code=400, detail="Unexpected error")
+        raise HTTPException(status_code=400, detail="Unexpected message")
 
 @app.post("/ai/testing")
 def start_testing(data: UserMessage = Body(...)):
     if not data.username:
-        return JSONResponse(content={"error": "Username is missing"}, status_code=400)
+        return JSONResponse(content={"message": "Username is missing"}, status_code=400)
     
     if not data.message:
-        return JSONResponse(content={"error": "Message is missing"}, status_code=400)
+        return JSONResponse(content={"message": "Message is missing"}, status_code=400)
 
     if not data.training_date:
-        return JSONResponse(content={"error": "Training date is missing"}, status_code=400)
+        return JSONResponse(content={"message": "Training date is missing"}, status_code=400)
 
     response = test_model(data.message, data.username, data.training_date)
     
@@ -65,9 +65,12 @@ async def get_all(username: str = Header(...)):
     if not username:
         raise HTTPException(status_code=400, detail="Username is missing in header")
     
-    all_directories = get_all_directories(username)
-
-    return JSONResponse(content={"directories": all_directories}, status_code=200)
+    try:
+        all_directories = get_all_directories(username)
+        return JSONResponse(content={"directories": all_directories}, status_code=200)
+    
+    except FileNotFoundError as e:
+        return JSONResponse(content={"message": str(e)}, status_code=404)
 
 @app.get("/ai/download")
 async def download_model(username: str = Header(...), date: str = Query(...)):

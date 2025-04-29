@@ -7,6 +7,8 @@ export const Blogs = () => {
     const navigate = new useNavigate();
     const blogsData = useBlogsData();
 
+    if (blogsData.length == 0) return;
+    
     const handleBlogSelection = (blog) => {
         navigate(`/blog?blogId=${blog.id}`);
     }

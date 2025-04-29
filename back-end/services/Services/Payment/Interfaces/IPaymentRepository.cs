@@ -3,7 +3,7 @@ using Stripe;
 
 namespace services.Services.Payment.Interfaces
 {
-    public interface IPaymentRepository
+    public interface IStripeService
     {
         Task<PaymentIntent> ProcessPaymentAsync(PaymentDto dto);
     }

@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using services.Data;
 using services.Models;
 using services.Services.Subscription.Interfaces;
@@ -13,17 +14,14 @@ namespace services.Services.Subscription.Repositories
             this.context = context;
         }
 
-        public async Task<SubscriptionPlanModel> CreateSubscriptionPlanAsync(SubscriptionPlanModel subscriptionPlanModel)
+        public async Task<bool> IsSubscribed(AppUser appUser)
         {
-            await context.SubscriptionPlans.AddAsync(subscriptionPlanModel);
-            await context.SaveChangesAsync();
-
-            return subscriptionPlanModel;
+            return await context.Subscriptions.AnyAsync(s => s.AppUserId == appUser.Id);
         }
 
-        public async Task<SubscriptionPlanModel> CancelSubscriptionPlanAsync(SubscriptionPlanModel subscriptionPlanModel)
+        public async Task<Models.SubscriptionModel> CreateSubscriptionPlanAsync(Models.SubscriptionModel subscriptionPlanModel)
         {
-            context.SubscriptionPlans.Remove(subscriptionPlanModel);
+            await context.Subscriptions.AddAsync(subscriptionPlanModel);
             await context.SaveChangesAsync();
 
             return subscriptionPlanModel;

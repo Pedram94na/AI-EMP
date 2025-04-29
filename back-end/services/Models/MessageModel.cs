@@ -11,6 +11,9 @@ namespace services.Models
         public string Email { get; set; } = string.Empty;
         public string Content { get; set; } = string.Empty;
         public DateTime CreatedOn { get; set; } = DateTime.Today;
+
+        [ForeignKey("Customers")]
         public int CustomerID { get; set; }
+        public CustomerModel? Customer { get; set; }
     }
 }

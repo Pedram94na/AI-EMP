@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace services.Models
 {
-    [Table("ChabotQAndAs")]
-    public class ChatbotQAndA
+    [Table("Chatbots")]
+    public class ChatbotModel
     {
         [Key]
         public int Id { get; set; }

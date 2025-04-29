@@ -5,6 +5,7 @@ using services.Extensions;
 using Microsoft.AspNetCore.Identity;
 using services.Models;
 using Microsoft.AspNetCore.Authorization;
+using services.Services.Review.Mappers;
 
 namespace services.Services.Review.Controller
 {
@@ -15,7 +16,7 @@ namespace services.Services.Review.Controller
         private readonly UserManager<AppUser> userManager = userManager;
         private readonly IReviewRepo reviewRepo = reviewRepo;
 
-        [HttpPost("submit")]
+        [HttpPost]
         [Authorize]
         public async Task<IActionResult> Submit([FromBody] ReviewDto dto)
         {
@@ -28,18 +29,17 @@ namespace services.Services.Review.Controller
             if (appUser is null)
                 return NotFound("User not found");
 
-            await reviewRepo.CreateReviewAsync(dto, appUser.FirstName);
-            
-            appUser.HasReview = true;
-            var result = await userManager.UpdateAsync(appUser);
+            var hasReview = await reviewRepo.HasReview(appUser);
+            if (hasReview)
+                return Conflict("You already have a review!");
 
-            if (!result.Succeeded)
-                return StatusCode(500, "Failed to update user review status");
+            var reviewModel = dto.CreateReviewFromDto(appUser);
+            await reviewRepo.CreateReviewAsync(reviewModel);
 
             return Created("/review/submit/success", dto);
         }
 
-        [HttpGet("fetch-reviews")]
+        [HttpGet]
         public async Task<IActionResult> FetchTopReviews()
         {
             var reviews = await reviewRepo.GetTopReviewsAsync();

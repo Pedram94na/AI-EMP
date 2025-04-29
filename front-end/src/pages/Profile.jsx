@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import { Navigation } from "../components/Navigation";
 import { Footer } from "../components/Footer";
 
-import { CreateBlog, ListAllBlogs } from "../components/profile/Admin";
+import { Chatbot, CreateBlog, ListAllBlogs } from "../components/profile/Admin";
 import { Models, TrainModel, TestModel } from "../components/profile/Customer";
-import { AdminActions, UserActions, models, trainModel, testModel, createBlog, blogsList } from '../components/profile/Actions';
+import { AdminActions, UserActions, models, trainModel, testModel, createBlog, blogsList, chatbot } from '../components/profile/Actions';
 import { ReviewOverlay } from '../components/review/ReviewOverlay';
 import Subscription from "../components/subscription/Subscription";
 
@@ -50,6 +50,7 @@ const Dashboard = () => {
 
                         {activeSection === blogsList && <ListAllBlogs />}
                         {activeSection === createBlog && <CreateBlog />}
+                        {activeSection === chatbot && <Chatbot />}
                     </>
                 )
             };

@@ -1,9 +1,7 @@
-using Microsoft.EntityFrameworkCore;
 using services.Data;
-using services.Services.ContactForm.DTOs;
 using services.Services.ContactForm.Interfaces;
-using services.Services.ContactForm.Mappers;
 using services.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace services.Services.ContactForm.Repositories
 {
@@ -16,32 +14,21 @@ namespace services.Services.ContactForm.Repositories
             this.context = context;
         }
 
-        public async Task<CustomerModel> CreateCustomerAsync(ContactFormDto contactFormDto)
+        public async Task<CustomerModel> FindExistingCustomer(CustomerModel model)
         {
-            var customerModel = ContactFormMapper.CreateCustomer(contactFormDto);
-            var existingCustomer = await context
-                                    .Customers
-                                    .FirstOrDefaultAsync(c =>
-                                        c.Name == contactFormDto.Name &&
-                                        c.EmailAddress == contactFormDto.EmailAddress);
-                                        
-            if (existingCustomer is not null)
-                return existingCustomer;
+            var existingCustomer = await context.Customers.FirstOrDefaultAsync(
+                c => c.Name == model.Name && c.EmailAddress == model.EmailAddress
+            );
 
-            await context.Customers.AddAsync(customerModel);
-            await context.SaveChangesAsync();
-
-            return customerModel;
+            return existingCustomer is not null ? existingCustomer : model;
         }
 
-        public async Task<MessageModel> CreateMessageAsync(ContactFormDto contactFormDto, int id)
+        public async Task<MessageModel> CreateMessageAsync(MessageModel model)
         {
-            var messageModel = ContactFormMapper.CreateMessage(contactFormDto, id);
-
-            await context.Messages.AddAsync(messageModel);
+            await context.Messages.AddAsync(model);
             await context.SaveChangesAsync();
 
-            return messageModel;
+            return model;
         }
     }
 }

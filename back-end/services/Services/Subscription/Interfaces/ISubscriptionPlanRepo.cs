@@ -4,7 +4,7 @@ namespace services.Services.Subscription.Interfaces
 {
     public interface ISubscriptionPlanRepo
     {
-        Task<SubscriptionPlanModel> CreateSubscriptionPlanAsync(SubscriptionPlanModel subscriptionPlanModel);
-        Task<SubscriptionPlanModel> CancelSubscriptionPlanAsync(SubscriptionPlanModel subscriptionPlanModel);
+        Task<bool> IsSubscribed(AppUser appUser);
+        Task<Models.SubscriptionModel> CreateSubscriptionPlanAsync(Models.SubscriptionModel subscriptionPlanModel);
     }
 }
