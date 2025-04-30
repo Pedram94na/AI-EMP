@@ -16,7 +16,7 @@ const Guide = () => {
               <iframe
                 width="700"
                 height="500"
-                src="https://www.youtube.com/embed/HrHUHGRIDMQ"
+                src="https://www.youtube.com/embed/H3W4sIQIuSk"
                 title="YouTube video player"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
