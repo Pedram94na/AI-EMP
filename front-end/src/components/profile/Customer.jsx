@@ -34,7 +34,7 @@ export const TrainModel = () => {
             batch = 3;
 
         if (!fileData)
-            {
+        {
             setMessage({"message": "File Required", "color": "text-danger" });
             setLoading(false);
             localStorage.setItem("trainingLoading", false);

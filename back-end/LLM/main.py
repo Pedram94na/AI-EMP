@@ -38,12 +38,15 @@ async def start_training(username: str = Form(...),
     try:
         await process_file(file, username)
         
-        train_model(username, int(epoch), int(batch), model)
+        # train_model(username, int(epoch), int(batch), model)
         
         return JSONResponse(content={"message": "Training ended successfully"}, status_code=200)
 
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    
     except Exception as e:
-        raise HTTPException(status_code=400, detail="Unexpected message")
+        raise HTTPException(status_code=400, detail=str(e))
 
 @app.post("/ai/testing")
 def start_testing(data: UserMessage = Body(...)):

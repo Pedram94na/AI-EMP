@@ -13,6 +13,6 @@ async def process_file(file, username):
         
         reader = await reader_factory(file_io, file_extension, username)
         reader.process_data()
-
+    
     except Exception as e:
-        print(f"ERROR: {e}")
+        raise Exception(e)

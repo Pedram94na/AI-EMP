@@ -16,13 +16,14 @@ export const sendFileToTrain = async (data) => {
         
         if (response.status === 200)
             return { success: true, response: response.data.message };
-
+        
         return { success: false, response: response.data.message };
     }
 
     catch (e)
     {
-        return { success: false, message: e.response.data.message };
+        console.log(e);
+        return { success: false, response: e.response.data.detail };
     }
 };
 

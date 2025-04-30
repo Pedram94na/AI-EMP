@@ -45,6 +45,9 @@ class CsvFileReader(FileReader):
 
     def process_data(self):
         labels = self.file.fieldnames
+        
+        if len(labels) != 2:
+            raise Exception("CSV file must have exactly 2 columns.")
 
         self.file_data = [row for row in self.file]
         
