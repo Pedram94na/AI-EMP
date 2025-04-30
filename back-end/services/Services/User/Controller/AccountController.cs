@@ -14,14 +14,16 @@ namespace services.Services.User.Controller
         private readonly UserManager<AppUser> userManager;
         private readonly SignInManager<AppUser> signinManager;
         private readonly ITokenService tokenService;
+        private readonly IUserStatusRepository userStatusRepo;
     
         public AccountController(
             UserManager<AppUser> userManager, SignInManager<AppUser> signinManager,
-            ITokenService tokenService)
+            ITokenService tokenService, IUserStatusRepository userStatusRepo)
         {
             this.userManager = userManager;
             this.signinManager = signinManager;
             this.tokenService = tokenService;
+            this.userStatusRepo = userStatusRepo;
         }
 
         [HttpPost("register")]
@@ -103,6 +105,9 @@ namespace services.Services.User.Controller
             if (roles == null || !roles.Any())
                 return BadRequest("Role not assigned for this user");
 
+            var reviewStatus = await userStatusRepo.HasReviewAsync(user);
+            var subscriptionStatus = await userStatusRepo.IsSubscribedAsync(user);
+
             return Ok (
                 new AuthorizedDto
                         {
@@ -110,6 +115,8 @@ namespace services.Services.User.Controller
                             LastName = user.LastName,
                             Username = user.UserName,
                             EmailAddress = user.Email,
+                            HasReview = reviewStatus,
+                            IsSubscribed = subscriptionStatus,
                             Role = roles.FirstOrDefault(),
                             Token = tokenService.Create(user)
                         }

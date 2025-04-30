@@ -45,7 +45,7 @@ namespace services.Services.Subscription.Controller
 
                 var subscriptionPlanModel = dto.FromCreateSubscriptionDtoToModel(appUser);
                 await subscriptionPlanRepo.CreateSubscriptionPlanAsync(subscriptionPlanModel);
-
+                
                 return Ok(subscriptionPlanModel.FromModelToSubscriptionPlanDto());
             }
 

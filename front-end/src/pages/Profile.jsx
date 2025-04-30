@@ -14,8 +14,11 @@ const Dashboard = () => {
     const [ showSubscription, setShowSubscription ] = useState(true);
     const [selectedBlog, setSelectedBlog] = useState();
 
-    const { hasReview, hasSubscribed, role } = JSON.parse(localStorage.getItem('user'));
+    const { hasReview, isSubscribed, role } = JSON.parse(localStorage.getItem('user'));
     console.log(localStorage.getItem('user'));
+    console.log("RE" + hasReview);
+    console.log("SUB" + isSubscribed);
+    
     
     const handlePaymentSuccess = () => {
         setShowSubscription(false);
@@ -32,7 +35,7 @@ const Dashboard = () => {
 
                     <>
                         {!hasReview  && <ReviewOverlay />}
-                        {!hasSubscribed && showSubscription && <Subscription onPaymentSuccess={handlePaymentSuccess}/>}
+                        {!isSubscribed && showSubscription && <Subscription onPaymentSuccess={handlePaymentSuccess}/>}
                         
                         <UserActions setActiveSection={setActiveSection} />
 

@@ -19,7 +19,7 @@ namespace services.Services.Subscription.Repositories
             return await context.Subscriptions.AnyAsync(s => s.AppUserId == appUser.Id);
         }
 
-        public async Task<Models.SubscriptionModel> CreateSubscriptionPlanAsync(Models.SubscriptionModel subscriptionPlanModel)
+        public async Task<SubscriptionModel> CreateSubscriptionPlanAsync(Models.SubscriptionModel subscriptionPlanModel)
         {
             await context.Subscriptions.AddAsync(subscriptionPlanModel);
             await context.SaveChangesAsync();

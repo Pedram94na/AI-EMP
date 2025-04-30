@@ -38,7 +38,7 @@ async def start_training(username: str = Form(...),
     try:
         await process_file(file, username)
         
-        # train_model(username, int(epoch), int(batch), model)
+        train_model(username, int(epoch), int(batch), model)
         
         return JSONResponse(content={"message": "Training ended successfully"}, status_code=200)
 

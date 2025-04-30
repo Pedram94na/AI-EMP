@@ -7,7 +7,7 @@ namespace services.Services.User.DTOs
         public string? Username { get; set; }
         public string? EmailAddress { get; set; }
         public bool HasReview { get; set; }
-        public bool HasSubscribed { get; set; }
+        public bool IsSubscribed { get; set; }
         public string? Role { get; set; }
         public string? Token { get; set; }
     }

@@ -20,6 +20,7 @@ using services.Services.Chatbot.Interfaces;
 using services.Services.Chatbot.Repositories;
 using services.Services.Payment.Interfaces;
 using services.Services.Payment.Repositories;
+using services.Services.User.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -122,6 +123,7 @@ builder.Services.AddScoped<IBlogRepo, BlogRepo>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<ISubscriptionPlanRepo, SubscriptionPlanRepo>();
 builder.Services.AddScoped<IChatbotRepository, ChatbotRepository>();
+builder.Services.AddScoped<IUserStatusRepository, UserStatusRepository>();
 builder.Services.AddScoped<IStripeService>(provider => new StripeService(provider.GetRequiredService<IConfiguration>()));
 
 var app = builder.Build();
