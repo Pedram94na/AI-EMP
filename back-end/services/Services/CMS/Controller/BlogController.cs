@@ -22,7 +22,8 @@ namespace services.Services.CMS.Controller
             this.userManager = userManager;
             this.blogRepo = blogRepo;
 
-            Directory.CreateDirectory(imageDirectory);
+            if (!Directory.Exists(imageDirectory))
+                Directory.CreateDirectory(imageDirectory);
         }
 
         [HttpPost]
