@@ -1,3 +1,5 @@
+What are web apps
+
 Web applications have become the backbone of the modern internet, enabling dynamic, interactive experiences across browsers and devices. Unlike traditional software, web apps are hosted on remote servers and accessed through a web browser, which makes them incredibly accessible and easy to update.
 
 Popular frameworks like React, Vue.js, and Angular help developers build fast, responsive interfaces, while Node.js, Django, and Ruby on Rails power robust back-end systems. Many apps rely on REST APIs or GraphQL for seamless data exchange between client and server.
